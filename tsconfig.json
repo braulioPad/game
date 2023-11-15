@@ -1,6 +1,34 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "forceConsistentCasingInFileNames": false,
+    "target": "ES5",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "sourceMap": false,
+    "baseUrl": ".",
+    "types": [ "jest"],
+    "typeRoots": ["./types", "./node_modules/@types"],
+    
+    "paths": {
+      "@app/*": [
+        "./app/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
+  "include": ["./src/**/*.tsx", "./src/**/*.ts"],
+  "extends": "expo/tsconfig.base"
 }
