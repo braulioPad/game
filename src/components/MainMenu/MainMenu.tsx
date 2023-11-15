@@ -10,7 +10,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
    navigation.navigate('aboutUs');
   };
   const goToPlay = () => {
-   navigation.navigate('TeamScr');
+   navigation.navigate('TeamsListScreen');
   };
 
 

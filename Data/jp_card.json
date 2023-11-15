@@ -1,0 +1,17 @@
+{
+    "typeCard": 
+        {
+          "animals":[
+            "Cat",
+            "Dog"
+          ],
+          "util":[
+            "Car",
+            "Chainsaw"
+          ],
+          "misc":[
+            "",
+            ""
+          ]
+        }
+    }

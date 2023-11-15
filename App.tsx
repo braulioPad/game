@@ -6,6 +6,7 @@ import MainMenu from './src/components/MainMenu/MainMenu';
 import About from './src/components/AboutUsScr/AboutScr';
 import TeamScr from './src/components/TeamScreen/TeamScr';
 import TeamsListScreen from './src/components/TeamListScreen/TeamsListScreen';
+import GameScr from './src/components/GameScreen/GameScr';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +18,10 @@ const App: React.FC = () => {
         <Stack.Screen name="configuration" component={ConfigScreen} />
         <Stack.Screen name="aboutUs" component={About} />
         <Stack.Screen name="TeamScr" component={TeamScr} options={{ headerShown: true }} />
-        <Stack.Screen name="TeamsListScreen" getComponent={TeamsListScreen} />
+        <Stack.Screen
+          name="TeamsListScreen"
+          component={TeamsListScreen as React.FC}/>
+          <Stack.Screen name="TimerScreen" component={GameScr} /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
