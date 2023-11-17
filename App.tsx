@@ -7,7 +7,7 @@ import About from './src/components/AboutUsScr/AboutScr';
 import TeamScr from './src/components/TeamScreen/TeamScr';
 import TeamsListScreen from './src/components/TeamListScreen/TeamsListScreen';
 import GameScr from './src/components/GameScreen/GameScr';
-
+import ScoreScr from './src/components/ScoreScreen/ScoreScr';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {
@@ -18,10 +18,11 @@ const App: React.FC = () => {
         <Stack.Screen name="configuration" component={ConfigScreen} />
         <Stack.Screen name="aboutUs" component={About} />
         <Stack.Screen name="TeamScr" component={TeamScr} options={{ headerShown: true }} />
+        <Stack.Screen name="ScoreScr" component={ScoreScr} options={{ headerShown: true }} />
         <Stack.Screen
           name="TeamsListScreen"
           component={TeamsListScreen as React.FC}/>
-          <Stack.Screen name="TimerScreen" component={GameScr} /> 
+          <Stack.Screen name="TimerScreen" component={GameScr} options={{ headerShown: false }}/> 
       </Stack.Navigator>
     </NavigationContainer>
   );
