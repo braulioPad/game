@@ -1,6 +1,7 @@
 // TeamScreen.tsx
 import React, { useState } from 'react';
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [teamName, setTeamName] = useState<string>('');
@@ -14,7 +15,7 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
       }
     };
   
-    const createTeam = () => {
+    const createTeam = async  () => {
       if (teamName && players.length > 0) {
         // Save team data (e.g., to a database)
         console.log('Team Name:', teamName);
@@ -22,7 +23,30 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
   
         // Navigate to another screen or perform other actions
         // For example, navigate back to the home screen
-       // navigation.goBack();
+       
+
+        try {
+            await AsyncStorage.setItem('Teams', teamName);
+            navigation.goBack();
+        } catch (error) {
+          console.error('axel', error);
+        }
+
+        /*
+        [
+          teams: {
+            teamName: 'string',
+            Score: 'number',
+            players: {
+              name: 'string',
+              played: 'boolean',
+            }
+          }
+        ]
+        */
+
+
+
       } else {
         alert('Please enter a team name and add at least one player.');
       }

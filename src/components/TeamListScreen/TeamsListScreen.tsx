@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet,Button } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface TeamsListScreenProps {
   route: {
@@ -11,6 +12,21 @@ interface TeamsListScreenProps {
 }
 
 const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ route,navigation }) => {
+
+  useEffect(() => {
+    loadUsername();
+  }, []);
+
+
+  const loadUsername = async () => {
+    try {
+      const storedUsername = await AsyncStorage.getItem('Teams');
+      console.log('axel', storedUsername);
+    } catch (error) {
+      console.error('Failed to load username:', error);
+    }
+  };
+
   const { teams } = route.params || {};
   const handleAddTeam = () => {
     // Navigate to the TeamScreen to add a new team
