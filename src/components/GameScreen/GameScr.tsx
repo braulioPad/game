@@ -17,7 +17,12 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation,route }) => {
     { name: 'Team A', score: 0 },
     { name: 'Team B', score: 0 },
   ]);
-  
+
+
+  useEffect(() => {
+    setJsonData(jsonData);
+  }, []);
+
 
   useEffect(() => {
     // Start the timer for TimerScreen when the modal closes
@@ -48,7 +53,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation,route }) => {
     }
   }, [modalVisible]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const onFocus = () => {
       setTime(10);
       setModalTime(2);
@@ -59,7 +64,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation,route }) => {
     return () => {
       navigation.removeListener('focus', onFocus);
     };
-  }, [navigation]);
+  }, [navigation]); */
   const handleGoBack = () => {
     navigation.goBack();
   };

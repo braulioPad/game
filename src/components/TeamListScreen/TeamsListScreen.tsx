@@ -3,31 +3,29 @@ import { View, Text, FlatList, StyleSheet,Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface TeamsListScreenProps {
-  route: {
-    params?: {
-      teams?: { name: string; players: string[] }[];
-    };
-  };
   navigation: any; 
 }
+const [teamsData, setTeamsData] = useState<string[]>([]);
 
-const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ route,navigation }) => {
+const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
+
 
   useEffect(() => {
-    loadUsername();
+    const fetchTeamsData = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('Teams');
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          setTeamsData(parsedData);
+        }
+      } catch (error) {
+        console.error('Error fetching Teams data:', error);
+      }
+    };
+
+    fetchTeamsData();
   }, []);
 
-
-  const loadUsername = async () => {
-    try {
-      const storedUsername = await AsyncStorage.getItem('Teams');
-      console.log('axel', storedUsername);
-    } catch (error) {
-      console.error('Failed to load username:', error);
-    }
-  };
-
-  const { teams } = route.params || {};
   const handleAddTeam = () => {
     // Navigate to the TeamScreen to add a new team
     navigation.navigate('TeamScr');
@@ -38,11 +36,30 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ route,navigation }) =
     navigation.navigate('TimerScreen');
   };
 
-  if (!teams) {
+
     // Handle the case when teams are undefined
     return (
       <View style={styles.container}>
-        <Text>No teams available.</Text>
+         <Text>Teams Data:</Text>
+      {teamsData ? (
+        <View>
+          {Object.keys(teamsData).map((teamName) => (
+            <View key={teamName}>
+              <Text>Team Name: {teamName}</Text>
+              {/* <Text>Score: {teamsData[teamName].score}</Text> */}
+              <Text>Players:</Text>
+              {teamsData[teamName].players.map((player, index) => (
+                <View key={index}>
+                  <Text>Name: {player.name}</Text>
+                  {/* <Text>Played: {player.played ? 'Yes' : 'No'}</Text> */}
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
+      ) : (
+        <Text>No Teams Data</Text>
+      )} 
         <View style={styles.buttonsContainer}>
         <Button title="Add Team" onPress={handleAddTeam} />
         <Button title="Go Play" onPress={handleGoGame} />
@@ -50,29 +67,8 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ route,navigation }) =
       </View>
       
     );
-  }
-
-  // Continue with rendering when teams are defined
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Teams List</Text>
-      <FlatList
-        data={teams}
-        keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <View style={styles.teamContainer}>
-            <Text style={styles.teamName}>{item.name}</Text>
-            <Text>Players:</Text>
-            {item.players.map((player, index) => (
-              <Text key={index}>{player}</Text>
-            ))}
-          </View>
-        )}
-      />
-    </View>
-  );
-};
+  
+      }
 
 const styles = StyleSheet.create({
   container: {
@@ -96,6 +92,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 16,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
   },
 });
 

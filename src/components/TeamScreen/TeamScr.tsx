@@ -20,16 +20,13 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
         // Save team data (e.g., to a database)
         console.log('Team Name:', teamName);
         console.log('Players:', players);
-  
         // Navigate to another screen or perform other actions
         // For example, navigate back to the home screen
-       
-
         try {
             await AsyncStorage.setItem('Teams', teamName);
             navigation.goBack();
         } catch (error) {
-          console.error('axel', error);
+          console.error('Error Data', error);
         }
 
         /*

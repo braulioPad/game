@@ -18,7 +18,7 @@ const App: React.FC = () => {
         <Stack.Screen name="configuration" component={ConfigScreen} />
         <Stack.Screen name="aboutUs" component={About} />
         <Stack.Screen name="TeamScr" component={TeamScr} options={{ headerShown: true }} />
-        <Stack.Screen name="ScoreScr" component={ScoreScr} options={{ headerShown: true }} />
+        <Stack.Screen name="ScoreScr" component={ScoreScr} options={{ headerShown: false }} />
         <Stack.Screen
           name="TeamsListScreen"
           component={TeamsListScreen as React.FC}/>
