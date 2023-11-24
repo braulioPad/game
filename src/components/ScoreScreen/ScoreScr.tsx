@@ -8,8 +8,8 @@ interface ScoreScreenProps {
 
 
 
-const ScoreScr: React.FC<ScoreScreenProps> = ({ route,navigation }) => {
-  const { teams } = route.params;
+const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
+  const  teams  ={};
 
   const handleGoGame = () => {
     // Navigate back to the previous screen
@@ -19,12 +19,12 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ route,navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Team Scores</Text>
-      {teams.map((team: { name: string; score: number }, index: number) => (
+     {/*  {teams.map((team: { name: string; score: number }, index: number) => (
         <View key={index} style={styles.teamContainer}>
           <Text style={styles.teamName}>{team.name}</Text>
           <Text style={styles.teamScore}>{team.score}</Text>
         </View>
-      ))}
+      ))} */}
       <Button title="Next player" onPress={handleGoGame} />
     </View>
   );

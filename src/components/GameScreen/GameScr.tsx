@@ -3,11 +3,11 @@ import { Button, StyleSheet, Text, TouchableOpacity, View, Modal  } from 'react-
 
 interface TimerScreenProps {
   navigation: any; // Assuming the navigation prop is of any type for simplicity
-  route: any;
+  
 }
 
 import data from '../Data/en_card.json';
-const GameScr: React.FC<TimerScreenProps> = ({ navigation,route }) => {
+const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const [time, setTime] = useState(10); // Set the initial countdown duration for the screen
   const [modalTime, setModalTime] = useState(3); // Set the initial countdown duration for the modal
   const [jsonData, setJsonData] = useState<any>(null);

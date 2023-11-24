@@ -8,6 +8,7 @@ import TeamScr from './src/components/TeamScreen/TeamScr';
 import TeamsListScreen from './src/components/TeamListScreen/TeamsListScreen';
 import GameScr from './src/components/GameScreen/GameScr';
 import ScoreScr from './src/components/ScoreScreen/ScoreScr';
+import CardSelectScr from './src/components/CardSelection/CardSelectScr';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {
@@ -23,6 +24,7 @@ const App: React.FC = () => {
           name="TeamsListScreen"
           component={TeamsListScreen as React.FC}/>
           <Stack.Screen name="TimerScreen" component={GameScr} options={{ headerShown: false }}/> 
+          <Stack.Screen name="CardSelectScr" component={CardSelectScr} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

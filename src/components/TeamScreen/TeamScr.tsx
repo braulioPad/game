@@ -1,5 +1,5 @@
 // TeamScreen.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -7,6 +7,7 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [teamName, setTeamName] = useState<string>('');
     const [playerName, setPlayerName] = useState<string>('');
     const [players, setPlayers] = useState<string[]>([]);
+    const [teamsData, setTeamsData] = useState({});
   
     const addPlayer = () => {
       if (playerName.trim() !== '') {
@@ -14,17 +15,18 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
         setPlayerName('');
       }
     };
-  
+
     const createTeam = async  () => {
       if (teamName && players.length > 0) {
-        // Save team data (e.g., to a database)
-        console.log('Team Name:', teamName);
-        console.log('Players:', players);
-        // Navigate to another screen or perform other actions
-        // For example, navigate back to the home screen
+        /*  Save team data (e.g., to a database)
+         Navigate to another screen or perform other actions
+         For example, navigate back to the home screen */
         try {
-            await AsyncStorage.setItem('Teams', teamName);
-            navigation.goBack();
+         // const updatedTeamsData = { ...teamsData, [teamName.name]: newTeamData };
+         // setTeamsData(updatedTeamsData);
+          const jsonValue = JSON.stringify(teamName);
+          await AsyncStorage.setItem('Teams', JSON.stringify(teamsData));
+          navigation.goBack();
         } catch (error) {
           console.error('Error Data', error);
         }
@@ -41,14 +43,28 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
           }
         ]
         */
-
-
-
       } else {
         alert('Please enter a team name and add at least one player.');
       }
     };
+
+    useEffect(() => {
+      // Fetch teams data from AsyncStorage when the component mounts
+      fetchTeamsData();
+    }, []);
   
+    const fetchTeamsData = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('Teams');
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          setTeamsData(parsedData);
+        }
+      } catch (error) {
+        console.error('Error fetching Teams data:', error);
+      }
+    };
+
     return (
       <View style={styles.container}>
         <Text style={styles.label}>Team Name:</Text>

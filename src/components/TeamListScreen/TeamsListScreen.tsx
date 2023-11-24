@@ -5,24 +5,25 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 interface TeamsListScreenProps {
   navigation: any; 
 }
-const [teamsData, setTeamsData] = useState<string[]>([]);
 
 const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
 
-
+  const [teamsData, setTeamsData] = useState<any>(null);
   useEffect(() => {
     const fetchTeamsData = async () => {
       try {
         const storedData = await AsyncStorage.getItem('Teams');
-        if (storedData) {
+        console.log(storedData);
+        if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
+        }else{
+          console.log('no Data');
         }
       } catch (error) {
-        console.error('Error fetching Teams data:', error);
+        console.error('Error parsing JSON:', error);
       }
     };
-
     fetchTeamsData();
   }, []);
 
@@ -33,7 +34,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
 
   const handleGoGame = () => {
     // Navigate back to the previous screen
-    navigation.navigate('TimerScreen');
+    navigation.navigate('CardSelectScr');
   };
 
 
@@ -43,19 +44,19 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
          <Text>Teams Data:</Text>
       {teamsData ? (
         <View>
-          {Object.keys(teamsData).map((teamName) => (
+          {/* {Object.keys(teamsData).map((teamName) => (
             <View key={teamName}>
               <Text>Team Name: {teamName}</Text>
-              {/* <Text>Score: {teamsData[teamName].score}</Text> */}
+              <Text>Score: {teamsData[teamName].score}</Text>
               <Text>Players:</Text>
               {teamsData[teamName].players.map((player, index) => (
                 <View key={index}>
                   <Text>Name: {player.name}</Text>
-                  {/* <Text>Played: {player.played ? 'Yes' : 'No'}</Text> */}
+                  <Text>Played: {player.played ? 'Yes' : 'No'}</Text>
                 </View>
               ))}
             </View>
-          ))}
+          ))} */}
         </View>
       ) : (
         <Text>No Teams Data</Text>
