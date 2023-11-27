@@ -18,31 +18,18 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
 
     const createTeam = async  () => {
       if (teamName && players.length > 0) {
-        /*  Save team data (e.g., to a database)
-         Navigate to another screen or perform other actions
-         For example, navigate back to the home screen */
+        /* Save team data (e.g., to a database) Navigate to another screen or perform other actions For example, navigate back to the home screen */
         try {
-         // const updatedTeamsData = { ...teamsData, [teamName.name]: newTeamData };
-         // setTeamsData(updatedTeamsData);
-          const jsonValue = JSON.stringify(teamName);
-          await AsyncStorage.setItem('Teams', JSON.stringify(teamsData));
+            const updatedTeamsData = {
+              ...teamsData,
+              [teamName]: { teamName, Score: 0, players: players.map((player) => ({ name: player, played: false })) },
+            };
+            setTeamsData(updatedTeamsData);
+            await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
           navigation.goBack();
         } catch (error) {
           console.error('Error Data', error);
         }
-
-        /*
-        [
-          teams: {
-            teamName: 'string',
-            Score: 'number',
-            players: {
-              name: 'string',
-              played: 'boolean',
-            }
-          }
-        ]
-        */
       } else {
         alert('Please enter a team name and add at least one player.');
       }
@@ -55,7 +42,7 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
   
     const fetchTeamsData = async () => {
       try {
-        const storedData = await AsyncStorage.getItem('Teams');
+        const storedData = await AsyncStorage.getItem('TeamData');
         if (storedData) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);

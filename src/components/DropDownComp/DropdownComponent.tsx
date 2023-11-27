@@ -4,9 +4,10 @@ import RNPickerSelect from 'react-native-picker-select';
 interface DropdownComponentProps {
   items: { label: string; value: any }[];
   onValueChange: (value: any) => void;
+  slcLanguage: any; // Add this line
 }
 
-const DropdownComponent: React.FC<DropdownComponentProps> = ({ items, onValueChange }) => {
+const DropdownComponent: React.FC<DropdownComponentProps> = ({ items, onValueChange,slcLanguage  }) => {
     const pickerSelectStyles = {
         inputIOS: {
           fontSize: 16,

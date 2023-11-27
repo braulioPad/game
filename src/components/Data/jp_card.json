@@ -1,15 +1,15 @@
 {
     "typeCard": 
         {
-          "animals":[
-            "Cat",
-            "Dog"
+          "easy":[
+            "inu",
+            "neko"
           ],
-          "util":[
-            "Car",
-            "Chainsaw"
+          "medium":[
+            "Kuruma",
+            "Chēnsō"
           ],
-          "misc":[
+          "hard":[
             "",
             ""
           ]

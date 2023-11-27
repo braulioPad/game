@@ -1,32 +1,69 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import Slider from '@react-native-community/slider';
-import RNPickerSelect from 'react-native-picker-select';
 import DropdownComponent from '../DropDownComp/DropdownComponent';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ConfigScreen: React.FC = () => {
-  
-  const handleSecondsChange = (value: number) => {
-    setSeconds(value);
-  };
+interface ConfigScrProps {
+  navigation: any;
+}
+const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
   const dropdownItems = [
     { label: 'Spanish', value: 'Spa' },
     { label: 'English', value: 'Eng' },
     { label: 'Japanese', value: 'Nih' },
   ];
+
+  const initialSeconds = 60;
+  const [seconds, setSeconds] = useState<number>();
+  const [slcLanguage, setslcLanguage] = useState<any>();
+
+  useEffect(() => {
+    const loadConfigData = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('ConfigData');
+        if (storedData !== null) {
+          const parsedData = JSON.parse(storedData);
+          setSeconds(parsedData.seconds);
+          setslcLanguage(parsedData.slcLanguage);
+        } else {
+          // ConfigData doesn't exist, set default values
+          setSeconds(initialSeconds);
+          setslcLanguage('Eng');
+        }
+      } catch (error) {
+        console.error('Error loading ConfigData:', error);
+      }
+    };
+
+    loadConfigData();
+  }, []);
+
   const handleDropdownChange = (value: any) => {
-    setSelectedValue(value);
+    setslcLanguage(value);
   };
-  const [seconds, setSeconds] = useState<number>(0);
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  const [selectedValue, setSelectedValue] = useState<any>(null);
-  
+  const handleSecondsChange = (value: number) => {
+    setSeconds(value);
+  };
+
+  const handleSaveConfig = async  () => {
+    try {
+      const updatedConfigData = {
+        seconds,
+        slcLanguage,
+      };
+      console.log('saving Data: '+ JSON.stringify(updatedConfigData));
+      AsyncStorage.setItem('ConfigData', JSON.stringify(updatedConfigData));
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error saving data', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Text>Configurations</Text>
-      <Text style={styles.durationText}>Game Time: {minutes}m {remainingSeconds}s</Text>
+      <Text style={styles.durationText}>Game Time: {Math.floor(seconds / 60)}m {seconds % 60}s</Text>
       <Slider
         style={styles.slider}
         minimumValue={60}
@@ -35,10 +72,11 @@ const ConfigScreen: React.FC = () => {
         value={seconds}
         onValueChange={handleSecondsChange}
       />
-      <Text style={styles.label}>Selected language: {selectedValue}</Text>
+      <Text style={styles.label}>Selected language: {slcLanguage}</Text>
       <View style={styles.centeredDropdownContainer}>
-        <DropdownComponent items={dropdownItems} onValueChange={handleDropdownChange} />
+        <DropdownComponent items={dropdownItems} onValueChange={handleDropdownChange} slcLanguage={slcLanguage} />
       </View>
+      <Button title="Save" onPress={handleSaveConfig} />
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet,Button } from 'react-native';
+import { View, Text, StyleSheet,Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface TeamsListScreenProps {
@@ -9,10 +9,11 @@ interface TeamsListScreenProps {
 const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
 
   const [teamsData, setTeamsData] = useState<any>(null);
+  
   useEffect(() => {
     const fetchTeamsData = async () => {
       try {
-        const storedData = await AsyncStorage.getItem('Teams');
+        const storedData = await AsyncStorage.getItem('TeamData');
         console.log(storedData);
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
@@ -34,9 +35,14 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
 
   const handleGoGame = () => {
     // Navigate back to the previous screen
+    const teamTurn=1;
+    AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
     navigation.navigate('CardSelectScr');
   };
 
+  const handleClearData = async () => {
+    await AsyncStorage.clear();
+  };
 
     // Handle the case when teams are undefined
     return (
@@ -44,7 +50,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
          <Text>Teams Data:</Text>
       {teamsData ? (
         <View>
-          {/* {Object.keys(teamsData).map((teamName) => (
+           {Object.keys(teamsData).map((teamName) => (
             <View key={teamName}>
               <Text>Team Name: {teamName}</Text>
               <Text>Score: {teamsData[teamName].score}</Text>
@@ -52,11 +58,10 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
               {teamsData[teamName].players.map((player, index) => (
                 <View key={index}>
                   <Text>Name: {player.name}</Text>
-                  <Text>Played: {player.played ? 'Yes' : 'No'}</Text>
                 </View>
               ))}
             </View>
-          ))} */}
+          ))} 
         </View>
       ) : (
         <Text>No Teams Data</Text>
@@ -64,6 +69,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
         <View style={styles.buttonsContainer}>
         <Button title="Add Team" onPress={handleAddTeam} />
         <Button title="Go Play" onPress={handleGoGame} />
+        <Button title="Clear Data" onPress={handleClearData} />
       </View>
       </View>
       

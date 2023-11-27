@@ -1,15 +1,15 @@
 {
     "typeCard": 
         {
-          "animals":[
+          "easy":[
             "Gato",
             "Perro"
           ],
-          "util":[
+          "medium":[
             "Auto",
             "Motosierra"
           ],
-          "misc":[
+          "hard":[
             "",
             ""
           ]

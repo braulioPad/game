@@ -1,110 +1,150 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Modal  } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface TimerScreenProps {
   navigation: any; // Assuming the navigation prop is of any type for simplicity
   
 }
 
-import data from '../Data/en_card.json';
+interface TimerScreenProps {
+  navigation: any; // Assuming the navigation prop is of any type for simplicity
+}
+
 const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
-  const [time, setTime] = useState(10); // Set the initial countdown duration for the screen
-  const [modalTime, setModalTime] = useState(3); // Set the initial countdown duration for the modal
+  
+  const [time, setTime] = useState(10);
+  const [modalTime, setModalTime] = useState(3);
   const [jsonData, setJsonData] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(true);
-
-  const [teams, setTeams] = useState([
-    { name: 'Team A', score: 0 },
-    { name: 'Team B', score: 0 },
-  ]);
+  const [teamsData, setTeamsData] = useState<any>(null);
+  const [listCards,setListCard]=useState<string[]>([]);
+  const [card,setCard]=useState<string>();
+  const [score, setScore] = useState<number>(0);
+  const [teamTurn, setTeamTurn] = useState<number>(0);
 
 
   useEffect(() => {
-    setJsonData(jsonData);
+    const fetchTeamsData = async () => {
+      try {
+        const configData = await AsyncStorage.getItem('ConfigData');
+        const parsedData = JSON.parse(configData);
+        setTime(parsedData.seconds);
+        const storedData = await AsyncStorage.getItem('TeamData');
+        console.log('data team: '+storedData);
+        const listCardData = await AsyncStorage.getItem('listCards');
+        const parsedListCardData = JSON.parse(listCardData);
+        const teamt = await AsyncStorage.getItem('teamTurn');
+        console.log('data turn: '+teamt);
+        setListCard(parsedListCardData);
+        if (storedData !== null) {
+          const parsedData = JSON.parse(storedData);
+          setTeamsData(parsedData);
+        }else{
+          console.log('no Data');
+        }
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    };
+    fetchTeamsData();
   }, []);
-
-
-  useEffect(() => {
-    // Start the timer for TimerScreen when the modal closes
-    if (!modalVisible) {
-      startTimerForTimerScreen();
-    }
-  }, [modalVisible]);
-
-
-  useEffect(() => {
-    // Start the countdown interval for the modal when it is visible
-    if (modalVisible) {
-      const modalIntervalId = setInterval(() => {
-        setModalTime((prevTime) => {
-          if (prevTime === 0) {
-            clearInterval(modalIntervalId); // Stop the interval when modal countdown reaches 0
-            console.log('Modal Countdown finished');
-            setModalVisible(false); // Close the modal after the modal countdown finishes
-          }
-          return prevTime > 0 ? prevTime - 1 : 0;
-        });
-      }, 1000);
-
-      // Cleanup function for modal countdown interval when the component unmounts or modal is closed
-      return () => {
-        clearInterval(modalIntervalId);
-      };
-    }
-  }, [modalVisible]);
-
-  /* useEffect(() => {
-    const onFocus = () => {
-      setTime(10);
-      setModalTime(2);
-      setModalVisible(true);
-    };
-    navigation.addListener('focus', onFocus);
-    // Cleanup listeners when the component is unmounted
-    return () => {
-      navigation.removeListener('focus', onFocus);
-    };
-  }, [navigation]); */
-  const handleGoBack = () => {
-    navigation.goBack();
-  };
-
-  const handleTouchable1Press = () => {
-    // Handle the press on the first invisible touchable panel
-    console.log('Touchable panel 1 pressed');
-  };
-
-  const handleTouchable2Press = () => {
-    // Handle the press on the second invisible touchable panel
-    console.log('Touchable panel 2 pressed');
-  };
 
   const closeModal = useCallback(() => {
     setModalVisible(false);
-    // Start the timer for TimerScreen after the modal closes
-    startTimerForTimerScreen();
   }, []);
 
-  const startTimerForTimerScreen = () => {
-    // Start the countdown interval for TimerScreen
+  const startTimerForTimerScreen = useCallback(() => {
     const timerScreenIntervalId = setInterval(() => {
       setTime((prevTime) => {
         if (prevTime === 0) {
-          clearInterval(timerScreenIntervalId); // Stop the interval when TimerScreen countdown reaches 0
+          clearInterval(timerScreenIntervalId);
           console.log('TimerScreen Countdown finished');
-          navigation.navigate('ScoreScr', { teams: teams });
+          // Use navigation.navigate inside useEffect or outside of rendering phase
+          requestAnimationFrame(() => {
+            navigation.navigate('ScoreScr');
+          });
         }
         return prevTime > 0 ? prevTime - 1 : 0;
       });
     }, 1000);
 
-    // Cleanup function for TimerScreen countdown interval when the component unmounts
+    // Clear existing interval before starting a new one
     return () => {
       clearInterval(timerScreenIntervalId);
     };
+  }, [navigation]);
+
+
+  useEffect(() => {
+    if (!modalVisible) {
+      startTimerForTimerScreen();
+      setCard(listCards[0]);
+      listCards.splice(0, 1);
+      setListCard(listCards);
+    }
+  }, [modalVisible, startTimerForTimerScreen]);
+
+
+  useEffect(() => {
+    if (!modalVisible) {
+      startTimerForTimerScreen();
+    }
+  }, [modalVisible, startTimerForTimerScreen]);
+
+  useEffect(() => {
+    if (modalVisible) {
+      const modalIntervalId = setInterval(() => {
+        setModalTime((prevTime) => {
+          if (prevTime === 0) {
+            clearInterval(modalIntervalId);
+            console.log('Modal Countdown finished');
+            setModalVisible(false);
+          }
+          return prevTime > 0 ? prevTime - 1 : 0;
+        });
+      }, 1000);
+
+      return () => {
+        clearInterval(modalIntervalId);
+      };
+    }
+  }, [modalVisible]);
+  
+  const handleGoBack = () => {
+    navigation.goBack();
   };
 
-  
+  const handleTouchable1Press = () => {
+    const randomIndex = Math.floor(Math.random() * listCards.length);
+    const randomElement = listCards[randomIndex];
+    setCard(randomElement);
+    setScore(score+1);
+    if (Array.isArray(listCards) && listCards.length > 0) {
+      // Remove the first element from the array
+      listCards.splice(randomIndex, 1);
+      // Update the state with the modified array
+      setListCard(listCards);
+    }else{
+      setCard('no more cards');
+    }
+    console.log('Touchable panel 1 pressed'+score);
+  };
+
+  const handleTouchable2Press = () => {
+    const randomIndex = Math.floor(Math.random() * listCards.length);
+    const randomElement = listCards[randomIndex];
+    setCard(randomElement);
+    if (Array.isArray(listCards) && listCards.length > 0) {
+      // Remove the first element from the array
+      listCards.splice(randomIndex, 1);
+      // Update the state with the modified array
+      setListCard(listCards);
+    }else{
+      setCard('no more cards');
+    }
+    console.log('Touchable panel 2 pressed');
+  };
 
   return (
     <View style={styles.container}>
@@ -124,12 +164,10 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       <View style={styles.timerLayer}>
         <View style={styles.content}>
           <Text style={styles.timerText}>{time} seconds</Text>
-          {jsonData && (
             <View>
-              <Text>Loaded JSON Data:</Text>
-              <Text>{JSON.stringify(jsonData, null, 2)}</Text>
+              <Text>Card:</Text>
+              <Text>{card}</Text>
             </View>
-          )}
         </View>
       </View>
 

@@ -1,30 +1,49 @@
-import React from 'react';
-import { View, Text, StyleSheet,Button } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface ScoreScreenProps {
-  route: any; // Assuming the route prop is of any type for simplicity
   navigation: any;
 }
 
-
-
 const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
-  const  teams  ={};
+  const [teamsData, setTeamsData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchTeamsData = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('TeamData');
+        console.log(storedData);
+
+        if (storedData !== null) {
+          const parsedData = JSON.parse(storedData);
+          setTeamsData(parsedData);
+        } else {
+          console.log('No Data');
+        }
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    };
+
+    fetchTeamsData();
+  }, []);
 
   const handleGoGame = () => {
     // Navigate back to the previous screen
-    navigation.navigate('TimerScreen');
+    navigation.navigate('CardSelectScr');
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Team Scores</Text>
-     {/*  {teams.map((team: { name: string; score: number }, index: number) => (
-        <View key={index} style={styles.teamContainer}>
-          <Text style={styles.teamName}>{team.name}</Text>
-          <Text style={styles.teamScore}>{team.score}</Text>
-        </View>
-      ))} */}
+      {teamsData &&
+        Object.keys(teamsData).map((teamName) => (
+          <View key={teamName} style={styles.teamContainer}>
+            <Text style={styles.teamName}>{teamName}</Text>
+            <Text style={styles.teamScore}>Score: {teamsData[teamName].Score}</Text>
+          </View>
+        ))}
       <Button title="Next player" onPress={handleGoGame} />
     </View>
   );
