@@ -61,8 +61,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         if (prevTime === 0) {
           clearInterval(timerScreenIntervalId);
           console.log('TimerScreen Countdown finished');
-  
-          if (teamsData && teamsData[teamTurn] !== undefined) {
+/*            if (teamsData && teamsData[teamTurn] !== undefined) {
             // Update the score in teamsData using the score state
             const updatedTeamsData = {
               ...teamsData,
@@ -72,7 +71,6 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
               },
             };
             console.log('Updated Teams Data:', updatedTeamsData);
-  
             // Save updated teamsData to AsyncStorage
             AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
               .then(() => {
@@ -80,11 +78,10 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
               })
               .catch((error) => {
                 console.error('Error saving updated teamsData:', error);
-              });
-          } else {
-            console.error('Invalid teamsData or teamTurn:', teamsData, teamTurn);
-          }
-  
+              }); 
+           } else {
+            console.error('Invalid teamsData or teamTurn:', teamsData);
+          }  */
           requestAnimationFrame(() => {
             navigation.navigate('ScoreScr');
           });
@@ -93,7 +90,6 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       });
     }, 1000);
   }, [navigation, teamsData, teamTurn, score]);
-  
 
 
   useEffect(() => {
@@ -104,19 +100,6 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       setListCard(listCards);
     }
   }, [modalVisible, startTimerForTimerScreen, listCards]);
-
-
-  useEffect(() => {
-    if (!modalVisible) {
-      startTimerForTimerScreen();
-    }
-  }, [modalVisible, startTimerForTimerScreen]);
-
-  useEffect(() => {
-    if (!modalVisible) {
-      startTimerForTimerScreen();
-    }
-  }, [modalVisible, startTimerForTimerScreen]);
   
   useEffect(() => {
     if (modalVisible) {
@@ -130,7 +113,6 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           return prevTime > 0 ? prevTime - 1 : 0;
         });
       }, 1000);
-  
       return () => {
         clearInterval(modalIntervalId);
       };
@@ -140,17 +122,16 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const handleTouchable1Press = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
     const randomElement = listCards[randomIndex];
-    setCard(randomElement);
-    setScore((prevScore) => prevScore + 1);
-    if (Array.isArray(listCards) && listCards.length > 0) {
+    setCard(randomElement); 
+     if (Array.isArray(listCards) && listCards.length > 0) {
       // Remove the first element from the array
       listCards.splice(randomIndex, 1);
       // Update the state with the modified array
       setListCard(listCards);
     }else{
       setCard('no more cards');
-    }
-    console.log('Touchable panel 1 pressed '+score);
+    } 
+    console.log('Touchable panel 1 pressed ');
   };
 
   const handleTouchable2Press = () => {

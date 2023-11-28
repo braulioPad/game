@@ -14,7 +14,6 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
       try {
         const storedData = await AsyncStorage.getItem('TeamData');
         const teamt = await AsyncStorage.getItem('teamTurn');
-        
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           const numberOfTeams = Object.keys(parsedData).length;
@@ -22,7 +21,6 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
           setTeamsData(parsedData);
           // Ensure both teamTurn and numberOfTeams are numbers
           const teamTurn = parseInt(teamt, 10);
-          
           if (!isNaN(teamTurn)) {
             if (teamTurn < (numberOfTeams)) {
               AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn + 1));
@@ -32,9 +30,7 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
             }
           } else {
             console.error('Invalid teamTurn value:', teamt);
-          }
-  
-          console.log(storedData);
+          }          
         } else {
           console.log('No Data');
         }
