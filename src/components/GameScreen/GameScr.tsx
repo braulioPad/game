@@ -29,18 +29,19 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       try {
         const configData = await AsyncStorage.getItem('ConfigData');
         const parsedData = JSON.parse(configData);
+        console.log('parsedData:', parsedData); // Log the parsed data
         setTime(parsedData.seconds);
         const storedData = await AsyncStorage.getItem('TeamData');
-        console.log('data team: '+storedData);
+        console.log('data team: ' + storedData);
         const listCardData = await AsyncStorage.getItem('listCards');
         const parsedListCardData = JSON.parse(listCardData);
         const teamt = await AsyncStorage.getItem('teamTurn');
-        console.log('data turn: '+teamt);
         setListCard(parsedListCardData);
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
-        }else{
+          setTeamTurn(teamt ? parseInt(teamt) : 0); // Parse as integer and handle null
+        } else {
           console.log('no Data');
         }
       } catch (error) {
@@ -60,7 +61,30 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         if (prevTime === 0) {
           clearInterval(timerScreenIntervalId);
           console.log('TimerScreen Countdown finished');
-          // Use navigation.navigate inside useEffect or outside of rendering phase
+  
+          if (teamsData && teamsData[teamTurn] !== undefined) {
+            // Update the score in teamsData using the score state
+            const updatedTeamsData = {
+              ...teamsData,
+              [teamTurn]: {
+                ...teamsData[teamTurn],
+                Score: teamsData[teamTurn].Score + score,
+              },
+            };
+            console.log('Updated Teams Data:', updatedTeamsData);
+  
+            // Save updated teamsData to AsyncStorage
+            AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
+              .then(() => {
+                console.log('Updated teamsData saved successfully');
+              })
+              .catch((error) => {
+                console.error('Error saving updated teamsData:', error);
+              });
+          } else {
+            console.error('Invalid teamsData or teamTurn:', teamsData, teamTurn);
+          }
+  
           requestAnimationFrame(() => {
             navigation.navigate('ScoreScr');
           });
@@ -68,12 +92,8 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         return prevTime > 0 ? prevTime - 1 : 0;
       });
     }, 1000);
-
-    // Clear existing interval before starting a new one
-    return () => {
-      clearInterval(timerScreenIntervalId);
-    };
-  }, [navigation]);
+  }, [navigation, teamsData, teamTurn, score]);
+  
 
 
   useEffect(() => {
@@ -83,7 +103,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       listCards.splice(0, 1);
       setListCard(listCards);
     }
-  }, [modalVisible, startTimerForTimerScreen]);
+  }, [modalVisible, startTimerForTimerScreen, listCards]);
 
 
   useEffect(() => {
@@ -92,6 +112,12 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     }
   }, [modalVisible, startTimerForTimerScreen]);
 
+  useEffect(() => {
+    if (!modalVisible) {
+      startTimerForTimerScreen();
+    }
+  }, [modalVisible, startTimerForTimerScreen]);
+  
   useEffect(() => {
     if (modalVisible) {
       const modalIntervalId = setInterval(() => {
@@ -104,22 +130,18 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           return prevTime > 0 ? prevTime - 1 : 0;
         });
       }, 1000);
-
+  
       return () => {
         clearInterval(modalIntervalId);
       };
     }
   }, [modalVisible]);
-  
-  const handleGoBack = () => {
-    navigation.goBack();
-  };
 
   const handleTouchable1Press = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
     const randomElement = listCards[randomIndex];
     setCard(randomElement);
-    setScore(score+1);
+    setScore((prevScore) => prevScore + 1);
     if (Array.isArray(listCards) && listCards.length > 0) {
       // Remove the first element from the array
       listCards.splice(randomIndex, 1);
@@ -128,7 +150,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     }else{
       setCard('no more cards');
     }
-    console.log('Touchable panel 1 pressed'+score);
+    console.log('Touchable panel 1 pressed '+score);
   };
 
   const handleTouchable2Press = () => {
@@ -143,7 +165,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     }else{
       setCard('no more cards');
     }
-    console.log('Touchable panel 2 pressed');
+    console.log('Touchable panel 2 pressed ');
   };
 
   return (

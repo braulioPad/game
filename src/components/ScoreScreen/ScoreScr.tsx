@@ -13,11 +13,28 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
     const fetchTeamsData = async () => {
       try {
         const storedData = await AsyncStorage.getItem('TeamData');
-        console.log(storedData);
-
+        const teamt = await AsyncStorage.getItem('teamTurn');
+        
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
+          const numberOfTeams = Object.keys(parsedData).length;
+          console.log('number of teams ' + numberOfTeams+'number of team playing: '+teamt);
           setTeamsData(parsedData);
+          // Ensure both teamTurn and numberOfTeams are numbers
+          const teamTurn = parseInt(teamt, 10);
+          
+          if (!isNaN(teamTurn)) {
+            if (teamTurn < (numberOfTeams)) {
+              AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn + 1));
+              
+            } else if (teamTurn >= (numberOfTeams)) {
+              AsyncStorage.setItem('teamTurn', JSON.stringify(0));
+            }
+          } else {
+            console.error('Invalid teamTurn value:', teamt);
+          }
+  
+          console.log(storedData);
         } else {
           console.log('No Data');
         }
@@ -25,7 +42,7 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
         console.error('Error parsing JSON:', error);
       }
     };
-
+  
     fetchTeamsData();
   }, []);
 
