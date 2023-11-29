@@ -1,4 +1,6 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ConfigScreen from './src/components/ConfigurationScreen/ConfigScreen';
@@ -9,9 +11,12 @@ import TeamsListScreen from './src/components/TeamListScreen/TeamsListScreen';
 import GameScr from './src/components/GameScreen/GameScr';
 import ScoreScr from './src/components/ScoreScreen/ScoreScr';
 import CardSelectScr from './src/components/CardSelection/CardSelectScr';
+import EditTeamScr from './src/components/EditTeamScreen/EditTeamScr';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {
+  
+   
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -20,9 +25,11 @@ const App: React.FC = () => {
         <Stack.Screen name="aboutUs" component={About} />
         <Stack.Screen name="TeamScr" component={TeamScr} options={{ headerShown: true }} />
         <Stack.Screen name="ScoreScr" component={ScoreScr} options={{ headerShown: false }} />
+
+        <Stack.Screen name="EditTeamScr"  component={EditTeamScr as React.FC} options={{ headerShown: false }} />
         <Stack.Screen
           name="TeamsListScreen"
-          component={TeamsListScreen as React.FC}/>
+          component={TeamsListScreen as React.FC} options={{ headerShown: false }}/>
           <Stack.Screen name="TimerScreen" component={GameScr} options={{ headerShown: false }}/> 
           <Stack.Screen name="CardSelectScr" component={CardSelectScr} options={{ headerShown: false }} />
       </Stack.Navigator>

@@ -17,7 +17,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const [modalTime, setModalTime] = useState(3);
   const [jsonData, setJsonData] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(true);
-  const [teamsData, setTeamsData] = useState<any>(null);
+  const [teamsData, setTeamsData] = useState([]);
   const [listCards,setListCard]=useState<string[]>([]);
   const [card,setCard]=useState<string>();
   const [score, setScore] = useState<number>(0);
@@ -58,40 +58,38 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const startTimerForTimerScreen = useCallback(() => {
     const timerScreenIntervalId = setInterval(() => {
       setTime((prevTime) => {
-        if (prevTime === 0) {
-          clearInterval(timerScreenIntervalId);
+        if (prevTime === 0 && !modalVisible) {
+          if (teamsData && teamsData[teamTurn] !== undefined) {
           console.log('TimerScreen Countdown finished');
-/*            if (teamsData && teamsData[teamTurn] !== undefined) {
-            // Update the score in teamsData using the score state
-            const updatedTeamsData = {
-              ...teamsData,
-              [teamTurn]: {
-                ...teamsData[teamTurn],
-                Score: teamsData[teamTurn].Score + score,
-              },
-            };
-            console.log('Updated Teams Data:', updatedTeamsData);
-            // Save updated teamsData to AsyncStorage
-            AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
+          const updatedTeamsData = {
+            ...teamsData,
+            [teamTurn]: {
+              ...teamsData[teamTurn],
+              score: teamsData[teamTurn].score + score,
+            },
+          }; 
+          console.log('Updated Teams Data:', updatedTeamsData);
+          AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
               .then(() => {
                 console.log('Updated teamsData saved successfully');
               })
               .catch((error) => {
                 console.error('Error saving updated teamsData:', error);
-              }); 
-           } else {
-            console.error('Invalid teamsData or teamTurn:', teamsData);
-          }  */
+              });
+            } else {
+              console.error('Invalid teamsData or teamTurn:', teamsData);
+            }
+          // Perform navigation when the timer reaches 0 and modalVisible is false
           requestAnimationFrame(() => {
             navigation.navigate('ScoreScr');
           });
+          clearInterval(timerScreenIntervalId);
         }
         return prevTime > 0 ? prevTime - 1 : 0;
       });
     }, 1000);
-  }, [navigation, teamsData, teamTurn, score]);
-
-
+  }, [navigation, modalVisible, teamsData, teamTurn/*, score*/]);
+  
   useEffect(() => {
     if (!modalVisible) {
       startTimerForTimerScreen();
@@ -123,11 +121,14 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
     const randomElement = listCards[randomIndex];
     setCard(randomElement); 
+    setScore((prevScore) => prevScore + 1);
+    console.log('score:', score);
      if (Array.isArray(listCards) && listCards.length > 0) {
       // Remove the first element from the array
       listCards.splice(randomIndex, 1);
       // Update the state with the modified array
       setListCard(listCards);
+      
     }else{
       setCard('no more cards');
     } 
@@ -156,11 +157,17 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={closeModal}
-      >
+        onRequestClose={closeModal}>
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>{modalTime} seconds</Text>
-        </View>
+          {teamsData && teamsData[teamTurn] ? (
+            <>
+              <Text style={styles.modalText}>Team: {Object.values(teamsData)[teamTurn]?.name}</Text>
+              <Text style={styles.modalText}>{modalTime} seconds</Text>
+            </>
+          ) : (
+            <Text style={styles.modalText}>Team data not available</Text>
+          )}
+  </View>
       </Modal>
 
       {/* Timer Layer */}

@@ -7,7 +7,7 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [teamName, setTeamName] = useState<string>('');
     const [playerName, setPlayerName] = useState<string>('');
     const [players, setPlayers] = useState<string[]>([]);
-    const [teamsData, setTeamsData] = useState({});
+    const [teamsData, setTeamsData] = useState([]);
   
     const addPlayer = () => {
       if (playerName.trim() !== '') {
@@ -20,13 +20,13 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
       if (teamName && players.length > 0) {
         /* Save team data (e.g., to a database) Navigate to another screen or perform other actions For example, navigate back to the home screen */
         try {
-            const updatedTeamsData = {
-              ...teamsData,
-              [teamName]: { teamName, Score: 0, players: players.map((player) => ({ name: player, played: false })) },
-            };
+          const updatedTeamsData = [
+            ...teamsData,
+            { name: teamName, score: 0, players: players.map((player) => ({ name: player, played: false })) },
+          ];
             setTeamsData(updatedTeamsData);
             await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
-          navigation.goBack();
+            navigation.navigate('TeamsListScreen');
         } catch (error) {
           console.error('Error Data', error);
         }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet,Button } from 'react-native';
+import { View, Text, StyleSheet,Button,BackHandler, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 interface TeamsListScreenProps {
   navigation: any; 
@@ -9,6 +10,16 @@ interface TeamsListScreenProps {
 const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
 
   const [teamsData, setTeamsData] = useState<any>(null);
+
+  /* useEffect(() => {
+    const disableBackButton = () => true; // Always return true to disable the back button
+    // Add an event listener for the hardware back button
+    BackHandler.addEventListener('hardwareBackPress', disableBackButton);
+    // Cleanup: Remove the event listener when the component is unmounted
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', disableBackButton);
+    };
+  }, []); */
   
   useEffect(() => {
     const fetchTeamsData = async () => {
@@ -34,10 +45,31 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
   };
 
   const handleGoGame = () => {
-    // Navigate back to the previous screen
-    const teamTurn=1;
+    const teamTurn = 1; // Assuming you have a specific teamTurn value
     AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
-    navigation.navigate('CardSelectScr');
+    if (teamsData && typeof teamsData === 'object') {
+      const teamKeys = Object.keys(teamsData);
+      if (teamKeys.length >= 2) {
+        // Check if the number of players is the same in all teams
+        const playersCount = teamsData[teamKeys[0]].players.length;
+        const allTeamsHaveSamePlayers = teamKeys.every((key) => teamsData[key].players.length === playersCount);
+        if (allTeamsHaveSamePlayers) {
+          navigation.navigate('CardSelectScr');
+          return;
+        } else {
+          // Display an alert or perform another action indicating the requirement
+          alert('All teams must have the same number of players.');
+          return;
+        }
+      }
+    }
+    // Display an alert or perform another action indicating the requirement
+    alert('Please create at least two teams before starting the game.');
+  };
+
+  const handleEditTeam = (teamName: string) => {
+    // Navigate to the EditTeamScreen with the selected team name
+    navigation.navigate('EditTeamScr', { teamName });
   };
 
   const handleClearData = async () => {
@@ -46,36 +78,38 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
 
     // Handle the case when teams are undefined
     return (
+      <ScrollView style={styles.container}>
       <View style={styles.container}>
-         <Text>Teams Data:</Text>
-      {teamsData ? (
-        <View>
-           {Object.keys(teamsData).map((teamName) => (
-            <View key={teamName}>
-              <Text>Team Name: {teamName}</Text>
-              <Text>Score: {teamsData[teamName].score}</Text>
-              <Text>Players:</Text>
-              {teamsData[teamName].players.map((player, index) => (
-                <View key={index}>
-                  <Text>Name: {player.name}</Text>
-                </View>
-              ))}
-            </View>
-          ))} 
-        </View>
-      ) : (
-        <Text>No Teams Data</Text>
-      )} 
+        <Text>Teams Data:</Text>
+        {teamsData ? (
+          <View>
+            {Object.keys(teamsData).map((teamName) => (
+              <View key={teamName} style={styles.teamContainer}>
+                <Text>Team Name: {teamName}</Text>
+                <Text>Score: {teamsData[teamName].score}</Text>
+                <Text>Players:</Text>
+                {teamsData[teamName].players.map((player, index) => (
+                  <View key={index}>
+                    <Text>Name: {player.name}</Text>
+                  </View>
+                ))}
+                <Button title="Edit" onPress={() => handleEditTeam(teamName)} />
+              </View>
+            ))}
+          </View>
+        ) : (
+          <Text>No Teams Data</Text>
+        )}
         <View style={styles.buttonsContainer}>
-        <Button title="Add Team" onPress={handleAddTeam} />
-        <Button title="Go Play" onPress={handleGoGame} />
-        <Button title="Clear Data" onPress={handleClearData} />
+          <Button title="Add Team" onPress={handleAddTeam} />
+          <Button title="Go Play" onPress={handleGoGame} />
+          <Button title="Clear Data" onPress={handleClearData} />
+        </View>
       </View>
-      </View>
-      
+      </ScrollView>
     );
-  
-      }
+  };
+      
 
 const styles = StyleSheet.create({
   container: {
