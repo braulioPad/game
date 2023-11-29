@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -21,7 +21,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
         console.error('Error loading ConfigData:', error);
       }
     };
-  
+
     // Call the function to load config data
     loadConfigData();
   }, []);
@@ -29,16 +29,16 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.navigate('configuration');
   };
   const goToAboutUs = () => {
-   navigation.navigate('aboutUs');
+    navigation.navigate('aboutUs');
   };
   const goToPlay = () => {
-   navigation.navigate('TeamsListScreen');
+    navigation.navigate('TeamsListScreen');
   };
 
 
   return (
     <View style={styles.container}>
-      <Button title="Play" onPress={goToPlay}/>
+      <Button title="Play" onPress={goToPlay} />
       <Button title="Configuration" onPress={goToConfig} />
       <Button title="About us" onPress={goToAboutUs} />
     </View>

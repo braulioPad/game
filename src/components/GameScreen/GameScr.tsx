@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Modal  } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface TimerScreenProps {
   navigation: any; // Assuming the navigation prop is of any type for simplicity
-  
+
 }
 
 interface TimerScreenProps {
@@ -12,14 +12,14 @@ interface TimerScreenProps {
 }
 
 const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
-  
+
   const [time, setTime] = useState(10);
   const [modalTime, setModalTime] = useState(3);
   const [jsonData, setJsonData] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(true);
   const [teamsData, setTeamsData] = useState([]);
-  const [listCards,setListCard]=useState<string[]>([]);
-  const [card,setCard]=useState<string>();
+  const [listCards, setListCard] = useState<string[]>([]);
+  const [card, setCard] = useState<string>();
   const [score, setScore] = useState<number>(0);
   const [teamTurn, setTeamTurn] = useState<number>(0);
 
@@ -60,25 +60,25 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       setTime((prevTime) => {
         if (prevTime === 0 && !modalVisible) {
           if (teamsData && teamsData[teamTurn] !== undefined) {
-          console.log('TimerScreen Countdown finished');
-          const updatedTeamsData = {
-            ...teamsData,
-            [teamTurn]: {
-              ...teamsData[teamTurn],
-              score: teamsData[teamTurn].score + score,
-            },
-          }; 
-          console.log('Updated Teams Data:', updatedTeamsData);
-          AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
+            console.log('TimerScreen Countdown finished');
+            const updatedTeamsData = {
+              ...teamsData,
+              [teamTurn]: {
+                ...teamsData[teamTurn],
+                score: teamsData[teamTurn].score + score,
+              },
+            };
+            console.log('Updated Teams Data:', updatedTeamsData);
+            AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
               .then(() => {
                 console.log('Updated teamsData saved successfully');
               })
               .catch((error) => {
                 console.error('Error saving updated teamsData:', error);
               });
-            } else {
-              console.error('Invalid teamsData or teamTurn:', teamsData);
-            }
+          } else {
+            console.error('Invalid teamsData or teamTurn:', teamsData);
+          }
           // Perform navigation when the timer reaches 0 and modalVisible is false
           requestAnimationFrame(() => {
             navigation.navigate('ScoreScr');
@@ -89,7 +89,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       });
     }, 1000);
   }, [navigation, modalVisible, teamsData, teamTurn/*, score*/]);
-  
+
   useEffect(() => {
     if (!modalVisible) {
       startTimerForTimerScreen();
@@ -98,7 +98,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       setListCard(listCards);
     }
   }, [modalVisible, startTimerForTimerScreen, listCards]);
-  
+
   useEffect(() => {
     if (modalVisible) {
       const modalIntervalId = setInterval(() => {
@@ -120,18 +120,18 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const handleTouchable1Press = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
     const randomElement = listCards[randomIndex];
-    setCard(randomElement); 
+    setCard(randomElement);
     setScore((prevScore) => prevScore + 1);
     console.log('score:', score);
-     if (Array.isArray(listCards) && listCards.length > 0) {
+    if (Array.isArray(listCards) && listCards.length > 0) {
       // Remove the first element from the array
       listCards.splice(randomIndex, 1);
       // Update the state with the modified array
       setListCard(listCards);
-      
-    }else{
+
+    } else {
       setCard('no more cards');
-    } 
+    }
     console.log('Touchable panel 1 pressed ');
   };
 
@@ -144,7 +144,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       listCards.splice(randomIndex, 1);
       // Update the state with the modified array
       setListCard(listCards);
-    }else{
+    } else {
       setCard('no more cards');
     }
     console.log('Touchable panel 2 pressed ');
@@ -167,17 +167,17 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           ) : (
             <Text style={styles.modalText}>Team data not available</Text>
           )}
-  </View>
+        </View>
       </Modal>
 
       {/* Timer Layer */}
       <View style={styles.timerLayer}>
         <View style={styles.content}>
           <Text style={styles.timerText}>{time} seconds</Text>
-            <View>
-              <Text>Card:</Text>
-              <Text>{card}</Text>
-            </View>
+          <View>
+            <Text>Card:</Text>
+            <Text>{card}</Text>
+          </View>
         </View>
       </View>
 

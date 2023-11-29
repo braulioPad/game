@@ -14,24 +14,24 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
     const fetchTeamsData = async () => {
       try {
         const storedData = await AsyncStorage.getItem('TeamData');
-    const teamt = await AsyncStorage.getItem('teamTurn');
-    if (storedData !== null) {
-      const parsedData = JSON.parse(storedData);
-      const numberOfTeams = Object.keys(parsedData).length;
-      console.log('number of teams ' + numberOfTeams + ', number of team playing: ' + teamt);
-      setTeamsData(parsedData);
-      // Ensure both teamTurn and numberOfTeams are numbers
-      const teamTurn = parseInt(teamt, 10);
-      if (!isNaN(teamTurn)) {
-        // Make sure teamTurn is less than numberOfTeams
-        const updatedTeamTurn = teamTurn < (numberOfTeams - 1) ? teamTurn + 1 : 0;
-        AsyncStorage.setItem('teamTurn', JSON.stringify(updatedTeamTurn));
-      } else {
-        console.error('Invalid teamTurn value:', teamt);
-      }
-    } else {
-      console.log('No Data');
-    }
+        const teamt = await AsyncStorage.getItem('teamTurn');
+        if (storedData !== null) {
+          const parsedData = JSON.parse(storedData);
+          const numberOfTeams = Object.keys(parsedData).length;
+          console.log('number of teams ' + numberOfTeams + ', number of team playing: ' + teamt);
+          setTeamsData(parsedData);
+          // Ensure both teamTurn and numberOfTeams are numbers
+          const teamTurn = parseInt(teamt, 10);
+          if (!isNaN(teamTurn)) {
+            // Make sure teamTurn is less than numberOfTeams
+            const updatedTeamTurn = teamTurn < (numberOfTeams - 1) ? teamTurn + 1 : 0;
+            AsyncStorage.setItem('teamTurn', JSON.stringify(updatedTeamTurn));
+          } else {
+            console.error('Invalid teamTurn value:', teamt);
+          }
+        } else {
+          console.log('No Data');
+        }
       } catch (error) {
         console.error('Error parsing JSON:', error);
       }

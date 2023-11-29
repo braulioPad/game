@@ -1,17 +1,16 @@
 {
-    "typeCard": 
-        {
-          "easy":[
-            "Gato",
-            "Perro"
-          ],
-          "medium":[
-            "Auto",
-            "Motosierra"
-          ],
-          "hard":[
-            "",
-            ""
-          ]
-        }
-    }
+  "typeCard": {
+    "easy": [
+      "Gato",
+      "Perro"
+    ],
+    "medium": [
+      "Auto",
+      "Motosierra"
+    ],
+    "hard": [
+      "",
+      ""
+    ]
+  }
+}

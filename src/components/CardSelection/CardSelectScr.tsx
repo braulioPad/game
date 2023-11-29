@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 interface CardsListScreenProps {
-  navigation: any; 
+  navigation: any;
 }
 
 
@@ -13,25 +13,25 @@ interface CardsListScreenProps {
 const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
   const [jsonData, setJsonData] = useState<any>(null);
 
-  const handleButtonPress =  async (buttonText) => {
+  const handleButtonPress = async (buttonText) => {
     try {
-    if(buttonText=== 'easy'){
-      console.log('saving Data: '+ JSON.stringify(jsonData.typeCard.easy));
-      AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.easy));
-    }else if(buttonText=== 'medium'){
-      console.log('saving Data: '+ JSON.stringify(jsonData.typeCard.medium));
-      AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.medium));
+      if (buttonText === 'easy') {
+        console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.easy));
+        AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.easy));
+      } else if (buttonText === 'medium') {
+        console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.medium));
+        AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.medium));
+      }
+      else {
+        console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.hard));
+        AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.hard));
+      }
+      navigation.navigate('TimerScreen');
+    } catch (error) {
+      console.error('Error saving data', error);
     }
-    else{
-      console.log('saving Data: '+ JSON.stringify(jsonData.typeCard.hard));
-      AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.hard));
-    }
-    navigation.navigate('TimerScreen');
-  } catch (error) {
-    console.error('Error saving data', error);
-  }
   };
-  
+
 
 
   useEffect(() => {

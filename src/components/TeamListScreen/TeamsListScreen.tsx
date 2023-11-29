@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet,Button,BackHandler, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Button, BackHandler, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 interface TeamsListScreenProps {
-  navigation: any; 
+  navigation: any;
 }
 
 const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
@@ -20,7 +20,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
       BackHandler.removeEventListener('hardwareBackPress', disableBackButton);
     };
   }, []); */
-  
+
   useEffect(() => {
     const fetchTeamsData = async () => {
       try {
@@ -29,7 +29,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
-        }else{
+        } else {
           console.log('no Data');
         }
       } catch (error) {
@@ -76,9 +76,9 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
     await AsyncStorage.clear();
   };
 
-    // Handle the case when teams are undefined
-    return (
-      <ScrollView style={styles.container}>
+  // Handle the case when teams are undefined
+  return (
+    <ScrollView style={styles.container}>
       <View style={styles.container}>
         <Text>Teams Data:</Text>
         {teamsData ? (
@@ -106,10 +106,10 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
           <Button title="Clear Data" onPress={handleClearData} />
         </View>
       </View>
-      </ScrollView>
-    );
-  };
-      
+    </ScrollView>
+  );
+};
+
 
 const styles = StyleSheet.create({
   container: {

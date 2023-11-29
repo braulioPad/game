@@ -1,17 +1,16 @@
 {
-    "typeCard": 
-        {
-          "easy":[
-            "inu",
-            "neko"
-          ],
-          "medium":[
-            "Kuruma",
-            "Chēnsō"
-          ],
-          "hard":[
-            "",
-            ""
-          ]
-        }
-    }
+  "typeCard": {
+    "easy": [
+      "inu",
+      "neko"
+    ],
+    "medium": [
+      "Kuruma",
+      "Chēnsō"
+    ],
+    "hard": [
+      "",
+      ""
+    ]
+  }
+}

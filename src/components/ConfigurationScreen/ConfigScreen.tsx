@@ -46,13 +46,13 @@ const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
     setSeconds(value);
   };
 
-  const handleSaveConfig = async  () => {
+  const handleSaveConfig = async () => {
     try {
       const updatedConfigData = {
         seconds,
         slcLanguage,
       };
-      console.log('saving Data: '+ JSON.stringify(updatedConfigData));
+      console.log('saving Data: ' + JSON.stringify(updatedConfigData));
       AsyncStorage.setItem('ConfigData', JSON.stringify(updatedConfigData));
       navigation.goBack();
     } catch (error) {
