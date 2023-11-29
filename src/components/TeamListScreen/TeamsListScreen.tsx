@@ -11,7 +11,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
 
   const [teamsData, setTeamsData] = useState<any>(null);
 
-  /* useEffect(() => {
+  /*  useEffect(() => {
     const disableBackButton = () => true; // Always return true to disable the back button
     // Add an event listener for the hardware back button
     BackHandler.addEventListener('hardwareBackPress', disableBackButton);
@@ -19,7 +19,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', disableBackButton);
     };
-  }, []); */
+  }, []);  */
 
   useEffect(() => {
     const fetchTeamsData = async () => {

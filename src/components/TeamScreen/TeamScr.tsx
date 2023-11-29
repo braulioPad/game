@@ -18,17 +18,15 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   const createTeam = async () => {
     if (teamName && players.length > 0) {
-      /* Save team data (e.g., to a database) Navigate to another screen or perform other actions For example, navigate back to the home screen */
       try {
         const updatedTeamsData = [
           ...teamsData,
           { name: teamName, score: 0, players: players.map((player) => ({ name: player, played: false })) },
         ];
-        setTeamsData(updatedTeamsData);
         await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
         navigation.navigate('TeamsListScreen');
       } catch (error) {
-        console.error('Error Data', error);
+        console.error('Error saving team data', error);
       }
     } else {
       alert('Please enter a team name and add at least one player.');
@@ -39,6 +37,11 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
     // Fetch teams data from AsyncStorage when the component mounts
     fetchTeamsData();
   }, []);
+
+  useEffect(() => {
+    // Fetch teams data again after creating the team
+    fetchTeamsData();
+  }, [navigation]);
 
   const fetchTeamsData = async () => {
     try {

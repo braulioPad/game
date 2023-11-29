@@ -36,11 +36,14 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         const listCardData = await AsyncStorage.getItem('listCards');
         const parsedListCardData = JSON.parse(listCardData);
         const teamt = await AsyncStorage.getItem('teamTurn');
+        
         setListCard(parsedListCardData);
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
           setTeamTurn(teamt ? parseInt(teamt) : 0); // Parse as integer and handle null
+          setScore(parsedData[teamt].score);
+          console.log('team turn: ', teamTurn);
         } else {
           console.log('no Data');
         }
