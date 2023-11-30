@@ -39,7 +39,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
     fetchTeamsData();
   }, []);
 
-  const handleAddTeam = () => {
+  const handleAddTeam = async () => {
     // Navigate to the TeamScreen to add a new team
     navigation.navigate('TeamScr');
   };
@@ -76,6 +76,26 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
     await AsyncStorage.clear();
   };
 
+  React.useEffect(() => {
+    const fetchTeamsData = async () => {
+      try {
+        const storedData = await AsyncStorage.getItem('TeamData');
+        console.log(storedData);
+        if (storedData !== null) {
+          const parsedData = JSON.parse(storedData);
+          setTeamsData(parsedData);
+        } else {
+          console.log('No Data');
+        }
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    };
+    const unsubscribe = navigation.addListener('focus', () => {
+      fetchTeamsData();
+    });
+    return unsubscribe;
+  }, [navigation]);
   // Handle the case when teams are undefined
   return (
     <ScrollView style={styles.container}>
