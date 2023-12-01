@@ -6,22 +6,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [teamName, setTeamName] = useState<string>('');
   const [playerName, setPlayerName] = useState<string>('');
-  const [players, setPlayers] = useState<string[]>([]);
   const [teamsData, setTeamsData] = useState([]);
 
-  const addPlayer = () => {
-    if (playerName.trim() !== '') {
-      setPlayers([...players, playerName]);
-      setPlayerName('');
-    }
-  };
-
   const createTeam = async () => {
-    if (teamName && players.length > 0) {
+    if (teamName) {
       try {
         const updatedTeamsData = [
           ...teamsData,
-          { name: teamName, score: 0, players: players.map((player) => ({ name: player, played: false })) },
+          { name: teamName, score: 0},
         ];
         await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
         navigation.navigate('TeamsListScreen');
@@ -63,19 +55,6 @@ const TeamScr: React.FC<{ navigation: any }> = ({ navigation }) => {
         value={teamName}
         onChangeText={(text) => setTeamName(text)}
       />
-
-      <Text style={styles.label}>Players:</Text>
-      {players.map((player, index) => (
-        <Text key={index}>{player}</Text>
-      ))}
-      <TextInput
-        style={styles.input}
-        placeholder="Enter player name"
-        value={playerName}
-        onChangeText={(text) => setPlayerName(text)}
-      />
-
-      <Button title="Add Player" onPress={addPlayer} />
       <Button title="Create Team" onPress={createTeam} />
     </View>
   );

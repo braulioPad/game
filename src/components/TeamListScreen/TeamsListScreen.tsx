@@ -11,7 +11,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
 
   const [teamsData, setTeamsData] = useState<any>(null);
 
-  /*  useEffect(() => {
+  useEffect(() => {
     const disableBackButton = () => true; // Always return true to disable the back button
     // Add an event listener for the hardware back button
     BackHandler.addEventListener('hardwareBackPress', disableBackButton);
@@ -19,7 +19,7 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
     return () => {
       BackHandler.removeEventListener('hardwareBackPress', disableBackButton);
     };
-  }, []);  */
+  }, []);  
 
   useEffect(() => {
     const fetchTeamsData = async () => {
@@ -51,20 +51,9 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
       const teamKeys = Object.keys(teamsData);
       if (teamKeys.length >= 2) {
         // Check if the number of players is the same in all teams
-        const playersCount = teamsData[teamKeys[0]].players.length;
-        const allTeamsHaveSamePlayers = teamKeys.every((key) => teamsData[key].players.length === playersCount);
-        if (allTeamsHaveSamePlayers) {
-          navigation.navigate('CardSelectScr');
-          return;
-        } else {
-          // Display an alert or perform another action indicating the requirement
-          alert('All teams must have the same number of players.');
-          return;
-        }
+        navigation.navigate('CardSelectScr');
       }
     }
-    // Display an alert or perform another action indicating the requirement
-    alert('Please create at least two teams before starting the game.');
   };
 
   const handleEditTeam = (teamName: string) => {
@@ -106,13 +95,6 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
             {Object.keys(teamsData).map((teamName) => (
               <View key={teamName} style={styles.teamContainer}>
                 <Text>Team Name: {teamName}</Text>
-                <Text>Score: {teamsData[teamName].score}</Text>
-                <Text>Players:</Text>
-                {teamsData[teamName].players.map((player, index) => (
-                  <View key={index}>
-                    <Text>Name: {player.name}</Text>
-                  </View>
-                ))}
                 <Button title="Edit" onPress={() => handleEditTeam(teamName)} />
               </View>
             ))}

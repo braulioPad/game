@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface ScoreScreenProps {
   navigation: any;
+  
 }
 
 const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
@@ -13,12 +14,13 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
   useEffect(() => {
     const fetchTeamsData = async () => {
       try {
+        
         const storedData = await AsyncStorage.getItem('TeamData');
         const teamt = await AsyncStorage.getItem('teamTurn');
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           const numberOfTeams = Object.keys(parsedData).length;
-          console.log('number of teams ' + numberOfTeams + ', number of team playing: ' + teamt);
+          //console.log('value update score of '+teamt+'is : '+score);
           setTeamsData(parsedData);
           // Ensure both teamTurn and numberOfTeams are numbers
           const teamTurn = parseInt(teamt, 10);
@@ -52,7 +54,7 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
   const handleConfirmFinish = () => {
     // Hide the finish modal
     setFinishModalVisible(false);
-
+    handleResetScores();
     // Navigate to the home screen
     navigation.navigate('Home');
   };
@@ -60,6 +62,22 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
   const handleCancelFinish = () => {
     // Hide the finish modal
     setFinishModalVisible(false);
+  };
+
+  const handleResetScores = async () => {
+    // Reset the scores to zero
+    const resetScoresData = Object.keys(teamsData).reduce((acc, key) => {
+      acc[key] = { ...teamsData[key], score: 0 };
+      return acc;
+    }, {});
+
+    try {
+      await AsyncStorage.setItem('TeamData', JSON.stringify(resetScoresData));
+      setTeamsData(resetScoresData);
+      console.log('Scores reset successfully');
+    } catch (error) {
+      console.error('Error resetting scores:', error);
+    }
   };
 
   return (

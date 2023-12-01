@@ -1,27 +1,29 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Modal } from 'react-native';
+import React, { useCallback, useEffect, useState,useRef  } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Modal,Animated } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface TimerScreenProps {
   navigation: any; // Assuming the navigation prop is of any type for simplicity
-
 }
-
 interface TimerScreenProps {
   navigation: any; // Assuming the navigation prop is of any type for simplicity
 }
-
 const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
 
   const [time, setTime] = useState(10);
   const [modalTime, setModalTime] = useState(3);
-  const [jsonData, setJsonData] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(true);
   const [teamsData, setTeamsData] = useState([]);
   const [listCards, setListCard] = useState<string[]>([]);
   const [card, setCard] = useState<string>();
-  const [score, setScore] = useState<number>(0);
   const [teamTurn, setTeamTurn] = useState<number>(0);
+  const score = useRef(0);
+  const scaleValue = new Animated.Value(1);
+  const getColourCorrect = (): string => 'rgba(0, 255, 0, 0.5)';
+  const getColourInCorrect = (): string => 'rgba(255, 0, 0, 0.5)';
+  const getColourNormal = (): string => 'rgba(255, 0, 0, 0)';
+  const [colourLeft, setColourLeft] = useState<string>('rgba(255, 0, 0, 0)');
+  const [colourRight, setColourRight] = useState<string>('rgba(255, 0, 0, 0)');
 
 
   useEffect(() => {
@@ -36,13 +38,11 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         const listCardData = await AsyncStorage.getItem('listCards');
         const parsedListCardData = JSON.parse(listCardData);
         const teamt = await AsyncStorage.getItem('teamTurn');
-        
         setListCard(parsedListCardData);
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
           setTeamTurn(teamt ? parseInt(teamt) : 0); // Parse as integer and handle null
-          setScore(parsedData[teamt].score);
           console.log('team turn: ', teamTurn);
         } else {
           console.log('no Data');
@@ -62,13 +62,13 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     const timerScreenIntervalId = setInterval(() => {
       setTime((prevTime) => {
         if (prevTime === 0 && !modalVisible) {
-          if (teamsData && teamsData[teamTurn] !== undefined) {
+           if (teamsData && teamsData[teamTurn] !== undefined) {
             console.log('TimerScreen Countdown finished');
             const updatedTeamsData = {
               ...teamsData,
               [teamTurn]: {
                 ...teamsData[teamTurn],
-                score: teamsData[teamTurn].score + score,
+                score: teamsData[teamTurn].score + score.current,
               },
             };
             console.log('Updated Teams Data:', updatedTeamsData);
@@ -81,7 +81,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
               });
           } else {
             console.error('Invalid teamsData or teamTurn:', teamsData);
-          }
+          } 
           // Perform navigation when the timer reaches 0 and modalVisible is false
           requestAnimationFrame(() => {
             navigation.navigate('ScoreScr');
@@ -91,7 +91,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         return prevTime > 0 ? prevTime - 1 : 0;
       });
     }, 1000);
-  }, [navigation, modalVisible, teamsData, teamTurn/*, score*/]);
+  }, [navigation, modalVisible, teamsData, teamTurn, score]);
 
   useEffect(() => {
     if (!modalVisible) {
@@ -120,28 +120,39 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     }
   }, [modalVisible]);
 
-  const handleTouchable1Press = () => {
+  const handleTouchablePressInLeft = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
     const randomElement = listCards[randomIndex];
     setCard(randomElement);
-    setScore((prevScore) => prevScore + 1);
+    setColourLeft(getColourCorrect());
     console.log('score:', score);
     if (Array.isArray(listCards) && listCards.length > 0) {
+      score.current += 1;
       // Remove the first element from the array
       listCards.splice(randomIndex, 1);
       // Update the state with the modified array
       setListCard(listCards);
-
     } else {
       setCard('no more cards');
     }
+    setTimeout(() => {
+      setColourLeft(getColourNormal());
+      console.log('Delayed code executed');
+    }, 1000);
     console.log('Touchable panel 1 pressed ');
+    
   };
 
-  const handleTouchable2Press = () => {
+  const handleTouchablePressOutLeft = () => {
+    console.log('press out ');
+   // setColour(getColourNormal());
+  };
+
+  const handleTouchablePressInRight = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
     const randomElement = listCards[randomIndex];
     setCard(randomElement);
+    setColourRight(getColourInCorrect());
     if (Array.isArray(listCards) && listCards.length > 0) {
       // Remove the first element from the array
       listCards.splice(randomIndex, 1);
@@ -150,7 +161,16 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     } else {
       setCard('no more cards');
     }
+    setTimeout(() => {
+      setColourRight(getColourNormal());
+      console.log('Delayed code executed');
+    }, 1000);
     console.log('Touchable panel 2 pressed ');
+  };
+
+  const handleTouchablePressOutRight = () => {
+    console.log('press out Right');
+   // setColour(getColourNormal());
   };
 
   return (
@@ -172,7 +192,6 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           )}
         </View>
       </Modal>
-
       {/* Timer Layer */}
       <View style={styles.timerLayer}>
         <View style={styles.content}>
@@ -183,24 +202,24 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           </View>
         </View>
       </View>
-
       {/* TouchableOpacity Layer */}
       <View style={styles.touchableOpacityLayer}>
         <TouchableOpacity
-          style={styles.touchablePanel}
-          onPress={handleTouchable1Press}
+          style={[styles.touchablePanel, { backgroundColor: colourLeft }]}
+          onPressIn={handleTouchablePressInLeft}
+          onPressOut={handleTouchablePressOutLeft}
           activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
         />
         <TouchableOpacity
-          style={styles.touchablePanel}
-          onPress={handleTouchable2Press}
+          style={[styles.touchablePanel, { backgroundColor: colourRight }]}
+          onPressIn={handleTouchablePressInRight}
+          onPressOut={handleTouchablePressOutRight}
           activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
         />
       </View>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -247,5 +266,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
 export default GameScr;
