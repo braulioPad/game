@@ -194,8 +194,11 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       </Modal>
       {/* Timer Layer */}
       <View style={styles.timerLayer}>
+      <Text style={styles.timerText}>{time} seconds</Text>
+      </View>
+      <View style={styles.centeredView}>
         <View style={styles.content}>
-          <Text style={styles.timerText}>{time} seconds</Text>
+          
           <View>
             <Text>Card:</Text>
             <Text>{card}</Text>
@@ -205,13 +208,13 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       {/* TouchableOpacity Layer */}
       <View style={styles.touchableOpacityLayer}>
         <TouchableOpacity
-          style={[styles.touchablePanel, { backgroundColor: colourLeft }]}
+          style={[styles.touchablePanel,{backgroundColor: colourLeft }]}
           onPressIn={handleTouchablePressInLeft}
           onPressOut={handleTouchablePressOutLeft}
           activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
         />
         <TouchableOpacity
-          style={[styles.touchablePanel, { backgroundColor: colourRight }]}
+          style={[styles.touchablePanel,{ backgroundColor: colourRight }]}
           onPressIn={handleTouchablePressInRight}
           onPressOut={handleTouchablePressOutRight}
           activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
@@ -236,12 +239,12 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   timerLayer: {
-    flex: 1,
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
+    alignItems: 'center', // Center the text horizontally
+    paddingTop: 20, // Add padding at the top
     zIndex: 1, // Higher zIndex to appear in the back
   },
   touchableOpacityLayer: {
@@ -265,5 +268,11 @@ const styles = StyleSheet.create({
   touchablePanel: {
     flex: 1,
   },
+  centeredView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  
 });
 export default GameScr;

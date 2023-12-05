@@ -1,75 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, BackHandler, ScrollView } from 'react-native';
+import { ScrollView, View, Text, Button, TextInput,StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-interface TeamsListScreenProps {
-  navigation: any;
-}
-
-const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
-
-  const [teamsData, setTeamsData] = useState<any>(null);
-
-  useEffect(() => {
-    const disableBackButton = () => true; // Always return true to disable the back button
-    // Add an event listener for the hardware back button
-    BackHandler.addEventListener('hardwareBackPress', disableBackButton);
-    // Cleanup: Remove the event listener when the component is unmounted
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', disableBackButton);
-    };
-  }, []);  
+const TeamsListScreen = ({ navigation }) => {
+  const [teamsData, setTeamsData] = useState(null);
+  const [newTeamName, setNewTeamName] = useState('');
 
   useEffect(() => {
     const fetchTeamsData = async () => {
       try {
         const storedData = await AsyncStorage.getItem('TeamData');
-        console.log(storedData);
-        if (storedData !== null) {
-          const parsedData = JSON.parse(storedData);
-          setTeamsData(parsedData);
-        } else {
-          console.log('no Data');
-        }
-      } catch (error) {
-        console.error('Error parsing JSON:', error);
-      }
-    };
-    fetchTeamsData();
-  }, []);
-
-  const handleAddTeam = async () => {
-    // Navigate to the TeamScreen to add a new team
-    navigation.navigate('TeamScr');
-  };
-
-  const handleGoGame = () => {
-    const teamTurn = 1; // Assuming you have a specific teamTurn value
-    AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
-    if (teamsData && typeof teamsData === 'object') {
-      const teamKeys = Object.keys(teamsData);
-      if (teamKeys.length >= 2) {
-        // Check if the number of players is the same in all teams
-        navigation.navigate('CardSelectScr');
-      }
-    }
-  };
-
-  const handleEditTeam = (teamName: string) => {
-    // Navigate to the EditTeamScreen with the selected team name
-    navigation.navigate('EditTeamScr', { teamName });
-  };
-
-  const handleClearData = async () => {
-    await AsyncStorage.clear();
-  };
-
-  React.useEffect(() => {
-    const fetchTeamsData = async () => {
-      try {
-        const storedData = await AsyncStorage.getItem('TeamData');
-        console.log(storedData);
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
@@ -80,12 +20,60 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
         console.error('Error parsing JSON:', error);
       }
     };
+
     const unsubscribe = navigation.addListener('focus', () => {
       fetchTeamsData();
     });
+
     return unsubscribe;
   }, [navigation]);
-  // Handle the case when teams are undefined
+
+  const handleAddTeam = async () => {
+    if (newTeamName.trim() !== '') {
+      const updatedTeamsData = [
+        ...teamsData,
+        { name: newTeamName, score: 0 } ];
+        // Assuming a default score of 0
+      setTeamsData(updatedTeamsData);
+      await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
+      setNewTeamName('');
+    }
+  };
+
+  const handleDeleteTeam = async (teamName) => {
+    if (teamsData && teamsData[teamName]) {
+      const { deletedTeam, ...updatedTeamsData } = teamsData;
+
+      setTeamsData(updatedTeamsData);
+      await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
+    }
+  };
+
+  const handleEditTeamName = (teamName, newName) => {
+    setTeamsData((prevTeamsData) => {
+      const updatedTeamsData = {
+        ...prevTeamsData,
+        [teamName]: { ...prevTeamsData[teamName], name: newName },
+      };
+      return updatedTeamsData;
+    });
+  };
+
+  const handleGoGame = () => {
+    const teamTurn = 1; // Assuming you have a specific teamTurn value
+    AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
+    if (teamsData && typeof teamsData === 'object') {
+      const teamKeys = Object.keys(teamsData);
+      if (teamKeys.length >= 2) {
+        // Check if the number of players is the same in all teams
+        navigation.navigate('CardSelectScr');
+      }else{
+        // Display an alert or perform another action indicating the requirement
+        alert('Please create at least two teams before starting the game.');
+      }
+    }  
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container}>
@@ -94,25 +82,33 @@ const TeamsListScreen: React.FC<TeamsListScreenProps> = ({ navigation }) => {
           <View>
             {Object.keys(teamsData).map((teamName) => (
               <View key={teamName} style={styles.teamContainer}>
-                <Text>Team Name: {teamName}</Text>
-                <Button title="Edit" onPress={() => handleEditTeam(teamName)} />
+                {/* Replace Text with TextInput */}
+                <TextInput
+                  style={styles.teamNameInput}
+                  value={teamsData[teamName].name}
+                  onChangeText={(text) => handleEditTeamName(teamName, text)}
+                />
+                <Button title="Delete" onPress={() => handleDeleteTeam(teamName)} />
               </View>
             ))}
           </View>
         ) : (
           <Text>No Teams Data</Text>
         )}
+        <TextInput
+          style={styles.input}
+          placeholder="Enter new team name"
+          value={newTeamName}
+          onChangeText={(text) => setNewTeamName(text)}
+        />
         <View style={styles.buttonsContainer}>
           <Button title="Add Team" onPress={handleAddTeam} />
-          <Button title="Go Play" onPress={handleGoGame} />
-          <Button title="Clear Data" onPress={handleClearData} />
+          <Button title="Star Game" onPress={() => handleGoGame()} />
         </View>
       </View>
     </ScrollView>
   );
-};
-
-
+        };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -121,9 +117,6 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  teamContainer: {
     marginBottom: 16,
   },
   teamName: {
@@ -140,6 +133,30 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 5,
   },
-});
+  teamContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
 
+  // Style for the editable area displaying team name
+  teamNameInput: {
+    flex: 1,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginRight: 10,
+    paddingHorizontal: 10,
+  },
+
+  // Style for the general input (for adding new team name)
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+
+});
 export default TeamsListScreen;

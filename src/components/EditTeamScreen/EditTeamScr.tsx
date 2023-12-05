@@ -42,16 +42,10 @@ const EditTeamScr: React.FC<EditTeamScreenProps> = ({ route, navigation }) => {
             const storedData = await AsyncStorage.getItem('TeamData');
             if (storedData !== null) {
                 const parsedData = JSON.parse(storedData);
-
                 // Update the team data
                 parsedData[teamName] = {
                     ...parsedData[teamName],
                     teamName: editedTeamName,
-                    score: parseInt(editedScore, 10) || 0,
-                    players: editedPlayers.split(',').map((playerName) => ({
-                        name: playerName.trim(),
-                        played: false,
-                    })),
                 };
 
                 // Save the updated data
