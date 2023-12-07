@@ -29,27 +29,46 @@ const TeamsListScreen = ({ navigation }) => {
   }, [navigation]);
 
   const handleAddTeam = async () => {
-    if (newTeamName.trim() !== '') {
-      const updatedTeamsData = [
-        ...teamsData,
-        { name: newTeamName, score: 0 } ];
-        // Assuming a default score of 0
-      setTeamsData(updatedTeamsData);
-      await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
-      setNewTeamName('');
+    try {
+      if (newTeamName.trim() !== '') {
+        // Ensure teamsData is an array or initialize it as an empty array
+        const teamsArray = Array.isArray(teamsData) ? teamsData : [];
+  
+        const updatedTeamsData = [
+          ...teamsArray,
+          { name: newTeamName, score: 0 },
+        ];
+  
+        setTeamsData(updatedTeamsData);
+        await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
+        setNewTeamName('');
+      }
+    } catch (error) {
+      console.error('Error in handleAddTeam:', error);
+      // Handle the error as needed (e.g., show an alert)
     }
   };
 
   const handleDeleteTeam = async (teamName) => {
-    if (teamsData && teamsData[teamName]) {
-      const { deletedTeam, ...updatedTeamsData } = teamsData;
-
-      setTeamsData(updatedTeamsData);
-      await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
+    try {
+      if (teamsData && teamsData[teamName]) {
+        const { [teamName]: deletedTeam, ...updatedTeamsData } = teamsData;
+        setTeamsData(updatedTeamsData);
+        await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
+      }
+    } catch (error) {
+      console.error('Error in handleDeleteTeam:', error);
+      // Handle the error as needed (e.g., show an alert)
     }
   };
 
+  useEffect(() => {
+    // Do something after teamsData changes (e.g., update the screen)
+    // You can put any logic here that needs to run after deleting a team
+  }, [teamsData]);
+
   const handleEditTeamName = (teamName, newName) => {
+    console.log('text changed');
     setTeamsData((prevTeamsData) => {
       const updatedTeamsData = {
         ...prevTeamsData,
@@ -74,6 +93,15 @@ const TeamsListScreen = ({ navigation }) => {
     }  
   };
 
+
+  const handleClearData = async () => {
+    try {
+      await AsyncStorage.clear();
+    } catch (error) {
+      console.error('Error in handleClearData:', error);
+      // Handle the error as needed (e.g., show an alert)
+    }
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container}>
@@ -104,6 +132,7 @@ const TeamsListScreen = ({ navigation }) => {
         <View style={styles.buttonsContainer}>
           <Button title="Add Team" onPress={handleAddTeam} />
           <Button title="Star Game" onPress={() => handleGoGame()} />
+          <Button title="Reset Data" onPress={() => handleClearData()} />
         </View>
       </View>
     </ScrollView>
@@ -160,3 +189,7 @@ const styles = StyleSheet.create({
 
 });
 export default TeamsListScreen;
+
+function alert(arg0: string) {
+  throw new Error('Function not implemented.');
+}

@@ -125,6 +125,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     const randomElement = listCards[randomIndex];
     setCard(randomElement);
     setColourLeft(getColourCorrect());
+    setTimeout(() => {
     console.log('score:', score);
     if (Array.isArray(listCards) && listCards.length > 0) {
       score.current += 1;
@@ -135,10 +136,9 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     } else {
       setCard('no more cards');
     }
-    setTimeout(() => {
       setColourLeft(getColourNormal());
       console.log('Delayed code executed');
-    }, 1000);
+    }, 800);
     console.log('Touchable panel 1 pressed ');
     
   };
@@ -151,6 +151,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const handleTouchablePressInRight = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
     const randomElement = listCards[randomIndex];
+    setTimeout(() => {
     setCard(randomElement);
     setColourRight(getColourInCorrect());
     if (Array.isArray(listCards) && listCards.length > 0) {
@@ -161,10 +162,9 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     } else {
       setCard('no more cards');
     }
-    setTimeout(() => {
       setColourRight(getColourNormal());
       console.log('Delayed code executed');
-    }, 1000);
+    }, 800);
     console.log('Touchable panel 2 pressed ');
   };
 
