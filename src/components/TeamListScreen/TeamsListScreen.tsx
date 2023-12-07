@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, Button, TextInput,StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomButton from '../CustomBtn/CustomButton';
+
+
 
 const TeamsListScreen = ({ navigation }) => {
+
   const [teamsData, setTeamsData] = useState(null);
   const [newTeamName, setNewTeamName] = useState('');
+
 
   useEffect(() => {
     const fetchTeamsData = async () => {
@@ -20,7 +25,6 @@ const TeamsListScreen = ({ navigation }) => {
         console.error('Error parsing JSON:', error);
       }
     };
-
     const unsubscribe = navigation.addListener('focus', () => {
       fetchTeamsData();
     });
@@ -28,19 +32,16 @@ const TeamsListScreen = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-  const handleAddTeam = async () => {
+  const handleAddTeam =  () => {
     try {
       if (newTeamName.trim() !== '') {
         // Ensure teamsData is an array or initialize it as an empty array
         const teamsArray = Array.isArray(teamsData) ? teamsData : [];
-  
         const updatedTeamsData = [
           ...teamsArray,
           { name: newTeamName, score: 0 },
         ];
-  
         setTeamsData(updatedTeamsData);
-        await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
         setNewTeamName('');
       }
     } catch (error) {
@@ -49,16 +50,14 @@ const TeamsListScreen = ({ navigation }) => {
     }
   };
 
-  const handleDeleteTeam = async (teamName) => {
+  const handleDeleteTeam = (teamName) => {
     try {
       if (teamsData && teamsData[teamName]) {
         const { [teamName]: deletedTeam, ...updatedTeamsData } = teamsData;
         setTeamsData(updatedTeamsData);
-        await AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData));
       }
     } catch (error) {
       console.error('Error in handleDeleteTeam:', error);
-      // Handle the error as needed (e.g., show an alert)
     }
   };
 
@@ -78,9 +77,10 @@ const TeamsListScreen = ({ navigation }) => {
     });
   };
 
-  const handleGoGame = () => {
+  const handleGoGame = async() => {
     const teamTurn = 1; // Assuming you have a specific teamTurn value
     AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
+    await AsyncStorage.setItem('TeamData', JSON.stringify(teamsData));
     if (teamsData && typeof teamsData === 'object') {
       const teamKeys = Object.keys(teamsData);
       if (teamKeys.length >= 2) {
@@ -105,7 +105,7 @@ const TeamsListScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container}>
-        <Text>Teams Data:</Text>
+        <Text style={styles.text}>Teams Data:</Text>
         {teamsData ? (
           <View>
             {Object.keys(teamsData).map((teamName) => (
@@ -116,7 +116,7 @@ const TeamsListScreen = ({ navigation }) => {
                   value={teamsData[teamName].name}
                   onChangeText={(text) => handleEditTeamName(teamName, text)}
                 />
-                <Button title="Delete" onPress={() => handleDeleteTeam(teamName)} />
+                <CustomButton title="Delete" onPress={() => handleDeleteTeam(teamName)} />
               </View>
             ))}
           </View>
@@ -130,9 +130,9 @@ const TeamsListScreen = ({ navigation }) => {
           onChangeText={(text) => setNewTeamName(text)}
         />
         <View style={styles.buttonsContainer}>
-          <Button title="Add Team" onPress={handleAddTeam} />
-          <Button title="Star Game" onPress={() => handleGoGame()} />
-          <Button title="Reset Data" onPress={() => handleClearData()} />
+          <CustomButton title="Add Team" onPress={handleAddTeam} />
+          <CustomButton title="Star Game" onPress={() => handleGoGame()} />
+          <CustomButton title="Reset Data" onPress={() => handleClearData()} />
         </View>
       </View>
     </ScrollView>
@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   header: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Eight-Bit-Dragon',
+    fontSize: 10,
     marginBottom: 16,
   },
   teamName: {
@@ -185,8 +185,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
+    fontFamily: 'Eight-Bit-Dragon',
+    fontSize: 10,
   },
-
+  text:{
+    fontFamily: 'Eight-Bit-Dragon',
+    fontSize: 10,
+  },
 });
 export default TeamsListScreen;
 

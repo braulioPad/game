@@ -151,9 +151,9 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const handleTouchablePressInRight = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
     const randomElement = listCards[randomIndex];
-    setTimeout(() => {
     setCard(randomElement);
     setColourRight(getColourInCorrect());
+    setTimeout(() => {
     if (Array.isArray(listCards) && listCards.length > 0) {
       // Remove the first element from the array
       listCards.splice(randomIndex, 1);
@@ -200,8 +200,8 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         <View style={styles.content}>
           
           <View>
-            <Text>Card:</Text>
-            <Text>{card}</Text>
+            <Text style={styles.text}>Card:</Text>
+            <Text style={styles.text}>{card}</Text>
           </View>
         </View>
       </View>
@@ -237,6 +237,7 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 20,
     color: 'white',
+    fontFamily: 'Eight-Bit-Dragon',
   },
   timerLayer: {
     position: 'absolute',
@@ -254,9 +255,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    height:'75%',
-    zIndex: 2, // Lower zIndex to appear in the front
-    flexDirection: 'row', // Stack TouchableOpacity elements horizontally
+    height: '75%',
+    zIndex: 2,
+    flexDirection: 'row',
+    //alignItems: 'center', // Center vertically
   },
   content: {
     justifyContent: 'center',
@@ -265,6 +267,7 @@ const styles = StyleSheet.create({
   timerText: {
     fontSize: 24,
     marginBottom: 20,
+    fontFamily: 'Eight-Bit-Dragon',
   },
   touchablePanel: {
     flex: 1,
@@ -273,6 +276,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text:{
+    fontFamily: 'Eight-Bit-Dragon',
+    fontSize: 10,
   },
   
 });

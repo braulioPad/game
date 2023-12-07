@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Modal, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomButton from '../CustomBtn/CustomButton';
 
 interface ScoreScreenProps {
   navigation: any;
@@ -90,8 +91,8 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
             <Text style={styles.teamScore}>Score: {teamsData[teamName].score}</Text>
           </View>
         ))}
-      <Button title="Next player" onPress={handleGoGame} />
-      <Button title="Finish?" onPress={handleFinishGame} />
+      <CustomButton title="Next player" onPress={handleGoGame} />
+      <CustomButton title="Finish?" onPress={handleFinishGame} />
 
       <Modal
         animationType="slide"
@@ -105,10 +106,10 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>Are you sure you want to finish the game?</Text>
             <Pressable style={styles.modalButton} onPress={handleConfirmFinish}>
-              <Text>Yes</Text>
+              <Text style={styles.text}>Yes</Text>
             </Pressable>
             <Pressable style={styles.modalButton} onPress={handleCancelFinish}>
-              <Text>No</Text>
+              <Text style={styles.text}>No</Text>
             </Pressable>
           </View>
         </View>
@@ -125,21 +126,25 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     marginBottom: 20,
+    fontFamily: 'Eight-Bit-Dragon',
   },
   teamContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    fontFamily: 'Eight-Bit-Dragon',
   },
   teamName: {
     fontSize: 18,
     marginRight: 10,
+    fontFamily: 'Eight-Bit-Dragon',
   },
   teamScore: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 15,
+   
+    fontFamily: 'Eight-Bit-Dragon',
   },
   modalContainer: {
     flex: 1,
@@ -151,10 +156,12 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     elevation: 5,
+    
   },
   modalText: {
     fontSize: 18,
     marginBottom: 20,
+    fontFamily: 'Eight-Bit-Dragon',
   },
   modalButton: {
     padding: 10,
@@ -162,6 +169,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
     alignItems: 'center',
     marginVertical: 5,
+  },
+  text:{
+    fontFamily: 'Eight-Bit-Dragon',
+    fontSize: 10,
   },
 });
 
