@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState,useRef  } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Modal,Animated } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Modal,Animated,ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomButton from '../CustomBtn/CustomButton';
 
-interface TimerScreenProps {
-  navigation: any; // Assuming the navigation prop is of any type for simplicity
-}
 interface TimerScreenProps {
   navigation: any; // Assuming the navigation prop is of any type for simplicity
 }
@@ -138,7 +136,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     }
       setColourLeft(getColourNormal());
       console.log('Delayed code executed');
-    }, 800);
+    }, 600);
     console.log('Touchable panel 1 pressed ');
     
   };
@@ -164,7 +162,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     }
       setColourRight(getColourNormal());
       console.log('Delayed code executed');
-    }, 800);
+    }, 600);
     console.log('Touchable panel 2 pressed ');
   };
 
@@ -173,8 +171,22 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
    // setColour(getColourNormal());
   };
 
-  return (
+  const handlePause = () => {
+    setPaused(true);
+    setModalVisible(true); // Open the modal when Pause is clicked
+  };
+
+  const handleResume = () => {
+    setPaused(false);
+    setModalVisible(false); // Close the modal when Resume is clicked
+  };
+
+
+  return ( 
     <View style={styles.container}>
+      <ImageBackground
+      source={require('../../../assets/Backgrounds/GmScr.png')} // Replace with the path to your background image
+      style={styles.backgroundImage}>
       {/* Modal */}
       <Modal
         animationType="slide"
@@ -194,11 +206,11 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       </Modal>
       {/* Timer Layer */}
       <View style={styles.timerLayer}>
-      <Text style={styles.timerText}>{time} seconds</Text>
+        <Text style={styles.timerText}>{time} seconds</Text>
+        <CustomButton title="Pause" onPress={handlePause} style={styles.customButton} />
       </View>
       <View style={styles.centeredView}>
         <View style={styles.content}>
-          
           <View>
             <Text style={styles.text}>Card:</Text>
             <Text style={styles.text}>{card}</Text>
@@ -208,18 +220,19 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       {/* TouchableOpacity Layer */}
       <View style={styles.touchableOpacityLayer}>
         <TouchableOpacity
-          style={[styles.touchablePanel,{backgroundColor: colourLeft }]}
-          onPressIn={handleTouchablePressInLeft}
-          onPressOut={handleTouchablePressOutLeft}
-          activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
-        />
-        <TouchableOpacity
-          style={[styles.touchablePanel,{ backgroundColor: colourRight }]}
+          style={[styles.touchablePanel,{backgroundColor: colourRight }]}
           onPressIn={handleTouchablePressInRight}
           onPressOut={handleTouchablePressOutRight}
           activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
         />
+        <TouchableOpacity
+          style={[styles.touchablePanel,{ backgroundColor: colourLeft }]}
+          onPressIn={handleTouchablePressInLeft}
+          onPressOut={handleTouchablePressOutLeft}
+          activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
+        />
       </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -240,13 +253,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Eight-Bit-Dragon',
   },
   timerLayer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    alignItems: 'center', // Center the text horizontally
-    paddingTop: 20, // Add padding at the top
-    zIndex: 1, // Higher zIndex to appear in the back
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 20,
+    zIndex: 1,
+  },
+  customButton: {
+    marginRight: 10, // Adjust the margin as needed
   },
   touchableOpacityLayer: {
     flex: 1,
@@ -258,7 +272,8 @@ const styles = StyleSheet.create({
     height: '75%',
     zIndex: 2,
     flexDirection: 'row',
-    //alignItems: 'center', // Center vertically
+    justifyContent: 'flex-start',
+    marginVertical: '8%', // Adjust the percentage or use a specific value
   },
   content: {
     justifyContent: 'center',
@@ -267,6 +282,7 @@ const styles = StyleSheet.create({
   timerText: {
     fontSize: 24,
     marginBottom: 20,
+    color: 'white',
     fontFamily: 'Eight-Bit-Dragon',
   },
   touchablePanel: {
@@ -278,8 +294,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text:{
+    color: 'white',
     fontFamily: 'Eight-Bit-Dragon',
     fontSize: 10,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'stretch', // or 'stretch' depending on your preference
   },
   
 });

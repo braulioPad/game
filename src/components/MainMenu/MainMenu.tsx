@@ -9,7 +9,7 @@ SplashScreen.preventAutoHideAsync();
 
 const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
-    'Eight-Bit-Dragon': require('../../assets/fonts/Eight-Bit-Dragon.ttf'),
+    'Eight-Bit-Dragon': require('../../../assets/fonts/Eight-Bit-Dragon.ttf'),
   });
 
   const [configLoaded, setConfigLoaded] = useState(false);
