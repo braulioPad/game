@@ -6,41 +6,37 @@ interface CustomButtonProps {
   onPress: () => void;
   style?: any;
   imageSource?: any; // Add this prop for the image source
-  buttonStyle?: Record<string, any>;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ title, onPress, style, imageSource, buttonStyle  }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ title, onPress, style, imageSource }) => {
   return (
-    <TouchableOpacity style={[styles.button, buttonStyle]} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
       {imageSource && <Image source={imageSource} style={styles.buttonImage} />}
-      <Text /* style={styles.buttonText} */>{title}</Text>
+      <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    width: 150, // Set the fixed width of the button
-    height: 0, // Set the fixed height of the button
-    backgroundColor: 'blue', // Add your desired button color
-    justifyContent: 'center', // Center the content vertically
-    alignItems: 'center', // Center the content horizontally
+    flexDirection: 'row', // Align image and text horizontally
+    alignItems: 'center', // Center vertically
+    backgroundColor: 'blue', // Add your desired button styles
+    padding: 10,
     borderRadius: 5,
     marginVertical: 10,
   },
   buttonImage: {
-    width: '100%', // Set the width of the image to cover the entire button
-    height: '100%', // Set the height of the image to cover the entire button
-    resizeMode: 'cover', // Ensure the image covers the entire space
-    borderRadius: 2, // Adjust the border radius to match the button if needed
+    width: 20, // Set the width of the image
+    height: 20, // Set the height of the image
+    marginRight: 5, // Spacing between image and text
   },
- /*  buttonText: {
+  buttonText: {
     fontFamily: 'Eight-Bit-Dragon',
-    fontSize: 16, // Adjust the font size of the text
+    fontSize: 10,
     color: 'white', // Add your desired text color
     textAlign: 'center',
-   // lineHeight: 50, // Ensure the line height matches the button height
-  }, */
+  },
 });
 
 export default CustomButton;

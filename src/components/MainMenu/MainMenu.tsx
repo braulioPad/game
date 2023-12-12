@@ -69,9 +69,9 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
       style={styles.backgroundImage}
       resizeMode="cover" // Ensure the image covers the entire area
     >
-      <CustomButton  title="Start" onPress={goToPlay} imageSource={require('../../../assets/btns/btns_7.png')} buttonStyle={buttonStyle}/>
-      <CustomButton title="Configuration" onPress={goToConfig} buttonStyle={buttonStyle}/>
-      <CustomButton title="About us" onPress={goToAboutUs} buttonStyle={buttonStyle}/>
+      <CustomButton title="Start" onPress={goToPlay} imageSource={require('../../../assets/btns/btns_7.png')} />
+      <CustomButton title="Configuration" onPress={goToConfig} />
+      <CustomButton title="About us" onPress={goToAboutUs} />
     </ImageBackground>
   </View>
   );
