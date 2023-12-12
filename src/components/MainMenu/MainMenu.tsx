@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import { View, StyleSheet,ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -56,24 +56,36 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
     return null;
   }
 
+  const buttonStyle = {
+    width: 150, // Set the width of the button
+    height: 50, // Set the height of the button
+    // Add other button styles as needed
+  };
+
   return (
     <View style={styles.container} onLayout={handleOnLayout}>
-      <CustomButton title="Play" onPress={goToPlay} />
-      <CustomButton title="Configuration" onPress={goToConfig} /> 
-      <CustomButton title="About us" onPress={goToAboutUs} />
-    </View>
+    <ImageBackground
+      source={require('../../../assets/Backgrounds/MnScr.png')}
+      style={styles.backgroundImage}
+      resizeMode="cover" // Ensure the image covers the entire area
+    >
+      <CustomButton  title="Start" onPress={goToPlay} imageSource={require('../../../assets/btns/btns_7.png')} buttonStyle={buttonStyle}/>
+      <CustomButton title="Configuration" onPress={goToConfig} buttonStyle={buttonStyle}/>
+      <CustomButton title="About us" onPress={goToAboutUs} buttonStyle={buttonStyle}/>
+    </ImageBackground>
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  button: {
-    fontFamily: 'Eight-Bit-Dragon',
-    fontSize: 30,
+  backgroundImage: {
+    flex: 1,
+    width: '100%', // Set the image width to 80% of the container width
+    justifyContent: 'center', // Center horizontally
+    alignItems: 'center', // Center vertically
   },
 });
 

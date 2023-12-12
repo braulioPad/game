@@ -171,15 +171,6 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
    // setColour(getColourNormal());
   };
 
-  const handlePause = () => {
-    setPaused(true);
-    setModalVisible(true); // Open the modal when Pause is clicked
-  };
-
-  const handleResume = () => {
-    setPaused(false);
-    setModalVisible(false); // Close the modal when Resume is clicked
-  };
 
 
   return ( 
@@ -207,7 +198,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       {/* Timer Layer */}
       <View style={styles.timerLayer}>
         <Text style={styles.timerText}>{time} seconds</Text>
-        <CustomButton title="Pause" onPress={handlePause} style={styles.customButton} />
+        {/* <CustomButton title="Pause" onPress={handlePause} style={styles.customButton} /> */}
       </View>
       <View style={styles.centeredView}>
         <View style={styles.content}>
