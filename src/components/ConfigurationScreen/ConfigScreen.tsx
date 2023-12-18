@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import Slider from '@react-native-community/slider';
 import DropdownComponent from '../DropDownComp/DropdownComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ConfigStyle as styles } from './ConfigStyle';
 
 interface ConfigScrProps {
   navigation: any;
@@ -81,27 +82,6 @@ const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  slider: {
-    width: 200,
-    marginVertical: 10,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  durationText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  centeredDropdownContainer: {
-    alignItems: 'center', // Align the dropdown to the center
-  },
-});
+
 
 export default ConfigScreen;

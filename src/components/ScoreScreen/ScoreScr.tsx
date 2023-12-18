@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Modal, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Modal, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
+import { ScoreScrStyles as styles } from './ScoreScrStyles';
 
 interface ScoreScreenProps {
   navigation: any;
   
 }
-
 const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
   const [teamsData, setTeamsData] = useState<any>(null);
   const [isFinishModalVisible, setFinishModalVisible] = useState(false);
@@ -91,8 +91,10 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
             <Text style={styles.teamScore}>Score: {teamsData[teamName].score}</Text>
           </View>
         ))}
-      <CustomButton title="Next player" onPress={handleGoGame} />
-      <CustomButton title="Finish?" onPress={handleFinishGame} />
+      <Text>Next player</Text>
+      <CustomButton  onPress={handleGoGame} />
+      <Text>Finish?</Text>
+      <CustomButton  onPress={handleFinishGame} />
 
       <Modal
         animationType="slide"
@@ -117,63 +119,5 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  header: {
-    fontSize: 24,
-    //fontWeight: 'bold',
-    marginBottom: 20,
-    fontFamily: 'Eight-Bit-Dragon',
-  },
-  teamContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-    fontFamily: 'Eight-Bit-Dragon',
-  },
-  teamName: {
-    fontSize: 18,
-    marginRight: 10,
-    fontFamily: 'Eight-Bit-Dragon',
-  },
-  teamScore: {
-    fontSize: 15,
-   
-    fontFamily: 'Eight-Bit-Dragon',
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    elevation: 5,
-    
-  },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 20,
-    fontFamily: 'Eight-Bit-Dragon',
-  },
-  modalButton: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: '#2196F3',
-    alignItems: 'center',
-    marginVertical: 5,
-  },
-  text:{
-    fontFamily: 'Eight-Bit-Dragon',
-    fontSize: 10,
-  },
-});
 
 export default ScoreScr;

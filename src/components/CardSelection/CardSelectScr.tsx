@@ -1,15 +1,12 @@
-import { View, StyleSheet  } from 'react-native';
+import { View, StyleSheet, Text  } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
-
+import { CardSelectionStyle as styles } from './CardSelectionStyle';
 
 interface CardsListScreenProps {
   navigation: any;
 }
-
-
-
 
 const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
   const [jsonData, setJsonData] = useState<any>(null);
@@ -68,23 +65,15 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <CustomButton title="Easy cards" onPress={() => handleButtonPress('easy')} />
-        <CustomButton title="Medium cards" onPress={() => handleButtonPress('medium')} />
-        <CustomButton title="Hard Cards" onPress={() => handleButtonPress('hard')} />
+        <Text>Easy</Text>
+        <CustomButton  onPress={() => handleButtonPress('easy')} />
+        <Text>Mid</Text>
+        <CustomButton  onPress={() => handleButtonPress('medium')} />
+        <Text>Hard</Text>
+        <CustomButton  onPress={() => handleButtonPress('hard')} />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-  },
-});
 
 export default CardSelectScr;

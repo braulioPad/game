@@ -1,0 +1,59 @@
+import { StyleSheet } from 'react-native';
+
+export const ScoreScrStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      header: {
+        fontSize: 24,
+        //fontWeight: 'bold',
+        marginBottom: 20,
+        fontFamily: 'Eight-Bit-Dragon',
+      },
+      teamContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+        fontFamily: 'Eight-Bit-Dragon',
+      },
+      teamName: {
+        fontSize: 18,
+        marginRight: 10,
+        fontFamily: 'Eight-Bit-Dragon',
+      },
+      teamScore: {
+        fontSize: 15,
+       
+        fontFamily: 'Eight-Bit-Dragon',
+      },
+      modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      modalContent: {
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10,
+        elevation: 5,
+        
+      },
+      modalText: {
+        fontSize: 18,
+        marginBottom: 20,
+        fontFamily: 'Eight-Bit-Dragon',
+      },
+      modalButton: {
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor: '#2196F3',
+        alignItems: 'center',
+        marginVertical: 5,
+      },
+      text:{
+        fontFamily: 'Eight-Bit-Dragon',
+        fontSize: 10,
+      },
+});

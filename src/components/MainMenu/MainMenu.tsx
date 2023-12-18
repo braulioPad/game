@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, StyleSheet,ImageBackground } from 'react-native';
+import { View, StyleSheet,ImageBackground, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import CustomButton from '../CustomBtn/CustomButton';
+import { MainMenuStyles as styles } from './MainMenuStyles';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -56,12 +57,6 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
     return null;
   }
 
-  const buttonStyle = {
-    width: 150, // Set the width of the button
-    height: 50, // Set the height of the button
-    // Add other button styles as needed
-  };
-
   return (
     <View style={styles.container} onLayout={handleOnLayout}>
     <ImageBackground
@@ -69,24 +64,17 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
       style={styles.backgroundImage}
       resizeMode="cover" // Ensure the image covers the entire area
     >
-      <CustomButton title="Start" onPress={goToPlay} imageSource={require('../../../assets/btns/btns_7.png')} />
-      <CustomButton title="Configuration" onPress={goToConfig} />
-      <CustomButton title="About us" onPress={goToAboutUs} />
+      <Text>Go Play</Text>
+      <CustomButton  onPress={goToPlay} imageSource={require('../../../assets/btns/btns_7.png')} />
+      <Text>Config</Text>
+      <CustomButton  onPress={goToConfig} />
+      <Text>About Us</Text>
+      <CustomButton  onPress={goToAboutUs} />
     </ImageBackground>
   </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  backgroundImage: {
-    flex: 1,
-    width: '100%', // Set the image width to 80% of the container width
-    justifyContent: 'center', // Center horizontally
-    alignItems: 'center', // Center vertically
-  },
-});
+
 
 export default MainMenu;
