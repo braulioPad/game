@@ -14,9 +14,9 @@ interface CustomButtonProps {
 
 const CustomButton: React.FC<CustomButtonProps> = ({ onPress, style, imageSource, imageStyle, buttonText, textStyle }) => {
   return (
-    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      {imageSource && <Image source={imageSource} style={[styles.buttonImage, imageStyle]} />}
-      {buttonText && <Text style={[styles.buttonText, textStyle]}>{buttonText}</Text>}
+    <TouchableOpacity style={[/* styles.button, */ style]} onPress={onPress}>
+      {imageSource && <Image source={imageSource} style={[/* styles.buttonImage, */ imageStyle]} />}
+      {buttonText && <Text style={[/* styles.buttonText, */ textStyle]}>{buttonText}</Text>}
     </TouchableOpacity>
   );
 };
