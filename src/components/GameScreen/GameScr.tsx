@@ -24,6 +24,8 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const [colourRight, setColourRight] = useState<string>('rgba(255, 0, 0, 0)');
   const [timerScreenIntervalId, setTimerScreenIntervalId] = useState(null);
   const [isTimerPaused, setIsTimerPaused] = useState(true);
+  const isNavigated = useRef(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         const configData = await AsyncStorage.getItem('ConfigData');
         const parsedData = JSON.parse(configData);
         console.log('parsedData:', parsedData); // Log the parsed data
-        setTime(parsedData.seconds);
+        setTime( parsedData.seconds);
         const storedData = await AsyncStorage.getItem('TeamData');
         console.log('data team: ' + storedData);
         const listCardData = await AsyncStorage.getItem('listCards');
@@ -58,54 +60,53 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     setModalVisible(false);
   }, []);
 
-  const startTimerForTimerScreen = useCallback(() => {
-    const timerScreenIntervalId = setInterval(() => {
-      setTime((prevTime) => {
-        if (prevTime === 0 && !modalVisible) {
-           if (teamsData && teamsData[teamTurn] !== undefined) {
-            console.log('TimerScreen Countdown finished');
-            const updatedTeamsData = {
-              ...teamsData,
-              [teamTurn]: {
-                ...teamsData[teamTurn],
-                score: teamsData[teamTurn].score + score.current,
-              },
-            };
-            console.log('Updated Teams Data:', updatedTeamsData);
-            AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
-              .then(() => {
-                console.log('Updated teamsData saved successfully');
-              })
-              .catch((error) => {
-                console.error('Error saving updated teamsData:', error);
-              });
-          } else {
-            console.error('Invalid teamsData or teamTurn:', teamsData);
-          } 
-          // Perform navigation when the timer reaches 0 and modalVisible is false
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isNavigated.current && !isTimerPaused) {
+        if (time > 0) {
+          setTime(time - 1);
+        } else if (time === 0) {
+          console.log('TimerScreen Countdown finished');
+          const updatedTeamsData = {
+            ...teamsData,
+            [teamTurn]: {
+              ...teamsData[teamTurn],
+              score: teamsData[teamTurn].score + score.current,
+            },
+          };
+          AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
+            .then(() => {
+              console.log('Updated teamsData saved successfully');
+            })
+            .catch((error) => {
+              console.error('Error saving updated teamsData:', error);
+            });
+          isNavigated.current = true; // Set the ref to true when navigation occurs
           requestAnimationFrame(() => {
             navigation.navigate('ScoreScr');
           });
-          clearInterval(timerScreenIntervalId);
         }
-        if(isTimerPaused!){
-        return prevTime > 0 ? prevTime - 1 : 0;
-        }
-        return prevTime;
-      });
-    setTimerScreenIntervalId(timerScreenIntervalId);
+      }
     }, 1000);
-  }, [navigation, modalVisible, teamsData, teamTurn, score]);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isTimerPaused, time, teamsData, teamTurn, score, navigation]);
+  
+  const handlePauseToggle = () => {
+    setIsTimerPaused(!isTimerPaused);
+    setIsModalVisible(true);
+  }
 
   useEffect(() => {
     if (!modalVisible) {
-      startTimerForTimerScreen();
       setCard(listCards[0]);
       listCards.splice(0, 1);
       setListCard(listCards);
     }
-  }, [modalVisible, startTimerForTimerScreen, listCards]);
-
+  }, [modalVisible, listCards]);
+  
   useEffect(() => {
     if (modalVisible) {
       const modalIntervalId = setInterval(() => {
@@ -114,6 +115,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
             clearInterval(modalIntervalId);
             console.log('Modal Countdown finished');
             setModalVisible(false);
+            setIsTimerPaused(false);
           }
           return prevTime > 0 ? prevTime - 1 : 0;
         });
@@ -147,10 +149,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     
   };
 
-  const handleTouchablePressOutLeft = () => {
-    console.log('press out ');
-   // setColour(getColourNormal());
-  };
+  
 
   const handleTouchablePressInRight = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
@@ -172,14 +171,11 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     console.log('Touchable panel 2 pressed ');
   };
 
-  const handleTouchablePressOutRight = () => {
-    console.log('press out Right');
-   // setColour(getColourNormal());
+  const closeModalPause = () => {
+    setIsModalVisible(false);
+    setIsTimerPaused(false);
   };
-
-  const handlePause = () => {
-   setIsTimerPaused(!isTimerPaused);
-  };
+  
 
   return ( 
     <View style={styles.container}>
@@ -197,10 +193,22 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
               <Text style={styles.modalText}>{modalTime} seconds</Text>
         </View>
       </Modal>
+      {/* Modal */}
+      <Modal
+          animationType="slide"
+          transparent={true}
+          visible={isModalVisible}
+          onRequestClose={closeModal}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalText}>Your Modal Content Here</Text>
+            {/* Add other modal content as needed */}
+            <Button title="Close Modal" onPress={closeModalPause} />
+          </View>
+        </Modal>
       {/* Timer Layer */}
       <View style={styles.timerLayer}>
         <Text style={styles.timerText}>{time} seconds</Text>
-        { <CustomButton  onPress={handlePause} style={styles.customButton} /> }
+        { <CustomButton  onPress={handlePauseToggle} style={styles.customButton} /> }
       </View>
       <View style={styles.centeredView}>
         <View style={styles.content}>
@@ -215,13 +223,11 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         <TouchableOpacity
           style={[styles.touchablePanel,{backgroundColor: colourRight }]}
           onPressIn={handleTouchablePressInRight}
-          onPressOut={handleTouchablePressOutRight}
           activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
         />
         <TouchableOpacity
           style={[styles.touchablePanel,{ backgroundColor: colourLeft }]}
           onPressIn={handleTouchablePressInLeft}
-          onPressOut={handleTouchablePressOutLeft}
           activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
         />
       </View>

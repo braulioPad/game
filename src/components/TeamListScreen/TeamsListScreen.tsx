@@ -33,16 +33,27 @@ const TeamsListScreen = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-  const handleAddTeam =  () => {
+  const handleAddTeam = () => {
     try {
       if (newTeamName.trim() !== '') {
-        // Ensure teamsData is an array or initialize it as an empty array
-        const teamsArray = Array.isArray(teamsData) ? teamsData : [];
-        const updatedTeamsData = [
-          ...teamsArray,
-          { name: newTeamName, score: 0 },
-        ];
-        setTeamsData(updatedTeamsData);
+        setTeamsData((prevTeamsData) => {
+          if (Array.isArray(prevTeamsData)) {
+            // If already an array, proceed with addition logic
+            const updatedTeamsData = [
+              ...prevTeamsData,
+              { name: newTeamName, score: 0 },
+            ];
+            return updatedTeamsData;
+          } else if (prevTeamsData && typeof prevTeamsData === 'object') {
+            // If an object with a single team, convert to an array
+            const singleTeamArray = Object.values(prevTeamsData);
+            return [...singleTeamArray, { name: newTeamName, score: 0 }];
+          }
+  
+          // If neither an array nor an object, return a new array with the new team
+          return [{ name: newTeamName, score: 0 }];
+        });
+  
         setNewTeamName('');
       }
     } catch (error) {
@@ -53,19 +64,17 @@ const TeamsListScreen = ({ navigation }) => {
 
   const handleDeleteTeam = (teamName) => {
     try {
-      if (teamsData && teamsData[teamName]) {
-        const { [teamName]: deletedTeam, ...updatedTeamsData } = teamsData;
-        setTeamsData(updatedTeamsData);
-      }
+      setTeamsData((prevTeamsData) => {
+        if (prevTeamsData && prevTeamsData[teamName]) {
+          const { [teamName]: deletedTeam, ...updatedTeamsData } = prevTeamsData;
+          return updatedTeamsData;
+        }
+        return prevTeamsData; // Return the original state if teamName doesn't exist
+      });
     } catch (error) {
       console.error('Error in handleDeleteTeam:', error);
     }
   };
-
-  useEffect(() => {
-    // Do something after teamsData changes (e.g., update the screen)
-    // You can put any logic here that needs to run after deleting a team
-  }, [teamsData]);
 
   const handleEditTeamName = (teamName, newName) => {
     console.log('text changed');
