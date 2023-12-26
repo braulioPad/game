@@ -10,4 +10,9 @@ export const MainMenuStyles = StyleSheet.create({
         justifyContent: 'center', // Center horizontally
         alignItems: 'center', // Center vertically
       },
+      customImage: {
+        width: 50, // Custom width for the image
+        height: 50, // Custom height for the image
+        marginRight: 10, // Custom margin between button text and image
+      },
 });

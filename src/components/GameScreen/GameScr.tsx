@@ -176,6 +176,26 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     setIsTimerPaused(false);
   };
   
+  const finishModalPause=() =>{
+    const updatedTeamsData = {
+      ...teamsData,
+      [teamTurn]: {
+        ...teamsData[teamTurn],
+        score: teamsData[teamTurn].score + score.current,
+      },
+    };
+    AsyncStorage.setItem('TeamData', JSON.stringify(updatedTeamsData))
+      .then(() => {
+        console.log('Updated teamsData saved successfully');
+      })
+      .catch((error) => {
+        console.error('Error saving updated teamsData:', error);
+      });
+    isNavigated.current = true; // Set the ref to true when navigation occurs
+    requestAnimationFrame(() => {
+      navigation.navigate('ScoreScr');
+    });
+  }
 
   return ( 
     <View style={styles.container}>
@@ -200,9 +220,10 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           visible={isModalVisible}
           onRequestClose={closeModal}>
           <View style={styles.modalContainer}>
-            <Text style={styles.modalText}>Your Modal Content Here</Text>
+            <Text style={styles.modalText}>Pause</Text>
             {/* Add other modal content as needed */}
-            <Button title="Close Modal" onPress={closeModalPause} />
+            <Button title="Close" onPress={closeModalPause} />
+            <Button title="Finish" onPress={finishModalPause} />
           </View>
         </Modal>
       {/* Timer Layer */}

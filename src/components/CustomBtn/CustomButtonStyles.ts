@@ -1,23 +1,23 @@
 import { StyleSheet } from 'react-native';
 
 export const CustomButtonStyles = StyleSheet.create({
-    button: {
-        flexDirection: 'row', // Align image and text horizontally
-        alignItems: 'center', // Center vertically
-        backgroundColor: 'blue', // Add your desired button styles
-        padding: 10,
-        borderRadius: 5,
-        marginVertical: 10,
-      },
-      buttonImage: {
-        width: 20, // Set the width of the image
-        height: 20, // Set the height of the image
-        marginRight: 5, // Spacing between image and text
-      },
-      buttonText: {
-        fontFamily: 'Eight-Bit-Dragon',
-        fontSize: 10,
-        color: 'white', // Add your desired text color
-        textAlign: 'center',
-      },
+  button: {
+    flexDirection: 'row', // Align image and text horizontally
+    alignItems: 'center', // Center vertically
+    backgroundColor: 'blue', // Default button background color
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 10,
+  },
+  buttonImage: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+  },
+  buttonText: {
+    fontFamily: 'Eight-Bit-Dragon',
+    fontSize: 14, // Default text font size
+    color: 'white', // Default text color
+    textAlign: 'center',
+  },
 });
