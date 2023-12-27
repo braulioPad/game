@@ -65,7 +65,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
       resizeMode="cover" // Ensure the image covers the entire area
     >
       <Text>Go Play</Text>
-      <CustomButton  onPress={goToPlay} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+      <CustomButton  onPress={goToPlay} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage} buttonText="Custom Style"/>
       <Text>Config</Text>
       <CustomButton  onPress={goToConfig} />
       <Text>About Us</Text>
