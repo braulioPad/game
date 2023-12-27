@@ -59,22 +59,44 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <View style={styles.container} onLayout={handleOnLayout}>
-    <ImageBackground
-      source={require('../../../assets/Backgrounds/MnScr.png')}
-      style={styles.backgroundImage}
-      resizeMode="cover" // Ensure the image covers the entire area
-    >
-      <Text>Go Play</Text>
-      <CustomButton  onPress={goToPlay} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage} buttonText="Custom Style"/>
-      <Text>Config</Text>
-      <CustomButton  onPress={goToConfig} />
-      <Text>About Us</Text>
-      <CustomButton  onPress={goToAboutUs} />
-    </ImageBackground>
-  </View>
+      <ImageBackground
+        source={require('../../../assets/Backgrounds/MnScr.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      >
+        {/* Play Button */}
+        <View style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Go Play</Text>
+          <CustomButton
+            onPress={goToPlay}
+            imageSource={require('../../../assets/btns/btns_7.png')}
+            imageStyle={styles.customImage}
+          />
+        </View>
+
+        {/* Config Button */}
+        <View style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Config</Text>
+          <CustomButton
+            onPress={goToConfig}
+            imageSource={require('../../../assets/btns/btns_7.png')}
+            imageStyle={styles.customImage}
+          />
+        </View>
+
+        {/* About Us Button */}
+        <View style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>About Us</Text>
+          <CustomButton
+            onPress={goToAboutUs}
+            imageSource={require('../../../assets/btns/btns_7.png')}
+            imageStyle={styles.customImage}
+          />
+        </View>
+      </ImageBackground>
+    </View>
   );
 };
-
 
 
 export default MainMenu;

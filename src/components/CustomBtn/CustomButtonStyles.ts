@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const CustomButtonStyles = StyleSheet.create({
-  button: {
+ /*  button: {
     flexDirection: 'row', // Align image and text horizontally
     alignItems: 'center', // Center vertically
     backgroundColor: 'blue', // Default button background color
@@ -19,5 +19,5 @@ export const CustomButtonStyles = StyleSheet.create({
     fontSize: 14, // Default text font size
     color: 'white', // Default text color
     textAlign: 'center',
-  },
+  }, */
 });
