@@ -127,7 +127,7 @@ const TeamsListScreen = ({ navigation }) => {
                   onChangeText={(text) => handleEditTeamName(teamName, text)}
                 />
                 <Text>Delete</Text>
-                <CustomButton  onPress={() => handleDeleteTeam(teamName)} />
+                <CustomButton  onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
               </View>
             ))}
           </View>
@@ -142,11 +142,11 @@ const TeamsListScreen = ({ navigation }) => {
         />
         <View style={styles.buttonsContainer}>
           <Text>Add Team</Text>
-          <CustomButton  onPress={handleAddTeam} />
+          <CustomButton  onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
           <Text>Star Game</Text>
-          <CustomButton  onPress={() => handleGoGame()} />
+          <CustomButton  onPress={() => handleGoGame()}  imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
           <Text>Reset Data</Text>
-          <CustomButton  onPress={() => handleClearData()} />
+          <CustomButton  onPress={() => handleClearData()} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
         </View>
       </View>
     </ScrollView>

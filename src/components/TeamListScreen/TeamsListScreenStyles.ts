@@ -28,6 +28,7 @@ export const TeamsListScreenStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
+        width:200,
       },
     
       // Style for the editable area displaying team name
@@ -43,6 +44,7 @@ export const TeamsListScreenStyles = StyleSheet.create({
       // Style for the general input (for adding new team name)
       input: {
         height: 40,
+        width:200,
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 10,
@@ -53,5 +55,26 @@ export const TeamsListScreenStyles = StyleSheet.create({
       text:{
         fontFamily: 'Eight-Bit-Dragon',
         fontSize: 10,
+      },
+      backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center', // Center content horizontally
+      },
+      buttonContainer: {
+        alignItems: 'center', // Center content horizontally within the button container
+        marginBottom: 20, // Adjust the spacing between buttons
+      },
+      buttonText: {
+       /*  fontFamily: 'Arial', // Add your font family */
+        fontSize: 18, // Add your font size
+        marginBottom: 10, // Adjust the spacing between text and button
+      },
+      customImage: {
+        width: 70,
+        height: 50,
+        resizeMode: 'contain'
+        // Add additional styling for the custom image if needed
       },
 });

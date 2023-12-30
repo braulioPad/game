@@ -66,4 +66,10 @@ export const GameScrStyles = StyleSheet.create({
         flex: 1,
         resizeMode: 'stretch', // or 'stretch' depending on your preference
       },
+      customImage: {
+        width: 70,
+        height: 50,
+        resizeMode: 'contain'
+        // Add additional styling for the custom image if needed
+      },
 });

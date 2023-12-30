@@ -9,4 +9,10 @@ export const CardSelectionStyle = StyleSheet.create({
       buttonContainer: {
         flexDirection: 'row',
       },
+      customImage: {
+        width: 70,
+        height: 50,
+        resizeMode: 'contain'
+        // Add additional styling for the custom image if needed
+      },
 });

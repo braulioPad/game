@@ -229,7 +229,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       {/* Timer Layer */}
       <View style={styles.timerLayer}>
         <Text style={styles.timerText}>{time} seconds</Text>
-        { <CustomButton  onPress={handlePauseToggle} style={styles.customButton} /> }
+        { <CustomButton  onPress={handlePauseToggle} style={styles.customButton} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/> }
       </View>
       <View style={styles.centeredView}>
         <View style={styles.content}>

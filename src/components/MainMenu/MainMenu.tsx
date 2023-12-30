@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, StyleSheet,ImageBackground, Text } from 'react-native';
+import { View,ImageBackground, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -42,7 +42,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
   }, []);
 
   const goToConfig = () => {
-    navigation.navigate('configuration');
+     navigation.navigate('configuration'); 
   };
 
   const goToAboutUs = () => {
@@ -70,26 +70,27 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
           <CustomButton
             onPress={goToPlay}
             imageSource={require('../../../assets/btns/btns_7.png')}
+            pressedImageSource={require('../../../assets/btns/btns_8.png')}
             imageStyle={styles.customImage}
           />
         </View>
-
         {/* Config Button */}
         <View style={styles.buttonContainer}>
           <Text style={styles.buttonText}>Config</Text>
           <CustomButton
             onPress={goToConfig}
             imageSource={require('../../../assets/btns/btns_7.png')}
+            pressedImageSource={require('../../../assets/btns/btns_8.png')}
             imageStyle={styles.customImage}
           />
         </View>
-
         {/* About Us Button */}
         <View style={styles.buttonContainer}>
           <Text style={styles.buttonText}>About Us</Text>
           <CustomButton
             onPress={goToAboutUs}
             imageSource={require('../../../assets/btns/btns_7.png')}
+            pressedImageSource={require('../../../assets/btns/btns_8.png')}
             imageStyle={styles.customImage}
           />
         </View>

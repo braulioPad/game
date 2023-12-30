@@ -56,4 +56,10 @@ export const ScoreScrStyles = StyleSheet.create({
         fontFamily: 'Eight-Bit-Dragon',
         fontSize: 10,
       },
+      customImage: {
+        width: 70,
+        height: 50,
+        resizeMode: 'contain'
+        // Add additional styling for the custom image if needed
+      },
 });
