@@ -26,7 +26,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
   const [isTimerPaused, setIsTimerPaused] = useState(true);
   const isNavigated = useRef(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const [points, setPoints] = useState<number>(0);
 
   useEffect(() => {
     const fetchTeamsData = async () => {
@@ -41,10 +41,12 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         const parsedListCardData = JSON.parse(listCardData);
         const teamt = await AsyncStorage.getItem('teamTurn');
         setListCard(parsedListCardData);
+        const point=await AsyncStorage.getItem('points');
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
           setTeamTurn(teamt ? parseInt(teamt) : 0); // Parse as integer and handle null
+          setPoints(point? parseInt(point) : 1);
           console.log('team turn: ', teamTurn);
         } else {
           console.log('no Data');
@@ -134,7 +136,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     setTimeout(() => {
     console.log('score:', score);
     if (Array.isArray(listCards) && listCards.length > 0) {
-      score.current += 1;
+      score.current += points;
       // Remove the first element from the array
       listCards.splice(randomIndex, 1);
       // Update the state with the modified array

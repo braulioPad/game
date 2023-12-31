@@ -16,13 +16,16 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
       if (buttonText === 'easy') {
         console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.easy));
         AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.easy));
+        AsyncStorage.setItem('points', JSON.stringify(1));
       } else if (buttonText === 'medium') {
         console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.medium));
         AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.medium));
+        AsyncStorage.setItem('points', JSON.stringify(2));
       }
       else {
         console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.hard));
         AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.hard));
+        AsyncStorage.setItem('points', JSON.stringify(3));
       }
       navigation.navigate('TimerScreen');
     } catch (error) {
