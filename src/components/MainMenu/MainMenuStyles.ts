@@ -12,6 +12,8 @@ export const MainMenuStyles = StyleSheet.create({
     justifyContent: 'center', // Center content vertically
     alignItems: 'center', // Center content horizontally
     backgroundColor: '#0B0F26',
+    width: '100%',
+    height: '100%',
   },
   buttonContainer: {
     /*    alignItems: 'center', // Center content horizontally within the button container */
@@ -59,5 +61,5 @@ export const MainMenuStyles = StyleSheet.create({
     flexDirection: 'column',
   },
   gameName: { width: 400, marginTop: 20, marginBottom: 20, resizeMode: 'contain', },
-  mainType: { width: 300, marginBottom: 20,resizeMode: 'contain', },
+  mainType: { width: 300, marginBottom: 20, resizeMode: 'contain', },
 });
