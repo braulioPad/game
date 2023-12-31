@@ -4,17 +4,17 @@ export const MainMenuStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    display:'flex',
+    display: 'flex',
   },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center', // Center content vertically
     alignItems: 'center', // Center content horizontally
-    backgroundColor:'#0B0F26',
+    backgroundColor: '#0B0F26',
   },
   buttonContainer: {
- /*    alignItems: 'center', // Center content horizontally within the button container */
+    /*    alignItems: 'center', // Center content horizontally within the button container */
     marginBottom: 0, // Adjust the spacing between buttons
     flexDirection: 'column',
   },
@@ -26,38 +26,38 @@ export const MainMenuStyles = StyleSheet.create({
     width: 70,
     height: 50,
     resizeMode: 'contain',
-    marginRight:20
+    marginRight: 20
     // Add additional styling for the custom image if needed
   },
-  mainContainer:{
-    width:'100%',
-    display:'flex',
+  mainContainer: {
+    width: '100%',
+    display: 'flex',
     flexDirection: 'row',
     flexWrap: 'nowrap',
     justifyContent: 'center',
-    
+
   },
-  elementor:{
-    display:'flex',
+  elementor: {
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center',
   },
-  elementorLeft:{
+  elementorLeft: {
     flex: 1.5,
-    display:'flex',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center',
   },
-  mainmenu:{
-    display:'flex',
-    flexDirection:'row',
+  mainmenu: {
+    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'flex-end',
   },
-  mainmenubtn:{
+  mainmenubtn: {
     flexDirection: 'column',
   },
-  gameName:{ width: 400,marginTop:20,marginBottom:20, resizeMode: 'cover',},
-  mainType:{ width: 300,marginBottom:20, },
+  gameName: { width: 400, marginTop: 20, marginBottom: 20, resizeMode: 'contain', },
+  mainType: { width: 300, marginBottom: 20,resizeMode: 'contain', },
 });

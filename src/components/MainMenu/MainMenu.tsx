@@ -116,7 +116,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.elementor}>
-          <Image source={require('../../../assets/Backgrounds/Horn.png' )} style={{ width: 280,marginRight:20, }} />
+          <Image source={require('../../../assets/Backgrounds/Horn.png' )} style={{ width: 280,marginRight:20, resizeMode: 'contain',}} />
           {/* Play Button */}
           <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Go Play</Text>
