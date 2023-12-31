@@ -66,11 +66,11 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Text>Easy</Text>
-        <CustomButton  onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+        <CustomButton  onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/easy.png')} imageStyle={styles.customImage}/>
         <Text>Mid</Text>
-        <CustomButton  onPress={() => handleButtonPress('medium')} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+        <CustomButton  onPress={() => handleButtonPress('medium')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage}/>
         <Text>Hard</Text>
-        <CustomButton  onPress={() => handleButtonPress('hard')} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+        <CustomButton  onPress={() => handleButtonPress('hard')} imageSource={require('../../../assets/btns/hard.png')} imageStyle={styles.customImage}/>
       </View>
     </View>
   );

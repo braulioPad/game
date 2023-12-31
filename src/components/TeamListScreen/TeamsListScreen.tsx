@@ -127,7 +127,7 @@ const TeamsListScreen = ({ navigation }) => {
                   onChangeText={(text) => handleEditTeamName(teamName, text)}
                 />
                 <Text>Delete</Text>
-                <CustomButton  onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+                <CustomButton  onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.customImage}/>
               </View>
             ))}
           </View>
@@ -143,10 +143,10 @@ const TeamsListScreen = ({ navigation }) => {
         <View style={styles.buttonsContainer}>
           <Text>Add Team</Text>
           <CustomButton  onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
-          <Text>Star Game</Text>
-          <CustomButton  onPress={() => handleGoGame()}  imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+          <Text>Start Game</Text>
+          <CustomButton  onPress={() => handleGoGame()}  imageSource={require('../../../assets/btns/btns_5.png')} imageStyle={styles.customImage}/>
           <Text>Reset Data</Text>
-          <CustomButton  onPress={() => handleClearData()} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+          <CustomButton  onPress={() => handleClearData()} imageSource={require('../../../assets/btns/btns_3.png')} imageStyle={styles.customImage}/>
         </View>
       </View>
     </ScrollView>
