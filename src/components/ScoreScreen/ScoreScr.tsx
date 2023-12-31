@@ -92,9 +92,9 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
           </View>
         ))}
       <Text>Next player</Text>
-      <CustomButton  onPress={handleGoGame} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+      <CustomButton  onPress={handleGoGame} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')}/>
       <Text>Finish?</Text>
-      <CustomButton  onPress={handleFinishGame} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+      <CustomButton  onPress={handleFinishGame} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')}/>
 
       <Modal
         animationType="slide"

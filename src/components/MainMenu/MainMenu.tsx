@@ -67,7 +67,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
       <View style={styles.mainContainer}>
           <View style={styles.elementorLeft}>
             <View style={styles.elementorLeft}>
-            <Image  source={require('../../../assets/Backgrounds/gamename.png')} style={styles.gameName} />
+            <Image  source={require('../../../assets/Backgrounds/gamename.png')} style={styles.gameName}  />
             <Image  source={require('../../../assets/Backgrounds/maintype.png')} style={styles.mainType} />
             </View>
 

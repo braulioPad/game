@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, Button, TextInput,StyleSheet } from 'react-native';
+import { ScrollView, View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { TeamsListScreenStyles as styles } from './TeamsListScreenStyles';
@@ -49,11 +49,11 @@ const TeamsListScreen = ({ navigation }) => {
             const singleTeamArray = Object.values(prevTeamsData);
             return [...singleTeamArray, { name: newTeamName, score: 0 }];
           }
-  
+
           // If neither an array nor an object, return a new array with the new team
           return [{ name: newTeamName, score: 0 }];
         });
-  
+
         setNewTeamName('');
       }
     } catch (error) {
@@ -87,7 +87,7 @@ const TeamsListScreen = ({ navigation }) => {
     });
   };
 
-  const handleGoGame = async() => {
+  const handleGoGame = async () => {
     const teamTurn = 1; // Assuming you have a specific teamTurn value
     AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
     await AsyncStorage.setItem('TeamData', JSON.stringify(teamsData));
@@ -96,11 +96,11 @@ const TeamsListScreen = ({ navigation }) => {
       if (teamKeys.length >= 2) {
         // Check if the number of players is the same in all teams
         navigation.navigate('CardSelectScr');
-      }else{
+      } else {
         // Display an alert or perform another action indicating the requirement
         alert('Please create at least two teams before starting the game.');
       }
-    }  
+    }
   };
 
 
@@ -127,7 +127,7 @@ const TeamsListScreen = ({ navigation }) => {
                   onChangeText={(text) => handleEditTeamName(teamName, text)}
                 />
                 <Text>Delete</Text>
-                <CustomButton  onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.customImage}/>
+                <CustomButton onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.customImage} />
               </View>
             ))}
           </View>
@@ -142,16 +142,16 @@ const TeamsListScreen = ({ navigation }) => {
         />
         <View style={styles.buttonsContainer}>
           <Text>Add Team</Text>
-          <CustomButton  onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage}/>
+          <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />
           <Text>Start Game</Text>
-          <CustomButton  onPress={() => handleGoGame()}  imageSource={require('../../../assets/btns/btns_5.png')} imageStyle={styles.customImage}/>
+          <CustomButton onPress={() => handleGoGame()} imageSource={require('../../../assets/btns/btns_5.png')} pressedImageSource={require('../../../assets/btns/btns_6.png')} imageStyle={styles.customImage} />
           <Text>Reset Data</Text>
-          <CustomButton  onPress={() => handleClearData()} imageSource={require('../../../assets/btns/btns_3.png')} imageStyle={styles.customImage}/>
+          <CustomButton onPress={() => handleClearData()} imageSource={require('../../../assets/btns/btns_3.png')} pressedImageSource={require('../../../assets/btns/btns_4.png')} imageStyle={styles.customImage} />
         </View>
       </View>
     </ScrollView>
   );
-        };
+};
 export default TeamsListScreen;
 function alert(arg0: string) {
   throw new Error('Function not implemented.');

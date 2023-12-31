@@ -7,7 +7,7 @@ export const CardSelectionStyle = StyleSheet.create({
         alignItems: 'center',
       },
       buttonContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
       },
       customImage: {
         width: 70,
