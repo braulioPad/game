@@ -58,4 +58,6 @@ export const MainMenuStyles = StyleSheet.create({
   mainmenubtn:{
     flexDirection: 'column',
   },
+  gameName:{ width: 400,marginTop:20,marginBottom:20, resizeMode: 'cover',},
+  mainType:{ width: 300,marginBottom:20, },
 });

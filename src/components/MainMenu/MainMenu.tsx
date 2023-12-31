@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View,ImageBackground, Text } from 'react-native';
+import { View,ImageBackground, Text,Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -67,8 +67,8 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
       <View style={styles.mainContainer}>
           <View style={styles.elementorLeft}>
             <View style={styles.elementorLeft}>
-            <img src={require('../../../assets/Backgrounds/gamename.png')} style={{ width: 400,marginTop:20,marginBottom:20, }} />
-            <img src={require('../../../assets/Backgrounds/maintype.svg')} style={{ width: 300,marginBottom:20, }} />
+            <Image  source={require('../../../assets/Backgrounds/gamename.png')} style={styles.gameName} />
+            <Image  source={require('../../../assets/Backgrounds/maintype.png')} style={styles.mainType} />
             </View>
 
             {/* nav Button */}
@@ -116,7 +116,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.elementor}>
-          <img src={require('../../../assets/Backgrounds/Horn.svg' )} style={{ width: 280,marginRight:20, }} />
+          <Image source={require('../../../assets/Backgrounds/Horn.png' )} style={{ width: 280,marginRight:20, }} />
           {/* Play Button */}
           <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Go Play</Text>
