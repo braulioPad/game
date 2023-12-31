@@ -64,36 +64,71 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
         style={styles.backgroundImage}
         resizeMode="cover"
       >
-        {/* Play Button */}
-        <View style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Go Play</Text>
-          <CustomButton
-            onPress={goToPlay}
-            imageSource={require('../../../assets/btns/btns_7.png')}
-            pressedImageSource={require('../../../assets/btns/btns_8.png')}
-            imageStyle={styles.customImage}
-          />
-        </View>
-        {/* Config Button */}
-        <View style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>Config</Text>
-          <CustomButton
-            onPress={goToConfig}
-            imageSource={require('../../../assets/btns/btns_7.png')}
-            pressedImageSource={require('../../../assets/btns/btns_8.png')}
-            imageStyle={styles.customImage}
-          />
-        </View>
-        {/* About Us Button */}
-        <View style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>About Us</Text>
-          <CustomButton
-            onPress={goToAboutUs}
-            imageSource={require('../../../assets/btns/btns_7.png')}
-            pressedImageSource={require('../../../assets/btns/btns_8.png')}
-            imageStyle={styles.customImage}
-          />
-        </View>
+      <View style={styles.mainContainer}>
+          <View style={styles.elementorLeft}>
+            <View style={styles.elementorLeft}>
+            <img src={require('../../../assets/Backgrounds/gamename.png')} style={{ width: 400,marginTop:20,marginBottom:20, }} />
+            <img src={require('../../../assets/Backgrounds/maintype.svg')} style={{ width: 300,marginBottom:20, }} />
+            </View>
+
+            {/* nav Button */}
+            <View  style={styles.mainmenu}>
+            {/* Play Button */}
+            <View style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>Go Play</Text>
+                <CustomButton
+                  onPress={goToPlay}
+                  imageSource={require('../../../assets/btns/menubtn.png')}
+                  pressedImageSource={require('../../../assets/btns/menubtn2.png')}
+                  imageStyle={styles.customImage}
+                />
+            </View>
+            {/* Play Button */}
+            <View style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>Go Play</Text>
+                <CustomButton
+                  onPress={goToPlay}
+                  imageSource={require('../../../assets/btns/menubtn.png')}
+                  pressedImageSource={require('../../../assets/btns/menubtn2.png')}
+                  imageStyle={styles.customImage}
+                />
+            </View>
+            {/* Config Button */}
+            <View style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>Config</Text>
+                <CustomButton
+                  onPress={goToConfig}
+                  imageSource={require('../../../assets/btns/menubtn.png')}
+                  pressedImageSource={require('../../../assets/btns/menubtn2.png')}
+                  imageStyle={styles.customImage}
+                />
+            </View>
+            {/* About Us Button */}
+            <View style={styles.buttonContainer}>
+                <Text style={styles.buttonText}>About Us</Text>
+                <CustomButton
+                  onPress={goToAboutUs}
+                  imageSource={require('../../../assets/btns/menubtn3.png')}
+                  pressedImageSource={require('../../../assets/btns/menubtn4.png')}
+                  imageStyle={styles.customImage}
+                />
+            </View>
+            </View>
+          </View>
+          <View style={styles.elementor}>
+          <img src={require('../../../assets/Backgrounds/Horn.svg' )} style={{ width: 280,marginRight:20, }} />
+          {/* Play Button */}
+          <View style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>Go Play</Text>
+              <CustomButton
+                onPress={goToPlay}
+                imageSource={require('../../../assets/btns/btns_5.png')}
+                pressedImageSource={require('../../../assets/btns/btns_6.png')}
+                imageStyle={styles.customImage}
+              />
+            </View>
+          </View>
+      </View>
       </ImageBackground>
     </View>
   );

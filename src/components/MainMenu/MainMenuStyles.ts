@@ -4,17 +4,19 @@ export const MainMenuStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
+    display:'flex',
   },
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center', // Center content vertically
     alignItems: 'center', // Center content horizontally
+    backgroundColor:'#0B0F26',
   },
   buttonContainer: {
  /*    alignItems: 'center', // Center content horizontally within the button container */
-    marginBottom: 20, // Adjust the spacing between buttons
-    flexDirection: 'row',
+    marginBottom: 0, // Adjust the spacing between buttons
+    flexDirection: 'column',
   },
   buttonText: {
     fontSize: 18, // Add your font size
@@ -23,7 +25,37 @@ export const MainMenuStyles = StyleSheet.create({
   customImage: {
     width: 70,
     height: 50,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    marginRight:20
     // Add additional styling for the custom image if needed
+  },
+  mainContainer:{
+    width:'100%',
+    display:'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    justifyContent: 'center',
+    
+  },
+  elementor:{
+    display:'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  elementorLeft:{
+    flex: 1.5,
+    display:'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+  mainmenu:{
+    display:'flex',
+    flexDirection:'row',
+    alignItems: 'flex-end',
+  },
+  mainmenubtn:{
+    flexDirection: 'column',
   },
 });
