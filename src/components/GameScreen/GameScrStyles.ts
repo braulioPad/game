@@ -9,7 +9,7 @@ export const GameScrStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+        backgroundColor: 'rgba(0, 0, 0, 0)', // Semi-transparent background
       },
       modalText: {
         fontSize: 20,
@@ -71,5 +71,29 @@ export const GameScrStyles = StyleSheet.create({
         height: 50,
         resizeMode: 'contain'
         // Add additional styling for the custom image if needed
+      },
+      CardText:{
+        color: 'white',
+        fontFamily: 'Eight-Bit-Dragon',
+        fontSize: 25,
+        
+      },
+      modalContent: {
+        backgroundColor: 'white', 
+        padding: 20,
+        borderRadius: 10,
+        elevation: 5,
+      },
+      modalButtonPause: {
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor: '#2196F3',
+        alignItems: 'center',
+        marginVertical: 5,
+      },
+      modalTextPause: {
+        fontSize: 18,
+        marginBottom: 20,
+        fontFamily: 'Eight-Bit-Dragon',
       },
 });

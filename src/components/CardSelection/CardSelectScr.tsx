@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text  } from 'react-native';
+import { View, Text, ImageBackground } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
@@ -10,7 +10,6 @@ interface CardsListScreenProps {
 
 const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
   const [jsonData, setJsonData] = useState<any>(null);
-
   const handleButtonPress = async (buttonText) => {
     try {
       if (buttonText === 'easy') {
@@ -32,8 +31,6 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
       console.error('Error saving data', error);
     }
   };
-
-
 
   useEffect(() => {
     // Function to load the JSON file
@@ -67,14 +64,25 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Text>Easy</Text>
-        <CustomButton  onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/easy.png')} imageStyle={styles.customImage}/>
-        <Text>Mid</Text>
-        <CustomButton  onPress={() => handleButtonPress('medium')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage}/>
-        <Text>Hard</Text>
-        <CustomButton  onPress={() => handleButtonPress('hard')} imageSource={require('../../../assets/btns/hard.png')} imageStyle={styles.customImage}/>
-      </View>
+      <ImageBackground
+        source={require('../../../assets/Backgrounds/MnScr.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover">
+        <View style={styles.buttonContainer}>
+          <View style={styles.buttonColumn}>
+            <Text style={styles.text}>Easy</Text>
+            <CustomButton onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/easy.png')} imageStyle={styles.customImage} />
+          </View>
+          <View style={styles.buttonColumn}>
+            <Text style={styles.text}>Mid   </Text>
+            <CustomButton onPress={() => handleButtonPress('medium')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage} />
+          </View>
+          <View style={styles.buttonColumn}>
+            <Text style={styles.text}>Hard</Text>
+            <CustomButton onPress={() => handleButtonPress('hard')} imageSource={require('../../../assets/btns/hard.png')} imageStyle={styles.customImage} />
+          </View>
+        </View>
+      </ImageBackground>
     </View>
   );
 };

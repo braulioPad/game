@@ -39,6 +39,8 @@ export const TeamsListScreenStyles = StyleSheet.create({
         borderWidth: 1,
         marginRight: 10,
         paddingHorizontal: 10,
+        fontFamily: 'Eight-Bit-Dragon',
+        fontSize: 10,
       },
     
       // Style for the general input (for adding new team name)
@@ -72,8 +74,14 @@ export const TeamsListScreenStyles = StyleSheet.create({
         marginBottom: 10, // Adjust the spacing between text and button
       },
       customImage: {
-        width: 70,
+        width: 50,
         height: 50,
+        resizeMode: 'contain'
+        // Add additional styling for the custom image if needed
+      },
+      deletebtn: {
+        width: 20,
+        height: 20,
         resizeMode: 'contain'
         // Add additional styling for the custom image if needed
       },

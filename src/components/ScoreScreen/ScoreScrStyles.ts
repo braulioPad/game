@@ -34,11 +34,10 @@ export const ScoreScrStyles = StyleSheet.create({
         alignItems: 'center',
       },
       modalContent: {
-        backgroundColor: 'white',
+        backgroundColor: 'white', 
         padding: 20,
         borderRadius: 10,
         elevation: 5,
-        
       },
       modalText: {
         fontSize: 18,
@@ -61,5 +60,15 @@ export const ScoreScrStyles = StyleSheet.create({
         height: 50,
         resizeMode: 'contain'
         // Add additional styling for the custom image if needed
+      },
+      backgroundImage: {
+        width: '50%', // Adjust the width as needed
+        height: '50%', // Adjust the height as needed
+        resizeMode: 'contain',
+      },
+      modalBackground: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
       },
 });

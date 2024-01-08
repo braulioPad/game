@@ -3,19 +3,18 @@ import { ScrollView, View, Text, Button, TextInput, StyleSheet } from 'react-nat
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { TeamsListScreenStyles as styles } from './TeamsListScreenStyles';
-
+import { useFonts } from 'expo-font';
 
 
 const TeamsListScreen = ({ navigation }) => {
 
   const [teamsData, setTeamsData] = useState(null);
   const [newTeamName, setNewTeamName] = useState('');
-
-
   useEffect(() => {
     const fetchTeamsData = async () => {
       try {
         const storedData = await AsyncStorage.getItem('TeamData');
+        /* setConfigLoaded(true); */
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
@@ -103,7 +102,7 @@ const TeamsListScreen = ({ navigation }) => {
     }
   };
 
-
+ 
   const handleClearData = async () => {
     try {
       await AsyncStorage.clear();
@@ -126,13 +125,13 @@ const TeamsListScreen = ({ navigation }) => {
                   value={teamsData[teamName].name}
                   onChangeText={(text) => handleEditTeamName(teamName, text)}
                 />
-                <Text>Delete</Text>
-                <CustomButton onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.customImage} />
+                <Text style={styles.text}>Delete</Text>
+                <CustomButton onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.deletebtn} />
               </View>
             ))}
           </View>
         ) : (
-          <Text>No Teams Data</Text>
+          <Text style={styles.text}>No Teams Data</Text>
         )}
         <TextInput
           style={styles.input}
@@ -141,12 +140,12 @@ const TeamsListScreen = ({ navigation }) => {
           onChangeText={(text) => setNewTeamName(text)}
         />
         <View style={styles.buttonsContainer}>
-          <Text>Add Team</Text>
+          <Text style={styles.text} >Add Team</Text>
           <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />
-          <Text>Start Game</Text>
+          <Text style={styles.text} >Start Game</Text>
           <CustomButton onPress={() => handleGoGame()} imageSource={require('../../../assets/btns/btns_5.png')} pressedImageSource={require('../../../assets/btns/btns_6.png')} imageStyle={styles.customImage} />
-          <Text>Reset Data</Text>
-          <CustomButton onPress={() => handleClearData()} imageSource={require('../../../assets/btns/btns_3.png')} pressedImageSource={require('../../../assets/btns/btns_4.png')} imageStyle={styles.customImage} />
+          {/* <Text>Reset Data</Text>
+          <CustomButton onPress={() => handleClearData()} imageSource={require('../../../assets/btns/btns_3.png')} pressedImageSource={require('../../../assets/btns/btns_4.png')} imageStyle={styles.customImage} /> */}
         </View>
       </View>
     </ScrollView>

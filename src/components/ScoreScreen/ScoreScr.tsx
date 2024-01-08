@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Modal, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Modal, Pressable, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { ScoreScrStyles as styles } from './ScoreScrStyles';
 
 interface ScoreScreenProps {
   navigation: any;
-  
+
 }
 const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
   const [teamsData, setTeamsData] = useState<any>(null);
@@ -15,7 +15,7 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
   useEffect(() => {
     const fetchTeamsData = async () => {
       try {
-        
+
         const storedData = await AsyncStorage.getItem('TeamData');
         const teamt = await AsyncStorage.getItem('teamTurn');
         if (storedData !== null) {
@@ -92,9 +92,11 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
           </View>
         ))}
       <Text>Next player</Text>
-      <CustomButton  onPress={handleGoGame} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')}/>
+      <CustomButton onPress={handleGoGame} imageSource={require('../../../assets/btns/btns_7.png')} 
+      imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')} />
       <Text>Finish?</Text>
-      <CustomButton  onPress={handleFinishGame} imageSource={require('../../../assets/btns/btns_7.png')} imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')}/>
+      <CustomButton onPress={handleFinishGame} imageSource={require('../../../assets/btns/btns_7.png')} 
+      imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')} />
 
       <Modal
         animationType="slide"
@@ -104,17 +106,17 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
           // Handle modal close
         }}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Are you sure you want to finish the game?</Text>
-            <Pressable style={styles.modalButton} onPress={handleConfirmFinish}>
-              <Text style={styles.text}>Yes</Text>
-            </Pressable>
-            <Pressable style={styles.modalButton} onPress={handleCancelFinish}>
-              <Text style={styles.text}>No</Text>
-            </Pressable>
+        <View  style={styles.modalContainer} >
+            <View style={styles.modalContent}>
+              <Text style={styles.modalText}>Are you sure you want to finish the game?</Text>
+              <Pressable style={styles.modalButton} onPress={handleConfirmFinish}>
+                <Text style={styles.text}>Yes</Text>
+              </Pressable>
+              <Pressable style={styles.modalButton} onPress={handleCancelFinish}>
+                <Text style={styles.text}>No</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
       </Modal>
     </View>
   );

@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState,useRef  } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Modal,Animated,ImageBackground } from 'react-native';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Modal, Animated, ImageBackground, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { GameScrStyles as styles } from './GameScrStyles';
@@ -34,19 +34,19 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         const configData = await AsyncStorage.getItem('ConfigData');
         const parsedData = JSON.parse(configData);
         console.log('parsedData:', parsedData); // Log the parsed data
-        setTime( parsedData.seconds);
+        setTime(parsedData.seconds);
         const storedData = await AsyncStorage.getItem('TeamData');
         console.log('data team: ' + storedData);
         const listCardData = await AsyncStorage.getItem('listCards');
         const parsedListCardData = JSON.parse(listCardData);
         const teamt = await AsyncStorage.getItem('teamTurn');
         setListCard(parsedListCardData);
-        const point=await AsyncStorage.getItem('points');
+        const point = await AsyncStorage.getItem('points');
         if (storedData !== null) {
           const parsedData = JSON.parse(storedData);
           setTeamsData(parsedData);
           setTeamTurn(teamt ? parseInt(teamt) : 0); // Parse as integer and handle null
-          setPoints(point? parseInt(point) : 1);
+          setPoints(point ? parseInt(point) : 1);
           console.log('team turn: ', teamTurn);
         } else {
           console.log('no Data');
@@ -95,7 +95,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
       clearInterval(interval);
     };
   }, [isTimerPaused, time, teamsData, teamTurn, score, navigation]);
-  
+
   const handlePauseToggle = () => {
     setIsTimerPaused(!isTimerPaused);
     setIsModalVisible(true);
@@ -103,12 +103,14 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     if (!modalVisible) {
-      setCard(listCards[0]);
+      const randomIndex = Math.floor(Math.random() * listCards.length);
+      const randomElement = listCards[randomIndex];
+      setCard(randomElement);
       listCards.splice(0, 1);
       setListCard(listCards);
     }
   }, [modalVisible, listCards]);
-  
+
   useEffect(() => {
     if (modalVisible) {
       const modalIntervalId = setInterval(() => {
@@ -134,24 +136,24 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     setCard(randomElement);
     setColourLeft(getColourCorrect());
     setTimeout(() => {
-    console.log('score:', score);
-    if (Array.isArray(listCards) && listCards.length > 0) {
-      score.current += points;
-      // Remove the first element from the array
-      listCards.splice(randomIndex, 1);
-      // Update the state with the modified array
-      setListCard(listCards);
-    } else {
-      setCard('no more cards');
-    }
+      if (Array.isArray(listCards) && listCards.length > 0) {
+        score.current += points;
+        // Remove the first element from the array
+        listCards.splice(randomIndex, 1);
+        // Update the state with the modified array
+        setListCard(listCards);
+        console.log('score:', score);
+      } else {
+        setCard('no more cards');
+      }
       setColourLeft(getColourNormal());
       console.log('Delayed code executed');
     }, 600);
     console.log('Touchable panel 1 pressed ');
-    
+
   };
 
-  
+
 
   const handleTouchablePressInRight = () => {
     const randomIndex = Math.floor(Math.random() * listCards.length);
@@ -159,14 +161,14 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     setCard(randomElement);
     setColourRight(getColourInCorrect());
     setTimeout(() => {
-    if (Array.isArray(listCards) && listCards.length > 0) {
-      // Remove the first element from the array
-      listCards.splice(randomIndex, 1);
-      // Update the state with the modified array
-      setListCard(listCards);
-    } else {
-      setCard('no more cards');
-    }
+      if (Array.isArray(listCards) && listCards.length > 0) {
+        // Remove the first element from the array
+        listCards.splice(randomIndex, 1);
+        // Update the state with the modified array
+        setListCard(listCards);
+      } else {
+        setCard('no more cards');
+      }
       setColourRight(getColourNormal());
       console.log('Delayed code executed');
     }, 600);
@@ -177,8 +179,8 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     setIsModalVisible(false);
     setIsTimerPaused(false);
   };
-  
-  const finishModalPause=() =>{
+
+  const finishModalPause = () => {
     const updatedTeamsData = {
       ...teamsData,
       [teamTurn]: {
@@ -199,61 +201,70 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
     });
   }
 
-  return ( 
+  return (
     <View style={styles.container}>
       <ImageBackground
-      source={require('../../../assets/Backgrounds/GmScr.png')} // Replace with the path to your background image
-      style={styles.backgroundImage}>
-      {/* Modal */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={closeModal}>
-        <View style={styles.modalContainer}>
-              <Text style={styles.modalText}>Team: {Object.values(teamsData)[teamTurn]?.name}</Text>
-              <Text style={styles.modalText}>{modalTime} seconds</Text>
-        </View>
-      </Modal>
-      {/* Modal */}
-      <Modal
+        source={require('../../../assets/Backgrounds/GmScr.png')} // Replace with the path to your background image
+        style={styles.backgroundImage}>
+        {/* Modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={closeModal}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTextPause}>Team: {Object.values(teamsData)[teamTurn]?.name}</Text>
+              <Text style={styles.modalTextPause}>{modalTime} seconds</Text>
+            </View>
+          </View>
+        </Modal>
+        {/* Modal */}
+        <Modal
           animationType="slide"
           transparent={true}
           visible={isModalVisible}
-          onRequestClose={closeModal}>
+          onRequestClose={() => {
+            closeModalPause
+          }}>
           <View style={styles.modalContainer}>
-            <Text style={styles.modalText}>Pause</Text>
-            {/* Add other modal content as needed */}
-            <Button title="Close" onPress={closeModalPause} />
-            <Button title="Finish" onPress={finishModalPause} />
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTextPause}>Are you sure you want to finish the game?</Text>
+              <Pressable style={styles.modalButtonPause} onPress={finishModalPause}>
+                <Text style={styles.text}>Yes</Text>
+              </Pressable>
+              <Pressable style={styles.modalButtonPause} onPress={closeModalPause}>
+                <Text style={styles.text}>No</Text>
+              </Pressable>
+            </View>
           </View>
         </Modal>
-      {/* Timer Layer */}
-      <View style={styles.timerLayer}>
-        <Text style={styles.timerText}>{time} seconds</Text>
-        { <CustomButton  onPress={handlePauseToggle} style={styles.customButton} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage}/> }
-      </View>
-      <View style={styles.centeredView}>
-        <View style={styles.content}>
-          <View>
-            <Text style={styles.text}>Card:</Text>
-            <Text style={styles.text}>{card}</Text>
+        {/* Timer Layer */}
+        <View style={styles.timerLayer}>
+          <Text style={styles.timerText}>{time} seconds</Text>
+          {<CustomButton onPress={handlePauseToggle} style={styles.customButton} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />}
+        </View>
+        <View style={styles.centeredView}>
+          <View style={styles.content}>
+            <View>
+              <Text style={styles.text}>Card:</Text>
+              <Text style={styles.CardText}>{card}</Text>
+            </View>
           </View>
         </View>
-      </View>
-      {/* TouchableOpacity Layer */}
-      <View style={styles.touchableOpacityLayer}>
-        <TouchableOpacity
-          style={[styles.touchablePanel,{backgroundColor: colourRight }]}
-          onPressIn={handleTouchablePressInRight}
-          activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
-        />
-        <TouchableOpacity
-          style={[styles.touchablePanel,{ backgroundColor: colourLeft }]}
-          onPressIn={handleTouchablePressInLeft}
-          activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
-        />
-      </View>
+        {/* TouchableOpacity Layer */}
+        <View style={styles.touchableOpacityLayer}>
+          <TouchableOpacity
+            style={[styles.touchablePanel, { backgroundColor: colourRight }]}
+            onPressIn={handleTouchablePressInRight}
+            activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
+          />
+          <TouchableOpacity
+            style={[styles.touchablePanel, { backgroundColor: colourLeft }]}
+            onPressIn={handleTouchablePressInLeft}
+            activeOpacity={0} // Set activeOpacity to 0 to make it completely invisible
+          />
+        </View>
       </ImageBackground>
     </View>
   );
