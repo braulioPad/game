@@ -83,6 +83,10 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+    <ImageBackground
+      source={require('../../../assets/Backgrounds/teamFinish.png')} // Replace with your background image path
+      style={styles.backgroundImage}
+    >
       <Text style={styles.header}>Team Scores</Text>
       {teamsData &&
         Object.keys(teamsData).map((teamName) => (
@@ -97,7 +101,7 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
       <Text>Finish?</Text>
       <CustomButton onPress={handleFinishGame} imageSource={require('../../../assets/btns/btns_7.png')} 
       imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')} />
-
+  
       <Modal
         animationType="slide"
         transparent={true}
@@ -106,19 +110,20 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
           // Handle modal close
         }}
       >
-        <View  style={styles.modalContainer} >
-            <View style={styles.modalContent}>
-              <Text style={styles.modalText}>Are you sure you want to finish the game?</Text>
-              <Pressable style={styles.modalButton} onPress={handleConfirmFinish}>
-                <Text style={styles.text}>Yes</Text>
-              </Pressable>
-              <Pressable style={styles.modalButton} onPress={handleCancelFinish}>
-                <Text style={styles.text}>No</Text>
-              </Pressable>
-            </View>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Are you sure you want to finish the game?</Text>
+            <Pressable style={styles.modalButton} onPress={handleConfirmFinish}>
+              <Text style={styles.text}>Yes</Text>
+            </Pressable>
+            <Pressable style={styles.modalButton} onPress={handleCancelFinish}>
+              <Text style={styles.text}>No</Text>
+            </Pressable>
           </View>
+        </View>
       </Modal>
-    </View>
+    </ImageBackground>
+  </View>
   );
 };
 

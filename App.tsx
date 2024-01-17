@@ -16,8 +16,8 @@ const App: React.FC = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={MainMenu} options={{ headerShown: false }} />
-        <Stack.Screen name="configuration" component={ConfigScreen} />
-        <Stack.Screen name="aboutUs" component={About} />
+        <Stack.Screen name="configuration" component={ConfigScreen}  options={{ headerShown: false }}/>
+        <Stack.Screen name="aboutUs" component={About} options={{ headerShown: false }}/>
         <Stack.Screen name="ScoreScr" component={ScoreScr} options={{ headerShown: false }} />
         <Stack.Screen  name="TeamsListScreen"
           component={TeamsListScreen as React.FC} options={{ headerShown: false }} />

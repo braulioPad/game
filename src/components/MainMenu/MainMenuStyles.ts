@@ -1,10 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions} from 'react-native';
+
+
+
+const { width, height } = Dimensions.get('window');
 
 export const MainMenuStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
     display: 'flex',
+    width:width,
+    height:height,
   },
   backgroundImage: {
     flex: 1,

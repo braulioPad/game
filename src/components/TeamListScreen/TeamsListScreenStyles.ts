@@ -85,4 +85,10 @@ export const TeamsListScreenStyles = StyleSheet.create({
         resizeMode: 'contain'
         // Add additional styling for the custom image if needed
       },
+      scrollView: {
+        flex: 1,
+      },
+      innerContainer: {
+        padding: 20, // Adjust the padding as needed
+      },
 });

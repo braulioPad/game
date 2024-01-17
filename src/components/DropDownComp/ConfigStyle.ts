@@ -10,6 +10,7 @@ export const ConfigStyle = StyleSheet.create({
         borderRadius: 4,
         color: 'black',
         width: 200, // Set the desired width
+        fontFamily: 'Eight-Bit-Dragon',
       },
       inputAndroid: {
         fontSize: 16,
@@ -20,5 +21,6 @@ export const ConfigStyle = StyleSheet.create({
         borderRadius: 8,
         color: 'black',
         width: 200, // Set the desired width
+        fontFamily: 'Eight-Bit-Dragon',
       },
 });

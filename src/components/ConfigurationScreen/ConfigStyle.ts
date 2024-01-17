@@ -11,14 +11,24 @@ export const ConfigStyle = StyleSheet.create({
         marginVertical: 10,
       },
       label: {
+        fontFamily: 'Eight-Bit-Dragon',
         fontSize: 16,
         marginBottom: 5,
       },
       durationText: {
+        fontFamily: 'Eight-Bit-Dragon',
         fontSize: 20,
-        fontWeight: 'bold',
       },
       centeredDropdownContainer: {
         alignItems: 'center', // Align the dropdown to the center
+      },
+      backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center', // Center content horizontally
+        backgroundColor: '#0B0F26',
+        width: '100%',
+        height: '100%',
       },
 });

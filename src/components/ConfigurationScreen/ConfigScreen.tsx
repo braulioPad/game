@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, ImageBackground } from 'react-native';
 import Slider from '@react-native-community/slider';
 import DropdownComponent from '../DropDownComp/DropdownComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -63,7 +63,12 @@ const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Configurations</Text>
+    <ImageBackground
+        source={require('../../../assets/Backgrounds/MnScr.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      >
+      <Text style={styles.label}>Configurations</Text>
       <Text style={styles.durationText}>Game Time: {Math.floor(seconds / 60)}m {seconds % 60}s</Text>
       <Slider
         style={styles.slider}
@@ -78,6 +83,7 @@ const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
         <DropdownComponent items={dropdownItems} onValueChange={handleDropdownChange} slcLanguage={slcLanguage} />
       </View>
       <Button title="Save" onPress={handleSaveConfig} />
+      </ImageBackground>
     </View>
   );
 };
