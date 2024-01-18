@@ -246,7 +246,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         </View>
         <View style={styles.centeredView}>
           <View style={styles.content}>
-            <View>
+            <View style={styles.content}>
               <Text style={styles.text}>Card:</Text>
               <Text style={styles.CardText}>{card}</Text>
             </View>

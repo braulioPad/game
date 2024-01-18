@@ -9,7 +9,7 @@ import TeamsListScreen from './src/components/TeamListScreen/TeamsListScreen';
 import GameScr from './src/components/GameScreen/GameScr';
 import ScoreScr from './src/components/ScoreScreen/ScoreScr';
 import CardSelectScr from './src/components/CardSelection/CardSelectScr';
-import TutorialScreen from './src/components/Tutorial/TutorialScr';
+import TutorialScreen from './src/components/TutorialScreen/TutorialScr';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {

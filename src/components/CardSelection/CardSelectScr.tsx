@@ -65,7 +65,7 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../../../assets/Backgrounds/MnScr.png')}
+        source={require('../../../assets/Backgrounds/selectType.png')}
         style={styles.backgroundImage}
         resizeMode="cover">
         <View style={styles.buttonContainer}>

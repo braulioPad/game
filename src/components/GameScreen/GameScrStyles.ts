@@ -60,7 +60,7 @@ export const GameScrStyles = StyleSheet.create({
       text:{
         color: 'white',
         fontFamily: 'Eight-Bit-Dragon',
-        fontSize: 10,
+        fontSize: 16,
       },
       backgroundImage: {
         flex: 1,
@@ -75,7 +75,7 @@ export const GameScrStyles = StyleSheet.create({
       CardText:{
         color: 'white',
        /*  fontFamily: 'Eight-Bit-Dragon', */
-        fontSize: 25,
+        fontSize: 46,
         
       },
       modalContent: {

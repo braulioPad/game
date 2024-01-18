@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
   },
   slideImage: {
     flex: 1,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     width: '100%',
   },
   page: {

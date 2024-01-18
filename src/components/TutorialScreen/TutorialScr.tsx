@@ -28,15 +28,15 @@ const TutorialScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
     <View style={styles.container}>
       <PagerView style={styles.viewPager} initialPage={0}>
         <View style={styles.page} key="1">
-          <Image source={require('../../../assets/btns/easy.png')} style={styles.slideImage} />
+          <Image source={require('../../../assets/tutorialImg/instruction1.png')} style={styles.slideImage} />
           <Text>Swipe ➡️</Text>
         </View>
         <View style={styles.page} key="2">
-          <Image source={require('../../../assets/btns/mid.png')} style={styles.slideImage} />
+          <Image source={require('../../../assets/tutorialImg/instruction2.png')} style={styles.slideImage} />
           <Text>Second page</Text>
         </View>
         <View style={styles.page} key="3">
-          <Image source={require('../../../assets/btns/hard.png')} style={styles.slideImage} />
+          <Image source={require('../../../assets/tutorialImg/instruction3.png')} style={styles.slideImage} />
           <Text>Third page</Text>
         </View>
       </PagerView>

@@ -93,6 +93,7 @@ const TeamsListScreen = ({ navigation }) => {
     const teamTurn = 0; // Assuming you have a specific teamTurn value
     AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
     await AsyncStorage.setItem('TeamData', JSON.stringify(teamsData));
+   // await AsyncStorage.clear();
     if (teamsData && typeof teamsData === 'object') {
       const teamKeys = Object.keys(teamsData);
       if (teamKeys.length >= 2) {
