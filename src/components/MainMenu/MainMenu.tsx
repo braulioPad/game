@@ -14,7 +14,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
   });
 
   const [configLoaded, setConfigLoaded] = useState(false);
-
+  const [isChecked, setChecked] = useState(false);
   const loadConfigData = async () => {
     try {
       const storedData = await AsyncStorage.getItem('ConfigData');
@@ -23,8 +23,16 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
           seconds: 60,
           slcLanguage: 'Eng',
         };
+        const skipTuto = await AsyncStorage.getItem('skipTutorial');
+        console.log("tutorial: "+skipTuto);
+      if (skipTuto === null) {
+        setChecked(false);
+      }else{
+        setChecked(true);
+      }
         console.log('saving Data: ' + JSON.stringify(updatedConfigData));
         await AsyncStorage.setItem('ConfigData', JSON.stringify(updatedConfigData));
+        await AsyncStorage.setItem('skipTutorial', JSON.stringify(isChecked));
       }
       setConfigLoaded(true);
     } catch (error) {
@@ -51,6 +59,10 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   const goToPlay = () => {
     navigation.navigate('TeamsListScreen');
+  };
+
+  const goToInfo = () => {
+    
   };
 
   if (!fontsLoaded || !configLoaded) {
@@ -85,9 +97,9 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
             {/* Play Button */}
             <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Go Play</Text>
+                <Text style={styles.buttonText}>    Info</Text>
                 <CustomButton
-                  onPress={goToPlay}
+                  onPress={goToInfo}
                   imageSource={require('../../../assets/btns/menubtn.png')}
                   pressedImageSource={require('../../../assets/btns/menubtn2.png')}
                   imageStyle={styles.customImage}
@@ -118,8 +130,8 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
           <View style={styles.elementor}>
           <Image source={require('../../../assets/Backgrounds/Horn.png' )} style={{ width: 280,marginRight:20, resizeMode: 'contain',}} />
           {/* Play Button */}
-          <View style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>Go Play</Text>
+          <View style={styles.buttonContainerPlay}>
+              <Text style={styles.buttonText}>just Play</Text>
               <CustomButton
                 onPress={goToPlay}
                 imageSource={require('../../../assets/btns/btns_5.png')}

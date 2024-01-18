@@ -74,7 +74,7 @@ export const GameScrStyles = StyleSheet.create({
       },
       CardText:{
         color: 'white',
-        fontFamily: 'Eight-Bit-Dragon',
+       /*  fontFamily: 'Eight-Bit-Dragon', */
         fontSize: 25,
         
       },

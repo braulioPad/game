@@ -61,10 +61,15 @@ export const MainMenuStyles = StyleSheet.create({
   mainmenu: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end', // Move items to the bottom
+    top:'10%',
   },
   mainmenubtn: {
     flexDirection: 'column',
+  },
+  buttonContainerPlay:{
+    flexDirection: 'column',
+    top:'15%',
   },
   gameName: { width: 400, marginTop: 20, marginBottom: 20, resizeMode: 'contain', },
   mainType: { width: 300, marginBottom: 20, resizeMode: 'contain', },

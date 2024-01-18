@@ -3,13 +3,12 @@ import { ScrollView, View, Text, Button, TextInput, StyleSheet, ImageBackground 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { TeamsListScreenStyles as styles } from './TeamsListScreenStyles';
-import { useFonts } from 'expo-font';
 
 
 const TeamsListScreen = ({ navigation }) => {
-
   const [teamsData, setTeamsData] = useState(null);
   const [newTeamName, setNewTeamName] = useState('');
+  const [isChecked, setChecked] = useState(false);
   useEffect(() => {
     const fetchTeamsData = async () => {
       try {
@@ -20,6 +19,10 @@ const TeamsListScreen = ({ navigation }) => {
           setTeamsData(parsedData);
         } else {
           console.log('No Data');
+        }
+        const skipTuto = await AsyncStorage.getItem('skipTutorial');
+        if (skipTuto !== null) {
+          setChecked(JSON.parse(skipTuto));
         }
       } catch (error) {
         console.error('Error parsing JSON:', error);
@@ -87,14 +90,19 @@ const TeamsListScreen = ({ navigation }) => {
   };
 
   const handleGoGame = async () => {
-    const teamTurn = 1; // Assuming you have a specific teamTurn value
+    const teamTurn = 0; // Assuming you have a specific teamTurn value
     AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
     await AsyncStorage.setItem('TeamData', JSON.stringify(teamsData));
     if (teamsData && typeof teamsData === 'object') {
       const teamKeys = Object.keys(teamsData);
       if (teamKeys.length >= 2) {
         // Check if the number of players is the same in all teams
-        navigation.navigate('CardSelectScr');
+        if (!isChecked) {
+          navigation.navigate('TutorialScreen');
+        } else {
+          navigation.navigate('CardSelectScr');
+        }
+
       } else {
         // Display an alert or perform another action indicating the requirement
         alert('Please create at least two teams before starting the game.');
@@ -117,43 +125,43 @@ const TeamsListScreen = ({ navigation }) => {
         source={require('../../../assets/Backgrounds/team.png')}
         style={styles.backgroundImage}
         resizeMode="cover">
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.innerContainer}>
-          <Text style={styles.text}>Teams Data:</Text>
-          {teamsData ? (
-            <View>
-              {Object.keys(teamsData).map((teamName) => (
-                <View key={teamName} style={styles.teamContainer}>
-                  {/* Replace Text with TextInput */}
-                  <TextInput
-                    style={styles.teamNameInput}
-                    value={teamsData[teamName].name}
-                    onChangeText={(text) => handleEditTeamName(teamName, text)}
-                  />
-                  <Text style={styles.text}>Delete</Text>
-                  <CustomButton onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.deletebtn} />
-                </View>
-              ))}
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.innerContainer}>
+            <Text style={styles.text}>Teams Data:</Text>
+            {teamsData ? (
+              <View>
+                {Object.keys(teamsData).map((teamName) => (
+                  <View key={teamName} style={styles.teamContainer}>
+                    {/* Replace Text with TextInput */}
+                    <TextInput
+                      style={styles.teamNameInput}
+                      value={teamsData[teamName].name}
+                      onChangeText={(text) => handleEditTeamName(teamName, text)}
+                    />
+                    <Text style={styles.text}>Delete</Text>
+                    <CustomButton onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.deletebtn} />
+                  </View>
+                ))}
+              </View>
+            ) : (
+              <Text style={styles.text}>No Teams Data</Text>
+            )}
+            <TextInput
+              style={styles.input}
+              placeholder="Enter new team name"
+              value={newTeamName}
+              onChangeText={(text) => setNewTeamName(text)}
+            />
+            <View style={styles.buttonsContainer}>
+              <Text style={styles.text}>Add Team</Text>
+              <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />
             </View>
-          ) : (
-            <Text style={styles.text}>No Teams Data</Text>
-          )}
-          <TextInput
-            style={styles.input}
-            placeholder="Enter new team name"
-            value={newTeamName}
-            onChangeText={(text) => setNewTeamName(text)}
-          />
-          <View style={styles.buttonsContainer}>
-            <Text style={styles.text}>Add Team</Text>
-            <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />
           </View>
+        </ScrollView>
+        <View style={styles.buttonsContainerStart}>
+          <Text style={styles.text}>Start Game</Text>
+          <CustomButton onPress={() => handleGoGame()} imageSource={require('../../../assets/btns/btns_5.png')} pressedImageSource={require('../../../assets/btns/btns_6.png')} imageStyle={styles.customImage} />
         </View>
-      </ScrollView>
-      <View style={styles.buttonsContainer}>
-        <Text style={styles.text}>Start Game</Text>
-        <CustomButton onPress={() => handleGoGame()} imageSource={require('../../../assets/btns/btns_5.png')} pressedImageSource={require('../../../assets/btns/btns_6.png')} imageStyle={styles.customImage} />
-      </View>
       </ImageBackground>
     </View>
 

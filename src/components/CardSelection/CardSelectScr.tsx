@@ -79,7 +79,7 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
           </View>
           <View style={styles.buttonColumn}>
             <Text style={styles.text}>Hard</Text>
-            <CustomButton onPress={() => handleButtonPress('hard')} imageSource={require('../../../assets/btns/hard.png')} imageStyle={styles.customImage} />
+            <CustomButton onPress={() => handleButtonPress('hard')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage} />
           </View>
         </View>
       </ImageBackground>

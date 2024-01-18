@@ -87,8 +87,16 @@ export const TeamsListScreenStyles = StyleSheet.create({
       },
       scrollView: {
         flex: 1,
+        right:'35%',
+        top:'10%',
       },
       innerContainer: {
         padding: 20, // Adjust the padding as needed
       },
+      buttonsContainerStart:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        left:'60%',
+        bottom:'5%',
+      }
 });
