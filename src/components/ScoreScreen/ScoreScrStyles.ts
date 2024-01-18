@@ -17,12 +17,15 @@ export const ScoreScrStyles = StyleSheet.create({
   },
   teamContainer: {
     marginBottom: 10,
+    flexDirection: 'row',
   },
   teamName: {
     fontSize: 16,
+    left:'1%',
   },
   teamScore: {
     fontSize: 14,
+    left:'100%',
   },
   customImage: {
     width: 100,
