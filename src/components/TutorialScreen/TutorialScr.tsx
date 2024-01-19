@@ -27,17 +27,24 @@ const TutorialScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <PagerView style={styles.viewPager} initialPage={0}>
-        <View style={styles.page} key="1">
-          <Image source={require('../../../assets/tutorialImg/instruction1.png')} style={styles.slideImage} />
-          <Text>Swipe ➡️</Text>
+        <View style={styles.instructionsContainer} key="1">
+          <Text style={styles.instructionsHeader}>How to Play:</Text>
+          <Text style={styles.instructionText}>* Form two or more teams, depending on the number of players.</Text>
+          <Text style={styles.instructionText}>* In each round, one player will be the "mimer" who tries to convey a sound using only their mouth.</Text>
+          <Text style={styles.instructionText}>* The mimer selects a sound word (e.g., animal noise, object sound, musical instrument) without revealing it to the other players.</Text>
+          <Text style={styles.instructionText}>* Teams have a limited time to discuss and make their guess.</Text>
         </View>
         <View style={styles.page} key="2">
-          <Image source={require('../../../assets/tutorialImg/instruction2.png')} style={styles.slideImage} />
-          <Text>Second page</Text>
+          <Image source={require('../../../assets/tutorialImg/instruction1.png')} style={styles.slideImage} />
+          <Text>you can't make any move your body or your hands, only with the mouth.</Text>
         </View>
         <View style={styles.page} key="3">
+          <Image source={require('../../../assets/tutorialImg/instruction2.png')} style={styles.slideImage} />
+          <Text>Click to the left to skip the word.</Text>
+        </View>
+        <View style={styles.page} key="4">
           <Image source={require('../../../assets/tutorialImg/instruction3.png')} style={styles.slideImage} />
-          <Text>Third page</Text>
+          <Text>Click to the right the teams player say the rigth word.</Text>
         </View>
       </PagerView>
       {/* Checkbox */}

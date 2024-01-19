@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const TeamsListScreenStyles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        /* padding: 16, */
       },
       header: {
         fontFamily: 'Eight-Bit-Dragon',

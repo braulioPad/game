@@ -22,7 +22,6 @@ export const MainMenuStyles = StyleSheet.create({
     height: '100%',
   },
   buttonContainer: {
-    /*    alignItems: 'center', // Center content horizontally within the button container */
     marginBottom: 0, // Adjust the spacing between buttons
     flexDirection: 'column',
   },

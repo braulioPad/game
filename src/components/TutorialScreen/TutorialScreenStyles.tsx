@@ -48,4 +48,18 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  instructionsContainer: {
+    marginLeft: 20, // Adjust the left margin as needed
+    flex: 1,
+    justifyContent: 'center',
+  },
+  instructionsHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  instructionText: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
 });
