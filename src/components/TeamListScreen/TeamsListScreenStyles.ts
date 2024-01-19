@@ -16,9 +16,11 @@ export const TeamsListScreenStyles = StyleSheet.create({
         marginBottom: 8,
       },
       buttonsContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
         marginTop: 16,
+        alignItems: 'center',
+
       },
       label: {
         fontSize: 16,
@@ -34,29 +36,34 @@ export const TeamsListScreenStyles = StyleSheet.create({
       // Style for the editable area displaying team name
       teamNameInput: {
         flex: 1,
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
+        height: 32,
+        borderColor: 'rgb(44,42,65)',
+        borderWidth: 1.5,
         marginRight: 10,
         paddingHorizontal: 10,
         fontFamily: 'Eight-Bit-Dragon',
         fontSize: 10,
+        borderRadius: 40,
+        backgroundColor: 'white',
       },
     
       // Style for the general input (for adding new team name)
       input: {
-        height: 40,
+        height: 32,
         width:200,
-        borderColor: 'gray',
-        borderWidth: 1,
+        borderColor: 'rgb(44,42,65)',
+        borderWidth: 1.5,
         marginBottom: 10,
         paddingHorizontal: 10,
         fontFamily: 'Eight-Bit-Dragon',
         fontSize: 10,
+        borderRadius: 40,
+        backgroundColor: 'white',
       },
       text:{
         fontFamily: 'Eight-Bit-Dragon',
-        fontSize: 10,
+        fontSize: 14,
+        margin:12,
       },
       backgroundImage: {
         flex: 1,
@@ -74,7 +81,7 @@ export const TeamsListScreenStyles = StyleSheet.create({
         marginBottom: 10, // Adjust the spacing between text and button
       },
       customImage: {
-        width: 50,
+        width: 150,
         height: 50,
         resizeMode: 'contain'
         // Add additional styling for the custom image if needed
@@ -87,7 +94,7 @@ export const TeamsListScreenStyles = StyleSheet.create({
       },
       scrollView: {
         flex: 1,
-        right:'35%',
+        right:'25%',
         top:'10%',
       },
       innerContainer: {
@@ -98,5 +105,6 @@ export const TeamsListScreenStyles = StyleSheet.create({
         justifyContent: 'space-between',
         left:'60%',
         bottom:'5%',
+        alignItems: 'center',
       }
 });
