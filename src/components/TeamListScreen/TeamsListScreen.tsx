@@ -93,7 +93,7 @@ const TeamsListScreen = ({ navigation }) => {
     const teamTurn = 0; // Assuming you have a specific teamTurn value
     AsyncStorage.setItem('teamTurn', JSON.stringify(teamTurn));
     await AsyncStorage.setItem('TeamData', JSON.stringify(teamsData));
-   // await AsyncStorage.clear();
+    // await AsyncStorage.clear();
     if (teamsData && typeof teamsData === 'object') {
       const teamKeys = Object.keys(teamsData);
       if (teamKeys.length >= 2) {
@@ -153,15 +153,18 @@ const TeamsListScreen = ({ navigation }) => {
               value={newTeamName}
               onChangeText={(text) => setNewTeamName(text)}
             />
-            <View style={styles.buttonsContainer}>
-              <Text style={styles.text}>Add Team</Text>
-              <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />
-            </View>
           </View>
         </ScrollView>
-        <View style={styles.buttonsContainerStart}>
-          <Text style={styles.text}>Start Game</Text>
-          <CustomButton onPress={() => handleGoGame()} imageSource={require('../../../assets/btns/btns_5.png')} pressedImageSource={require('../../../assets/btns/btns_6.png')} imageStyle={styles.customImage} />
+
+        <View style={styles.containerTeams}>
+        <View style={styles.buttonsContainer}>
+            <Text style={styles.text}>Add Team</Text>
+            <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />
+          </View>
+          <View style={styles.buttonsContainer}>
+            <Text style={styles.text}>Start Game</Text>
+            <CustomButton onPress={() => handleGoGame()} imageSource={require('../../../assets/btns/btns_5.png')} pressedImageSource={require('../../../assets/btns/btns_6.png')} imageStyle={styles.customImage} />
+          </View>
         </View>
       </ImageBackground>
     </View>

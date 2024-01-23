@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground } from 'react-native';
+import { View, Text, ImageBackground, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
@@ -70,15 +70,15 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
         resizeMode="cover">
         <View style={styles.buttonContainer}>
           <View style={styles.buttonColumn}>
-            <Text style={styles.text}>Easy</Text>
+            <Text style={styles.text}>Easy <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} /></Text>
             <CustomButton onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/easy.png')} imageStyle={styles.customImage} />
           </View>
           <View style={styles.buttonColumn}>
-            <Text style={styles.text}>Mid   </Text>
+            <Text style={styles.text}>Mid  <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} /></Text>
             <CustomButton onPress={() => handleButtonPress('medium')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage} />
           </View>
           <View style={styles.buttonColumn}>
-            <Text style={styles.text}>Hard</Text>
+            <Text style={styles.text}>Hard <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} /></Text>
             <CustomButton onPress={() => handleButtonPress('hard')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage} />
           </View>
         </View>

@@ -20,6 +20,7 @@ export const TeamsListScreenStyles = StyleSheet.create({
         justifyContent: 'space-between',
         marginTop: 16,
         alignItems: 'center',
+        
 
       },
       label: {
@@ -94,8 +95,10 @@ export const TeamsListScreenStyles = StyleSheet.create({
       },
       scrollView: {
         flex: 1,
-        right:'25%',
+        right:'20%',
         top:'10%',
+        width:'40%',
+        margin:'auto',
       },
       innerContainer: {
         padding: 20, // Adjust the padding as needed
@@ -106,5 +109,19 @@ export const TeamsListScreenStyles = StyleSheet.create({
         left:'60%',
         bottom:'5%',
         alignItems: 'center',
+      },
+      buttonsContainerTeamsStart:{
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      },
+      containerTeams:{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'stretch',
+        alignContent: 'space-between',
+        bottom:'5%', 
+        width:'100%',
       }
+      
 });
