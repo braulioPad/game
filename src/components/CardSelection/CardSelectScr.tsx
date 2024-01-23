@@ -68,20 +68,24 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
         source={require('../../../assets/Backgrounds/selectType.png')}
         style={styles.backgroundImage}
         resizeMode="cover">
-        <View style={styles.buttonContainer}>
-          <View style={styles.buttonColumn}>
-            <Text style={styles.text}>Easy <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} /></Text>
+          <View>
+            <View style={styles.containerlists}>
+            <Text style={styles.text}>Easy </Text>
+            <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} />
             <CustomButton onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/easy.png')} imageStyle={styles.customImage} />
-          </View>
-          <View style={styles.buttonColumn}>
-            <Text style={styles.text}>Mid  <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} /></Text>
+            </View>
+            <View style={styles.containerlists}>
+            <Text style={styles.text}>Mid </Text>
+            <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} />
             <CustomButton onPress={() => handleButtonPress('medium')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage} />
+            </View>
+            <View style={styles.containerlists}>
+            <Text style={styles.text}>Hard </Text>
+            <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} />
+            <CustomButton onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/easy.png')} imageStyle={styles.customImage} />
+            </View>
           </View>
-          <View style={styles.buttonColumn}>
-            <Text style={styles.text}>Hard <Image source={require('../../../assets/btns/start.png' )} style={{ width: 24, resizeMode: 'contain',}} /></Text>
-            <CustomButton onPress={() => handleButtonPress('hard')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage} />
-          </View>
-        </View>
+ 
       </ImageBackground>
     </View>
   );
