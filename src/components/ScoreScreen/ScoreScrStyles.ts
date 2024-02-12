@@ -16,8 +16,9 @@ export const ScoreScrStyles = StyleSheet.create({
     marginBottom: 10,
   },
   teamContainer: {
-    marginBottom: 10,
+    marginBottom:4,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   teamName: {
     fontSize: 16,
@@ -56,5 +57,26 @@ export const ScoreScrStyles = StyleSheet.create({
     backgroundColor: 'blue',
     alignItems: 'center',
     marginVertical: 5,
+  },
+  contentGap:{
+    flexDirection: 'row',
+    alignContent: 'space-around',
+    width:'85%',
+    alignItems: 'center',
+  },
+  contentGrow:{
+    flexGrow: 8,
+    flexBasis: 200,
+    marginLeft:50,
+  },
+  contentGrowsnd:{
+    flexGrow: 3,
+    flexBasis: 120,
+  },
+  teamBtns: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    alignContent: 'space-around',
+    width:'55%',
   },
 });

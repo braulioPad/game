@@ -68,24 +68,33 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
         source={require('../../../assets/Backgrounds/selectType.png')}
         style={styles.backgroundImage}
         resizeMode="cover">
-          <View style={styles.containerlist}>
-            <View style={styles.containerlists}>
+        <View style={styles.containerlist}>
+          <View style={styles.containerlists}>
             <Text style={styles.text}>Easy </Text>
-            <Image source={require('../../../assets/btns/star1.png' )} style={{ width: 60, resizeMode: 'contain',}} />
-            <CustomButton onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/easy.png')} imageStyle={styles.customImage} />
-            </View>
-            <View style={styles.containerlists}>
-            <Text style={styles.text}>Mid     </Text>
-            <Image source={require('../../../assets/btns/star2.png' )} style={{ width: 60, resizeMode: 'contain',}} />
-            <CustomButton onPress={() => handleButtonPress('medium')} imageSource={require('../../../assets/btns/mid.png')} imageStyle={styles.customImage} />
-            </View>
-            <View style={styles.containerlists}>
-            <Text style={styles.text}>Hard </Text>
-            <Image source={require('../../../assets/btns/star3.png' )} style={{ width: 60, resizeMode: 'contain',}} />
-            <CustomButton onPress={() => handleButtonPress('easy')} imageSource={require('../../../assets/btns/hard.png')} imageStyle={styles.customImage} />
-            </View>
+            <Image source={require('../../../assets/btns/star1.png')} style={{ width: 60, resizeMode: 'contain', }} />
+            <CustomButton onPress={() => handleButtonPress('easy')}
+              imageSource={require('../../../assets/btns/easy.png')}
+              pressedImageSource={require('../../../assets/btns/easy.png')}
+              imageStyle={styles.customImage} />
           </View>
- 
+          <View style={styles.containerlists}>
+            <Text style={styles.text}>Mid     </Text>
+            <Image source={require('../../../assets/btns/star2.png')} style={{ width: 60, resizeMode: 'contain', }} />
+            <CustomButton onPress={() => handleButtonPress('medium')}
+              imageSource={require('../../../assets/btns/mid.png')}
+              pressedImageSource={require('../../../assets/btns/mid.png')}
+              imageStyle={styles.customImage} />
+          </View>
+          <View style={styles.containerlists}>
+            <Text style={styles.text}>Hard </Text>
+            <Image source={require('../../../assets/btns/star3.png')} style={{ width: 60, resizeMode: 'contain', }} />
+            <CustomButton onPress={() => handleButtonPress('easy')}
+              imageSource={require('../../../assets/btns/hard.png')}
+              pressedImageSource={require('../../../assets/btns/hard.png')}
+              imageStyle={styles.customImage} />
+          </View>
+        </View>
+
       </ImageBackground>
     </View>
   );

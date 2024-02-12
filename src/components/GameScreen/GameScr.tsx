@@ -215,6 +215,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.modalTextPause}>Team: {Object.values(teamsData)[teamTurn]?.name}</Text>
+            
               <Text style={styles.modalTextTime}>{modalTime} seconds</Text>
             </View>
           </View>

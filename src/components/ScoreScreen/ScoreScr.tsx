@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Modal, Pressable, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Modal, Pressable, ImageBackground, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { ScoreScrStyles as styles } from './ScoreScrStyles';
@@ -87,22 +87,34 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
         source={require('../../../assets/Backgrounds/teamFinish.png')} // Replace with your background image path
         style={styles.backgroundImage}>
         <View>
-          <Text style={styles.header}>Team Scores</Text>
-          {teamsData &&
-            Object.keys(teamsData).map((teamName) => (
-              <View key={teamName} style={styles.teamContainer}>
-                <Text style={styles.teamName}> Team {teamsData[teamName].name}</Text>
-                <Text style={styles.teamScore}>Score: {teamsData[teamName].score}</Text>
-              </View>
-            ))}
+          <View style={styles.contentGap}>
+            <View style={styles.contentGrow}>
+              <Text style={styles.header}>Team Scores</Text>
+              {teamsData &&
+                Object.keys(teamsData).map((teamName) => (
+                  <View key={teamName} style={styles.teamContainer}>
+                    <Text style={styles.teamName}> Team {teamsData[teamName].name}</Text>
+                    <Text style={styles.teamScore}>Score: {teamsData[teamName].score}</Text>
+                  </View>
+                ))}
+            </View>
+            <View style={styles.contentGrowsnd}>
+              <Image source={require('../../../assets/Backgrounds/Horn.png')} style={{ width: 220, marginRight: 20, resizeMode: 'contain', }}></Image>
+            </View>
+          </View>
+
         </View>
-        <View  style={styles.teamContainer}>
-          <Text>Next player</Text>
-          <CustomButton onPress={handleGoGame} imageSource={require('../../../assets/btns/btns_7.png')}
-            imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')} />
-          <Text>Finish?</Text>
-          <CustomButton onPress={handleFinishGame} imageSource={require('../../../assets/btns/btns_7.png')}
-            imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')} />
+        <View style={styles.teamContainer}>
+          <View style={styles.teamBtns}>
+            <Text>Finish?</Text>
+            <CustomButton onPress={handleFinishGame} imageSource={require('../../../assets/btns/btns_7.png')}
+              imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_8.png')} />
+          </View>
+          <View style={styles.teamBtns}>
+            <Text>Next player</Text>
+            <CustomButton onPress={handleGoGame} imageSource={require('../../../assets/btns/btns_blue.png')}
+              imageStyle={styles.customImage} pressedImageSource={require('../../../assets/btns/btns_2.png')} />
+          </View>
         </View>
         <Modal
           animationType="slide"
