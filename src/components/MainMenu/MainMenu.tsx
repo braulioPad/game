@@ -128,15 +128,15 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.elementor}>
-          <Image source={require('../../../assets/Backgrounds/Horn.png' )} style={{ width: 280,marginRight:20, resizeMode: 'contain',}} />
+          <Image source={require('../../../assets/Backgrounds/Horn.png' )} style={{ width: 220,marginRight:20, resizeMode: 'contain',}} />
           {/* Play Button */}
           <View style={styles.buttonContainerPlay}>
-              <Text style={styles.buttonText}>just Play</Text>
+              <Text style={styles.buttonText}>Start Play</Text>
               <CustomButton
                 onPress={goToPlay}
                 imageSource={require('../../../assets/btns/btns_5.png')}
                 pressedImageSource={require('../../../assets/btns/btns_6.png')}
-                imageStyle={styles.customImage}
+                imageStyle={styles.MainImageBtn}
               />
             </View>
           </View>

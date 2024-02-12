@@ -38,9 +38,10 @@ export const CardSelectionStyle = StyleSheet.create({
   containerlists:{
     flexDirection: 'row',
     width:'100%',
+    height:100,
     justifyContent: 'center', // Center content vertically
     alignItems: 'center', // Center content horizontally
     margin:'auto',
-    left: '20%',
-  }
+    left: '30%',
+  },
 });

@@ -36,6 +36,7 @@ export const TeamsListScreenStyles = StyleSheet.create({
     
       // Style for the editable area displaying team name
       teamNameInput: {
+        
         flex: 1,
         height: 32,
         borderColor: 'rgb(44,42,65)',
@@ -68,7 +69,7 @@ export const TeamsListScreenStyles = StyleSheet.create({
       },
       backgroundImage: {
         flex: 1,
-        resizeMode: 'cover',
+        resizeMode: 'contain',
         justifyContent: 'center', // Center content vertically
         alignItems: 'center', // Center content horizontally
       },
@@ -97,8 +98,9 @@ export const TeamsListScreenStyles = StyleSheet.create({
         flex: 1,
         right:'20%',
         top:'10%',
-        width:'40%',
+        width:'50%',
         margin:'auto',
+        
       },
       innerContainer: {
         padding: 20, // Adjust the padding as needed

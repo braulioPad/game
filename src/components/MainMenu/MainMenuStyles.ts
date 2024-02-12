@@ -27,7 +27,15 @@ export const MainMenuStyles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18, // Add your font size
-    marginBottom: 10, // Adjust the spacing between text and button
+    marginBottom: 4, // Adjust the spacing between text and button
+  },
+  MainImageBtn: {
+    width: 180,
+    height: 45,
+    resizeMode: 'contain',
+    marginLeft: 10,
+    alignItems:  'center',
+
   },
   customImage: {
     width: 70,
@@ -69,7 +77,8 @@ export const MainMenuStyles = StyleSheet.create({
   buttonContainerPlay:{
     flexDirection: 'column',
     top:'15%',
+    alignItems:  'center',
   },
-  gameName: { width: 400, marginTop: 20, marginBottom: 20, resizeMode: 'contain', },
+  gameName: { width: 410, marginTop: 10, marginBottom: 20, top:30,resizeMode: 'contain', },
   mainType: { width: 300, marginBottom: 20, resizeMode: 'contain', },
 });
