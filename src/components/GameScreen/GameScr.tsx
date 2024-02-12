@@ -215,7 +215,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.modalTextPause}>Team: {Object.values(teamsData)[teamTurn]?.name}</Text>
-              <Text style={styles.modalTextPause}>{modalTime} seconds</Text>
+              <Text style={styles.modalTextTime}>{modalTime} seconds</Text>
             </View>
           </View>
         </Modal>
@@ -242,7 +242,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         {/* Timer Layer */}
         <View style={styles.timerLayer}>
           <Text style={styles.timerText}>{time} seconds</Text>
-          {<CustomButton onPress={handlePauseToggle} style={styles.customButton} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />}
+          {<CustomButton onPress={handlePauseToggle} style={styles.customButton} imageSource={require('../../../assets/btns/stop.png')} pressedImageSource={require('../../../assets/btns/stop2.png')} imageStyle={styles.customImage} />}
         </View>
         <View style={styles.centeredView}>
           <View style={styles.content}>

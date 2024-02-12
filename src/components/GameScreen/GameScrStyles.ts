@@ -17,14 +17,17 @@ export const GameScrStyles = StyleSheet.create({
         fontFamily: 'Eight-Bit-Dragon',
       },
       timerLayer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingTop: 20,
+        paddingTop: 40,
         zIndex: 1,
       },
       customButton: {
-        marginRight: 10, // Adjust the margin as needed
+        position: 'absolute',
+        right:20,
+        top:30,
+        alignItems: 'flex-end',
+        alignContent: 'flex-end',
       },
       touchableOpacityLayer: {
         flex: 1,
@@ -67,9 +70,10 @@ export const GameScrStyles = StyleSheet.create({
         resizeMode: 'stretch', // or 'stretch' depending on your preference
       },
       customImage: {
-        width: 70,
-        height: 50,
-        resizeMode: 'contain'
+        width: 40,
+        height: 40,
+        resizeMode: 'contain',
+        zIndex:1,
         // Add additional styling for the custom image if needed
       },
       CardText:{
@@ -95,5 +99,11 @@ export const GameScrStyles = StyleSheet.create({
         fontSize: 18,
         marginBottom: 20,
         fontFamily: 'Eight-Bit-Dragon',
+      },
+      modalTextTime: {
+        fontSize: 18,
+        marginBottom: 20,
+        fontFamily: 'Eight-Bit-Dragon',
+        justifyContent: 'center',
       },
 });
