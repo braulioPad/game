@@ -1,38 +1,36 @@
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Text, ImageBackground, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import CustomButton from '../CustomBtn/CustomButton';
+import { CardSelectionStyle as styles } from './CardSelectionStyle';
 
 interface CardsListScreenProps {
   navigation: any;
 }
 
-
-
-
 const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
   const [jsonData, setJsonData] = useState<any>(null);
-
   const handleButtonPress = async (buttonText) => {
     try {
       if (buttonText === 'easy') {
         console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.easy));
         AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.easy));
+        AsyncStorage.setItem('points', JSON.stringify(1));
       } else if (buttonText === 'medium') {
         console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.medium));
         AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.medium));
+        AsyncStorage.setItem('points', JSON.stringify(2));
       }
       else {
         console.log('saving Data: ' + JSON.stringify(jsonData.typeCard.hard));
         AsyncStorage.setItem('listCards', JSON.stringify(jsonData.typeCard.hard));
+        AsyncStorage.setItem('points', JSON.stringify(3));
       }
       navigation.navigate('TimerScreen');
     } catch (error) {
       console.error('Error saving data', error);
     }
   };
-
-
 
   useEffect(() => {
     // Function to load the JSON file
@@ -66,24 +64,40 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Button title="Easy cards" onPress={() => handleButtonPress('easy')} />
-        <Button title="Medium cards" onPress={() => handleButtonPress('medium')} />
-        <Button title="Hard Cards" onPress={() => handleButtonPress('hard')} />
-      </View>
+      <ImageBackground
+        source={require('../../../assets/Backgrounds/selectType.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover">
+        <View style={styles.containerlist}>
+          <View style={styles.containerlists}>
+            <Text style={styles.text}>Easy </Text>
+            <Image source={require('../../../assets/btns/star1.png')} style={{ width: 60, resizeMode: 'contain', }} />
+            <CustomButton onPress={() => handleButtonPress('easy')}
+              imageSource={require('../../../assets/btns/easy.png')}
+              pressedImageSource={require('../../../assets/btns/easy.png')}
+              imageStyle={styles.customImage} />
+          </View>
+          <View style={styles.containerlists}>
+            <Text style={styles.text}>Mid     </Text>
+            <Image source={require('../../../assets/btns/star2.png')} style={{ width: 60, resizeMode: 'contain', }} />
+            <CustomButton onPress={() => handleButtonPress('medium')}
+              imageSource={require('../../../assets/btns/mid.png')}
+              pressedImageSource={require('../../../assets/btns/mid.png')}
+              imageStyle={styles.customImage} />
+          </View>
+          <View style={styles.containerlists}>
+            <Text style={styles.text}>Hard </Text>
+            <Image source={require('../../../assets/btns/star3.png')} style={{ width: 60, resizeMode: 'contain', }} />
+            <CustomButton onPress={() => handleButtonPress('easy')}
+              imageSource={require('../../../assets/btns/hard.png')}
+              pressedImageSource={require('../../../assets/btns/hard.png')}
+              imageStyle={styles.customImage} />
+          </View>
+        </View>
+
+      </ImageBackground>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-  },
-});
 
 export default CardSelectScr;

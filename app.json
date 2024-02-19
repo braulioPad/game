@@ -7,6 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "jsEngine": "jsc",
+    "owner": "sdgames",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -22,10 +23,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.brauex.soundGame"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7d596561-ad22-4f93-b43f-073e838c0756"
+      }
     }
   }
 }

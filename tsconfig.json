@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "forceConsistentCasingInFileNames": false,
+    "lib": [ "es2017" ],
     "target": "ES5",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -31,5 +33,5 @@
   },
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts"],
-  "extends": "expo/tsconfig.base"
+  "extends": "./expo/tsconfig.base"
 }

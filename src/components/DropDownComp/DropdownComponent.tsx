@@ -1,5 +1,6 @@
 import React from 'react';
 import RNPickerSelect from 'react-native-picker-select';
+import { ConfigStyle as pickerSelectStyles } from './ConfigStyle';
 
 interface DropdownComponentProps {
   items: { label: string; value: any }[];
@@ -8,28 +9,6 @@ interface DropdownComponentProps {
 }
 
 const DropdownComponent: React.FC<DropdownComponentProps> = ({ items, onValueChange, slcLanguage }) => {
-  const pickerSelectStyles = {
-    inputIOS: {
-      fontSize: 16,
-      paddingVertical: 12,
-      paddingHorizontal: 10,
-      borderWidth: 1,
-      borderColor: 'gray',
-      borderRadius: 4,
-      color: 'black',
-      width: 200, // Set the desired width
-    },
-    inputAndroid: {
-      fontSize: 16,
-      paddingHorizontal: 10,
-      paddingVertical: 8,
-      borderWidth: 0.5,
-      borderColor: 'purple',
-      borderRadius: 8,
-      color: 'black',
-      width: 200, // Set the desired width
-    },
-  };
 
 
   return (
