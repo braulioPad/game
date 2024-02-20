@@ -45,13 +45,12 @@ const TutorialScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
         <View style={styles.page} key="4">
           <Image source={require('../../../assets/tutorialImg/instruction3.png')} style={styles.slideImage} />
           <Text>Click to the right the teams player say the rigth word.</Text>
+            <View style={styles.checkboxContainer}>
+              <Checkbox style={styles.checkbox} value={isChecked} onValueChange={setChecked} />
+              <Text> Dont show again </Text>
+            </View>
         </View>
       </PagerView>
-      {/* Checkbox */}
-      <View style={styles.checkboxContainer}>
-        <Checkbox style={styles.checkbox} value={isChecked} onValueChange={setChecked} />
-        <Text> Dont show again </Text>
-      </View>
       {/* Continue Button */}
       <TouchableOpacity
         style={[styles.continueButton, { backgroundColor: '#4CAF50' }]}
