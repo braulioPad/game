@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Button, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
 import DropdownComponent from '../DropDownComp/DropdownComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -63,26 +63,50 @@ const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-    <ImageBackground
+      <ImageBackground
         source={require('../../../assets/Backgrounds/MnScr.png')}
         style={styles.backgroundImage}
         resizeMode="cover"
-      >
-      <Text style={styles.label}>Configurations</Text>
-      <Text style={styles.durationText}>Game Time: {Math.floor(seconds / 60)}m {seconds % 60}s</Text>
-      <Slider
-        style={styles.slider}
-        minimumValue={60}
-        maximumValue={300} // Adjust as needed
-        step={1}
-        value={seconds}
-        onValueChange={handleSecondsChange}
-      />
-      <Text style={styles.label}>Selected language: {slcLanguage}</Text>
-      <View style={styles.centeredDropdownContainer}>
-        <DropdownComponent items={dropdownItems} onValueChange={handleDropdownChange} slcLanguage={slcLanguage} />
-      </View>
-      <Button title="Save" onPress={handleSaveConfig} />
+      ><Text style={styles.label}>Configurations</Text>
+        <View style={styles.containerSelect}>
+          <View style={styles.containerSelectLeft}>
+            <Text style={styles.durationText}>Game Time: {Math.floor(seconds / 60)}m {seconds % 60}s</Text>
+            <Slider
+              style={styles.slider}
+              minimumValue={60}
+              maximumValue={300} // Adjust as needed
+              minimumTrackTintColor="#90c400"
+              maximumTrackTintColor="#ffffff"
+              thumbTintColor="#f3d028"
+              step={1}
+              value={seconds}
+              onValueChange={handleSecondsChange}
+            />
+            <Text style={styles.label}>Selected language: {slcLanguage}</Text>
+            <View style={styles.centeredDropdownContainer}>
+              <DropdownComponent items={dropdownItems} onValueChange={handleDropdownChange} slcLanguage={slcLanguage} />
+            </View>
+
+          </View>
+          <View style={styles.containerSelectRight}>
+            <Image source={require('../../../assets/Backgrounds/Horn.png')}
+              style={{ width: 220, marginRight: 20, resizeMode: 'contain', }} />
+ <Text style={styles.buttonText}>Save</Text>
+            <TouchableOpacity
+              style={styles.saveBtn}
+              onPress={handleSaveConfig}
+              underlayColor="transparent" 
+            >
+              <View style={styles.buttonContent}>
+                <Image
+                  source={require('../../../assets/btns/btns_3.png')}
+                  style={styles.buttonImage}
+                />
+               
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
       </ImageBackground>
     </View>
   );

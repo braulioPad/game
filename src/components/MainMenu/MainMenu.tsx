@@ -107,9 +107,10 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
             {/* Config Button */}
             <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Config</Text>
+                <Text style={styles.buttonText}>About Us</Text>
                 <CustomButton
-                  onPress={goToConfig}
+                  
+                  onPress={goToAboutUs}
                   imageSource={require('../../../assets/btns/menubtn.png')}
                   pressedImageSource={require('../../../assets/btns/menubtn2.png')}
                   imageStyle={styles.customImage}
@@ -117,9 +118,9 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
             {/* About Us Button */}
             <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>About Us</Text>
+                <Text style={styles.buttonText}>Config</Text>
                 <CustomButton
-                  onPress={goToAboutUs}
+                  onPress={goToConfig}
                   imageSource={require('../../../assets/btns/menubtn3.png')}
                   pressedImageSource={require('../../../assets/btns/menubtn4.png')}
                   imageStyle={styles.customImage}
