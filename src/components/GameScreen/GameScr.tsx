@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Modal, Animated, ImageBackground, Pressable } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Modal, Animated, ImageBackground, Pressable, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { GameScrStyles as styles } from './GameScrStyles';
@@ -215,7 +215,6 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.modalTextPause}>Team: {Object.values(teamsData)[teamTurn]?.name}</Text>
-            
               <Text style={styles.modalTextTime}>{modalTime} seconds</Text>
             </View>
           </View>
@@ -231,7 +230,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <Text style={styles.modalTextPause}>Are you sure you want to finish the game?</Text>
-              <Pressable style={styles.modalButtonPause} onPress={finishModalPause}>
+              <Pressable style={styles.modalButtonPauseNO} onPress={finishModalPause}>
                 <Text style={styles.text}>Yes</Text>
               </Pressable>
               <Pressable style={styles.modalButtonPause} onPress={closeModalPause}>
@@ -242,6 +241,7 @@ const GameScr: React.FC<TimerScreenProps> = ({ navigation }) => {
         </Modal>
         {/* Timer Layer */}
         <View style={styles.timerLayer}>
+        <Image source={require('../../../assets/btns/clock.png')} style={{ width: 30, marginTop: 10, marginRight: 20, resizeMode: 'contain', }}></Image>
           <Text style={styles.timerText}>{time} seconds</Text>
           {<CustomButton onPress={handlePauseToggle} style={styles.customButton} imageSource={require('../../../assets/btns/stop.png')} pressedImageSource={require('../../../assets/btns/stop2.png')} imageStyle={styles.customImage} />}
         </View>

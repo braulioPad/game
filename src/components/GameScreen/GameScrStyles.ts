@@ -95,6 +95,13 @@ export const GameScrStyles = StyleSheet.create({
         alignItems: 'center',
         marginVertical: 5,
       },
+      modalButtonPauseNO: {
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor: '#d41a3d',
+        alignItems: 'center',
+        marginVertical: 5,
+      },
       modalTextPause: {
         fontSize: 18,
         marginBottom: 20,
@@ -105,5 +112,17 @@ export const GameScrStyles = StyleSheet.create({
         marginBottom: 20,
         fontFamily: 'Eight-Bit-Dragon',
         justifyContent: 'center',
+      },
+      timerLayer:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      timerText:{
+        marginTop: 30,
+        fontSize: 28,
+        marginBottom: 20,
+        fontFamily: 'Eight-Bit-Dragon',
+        color: 'white',
       },
 });

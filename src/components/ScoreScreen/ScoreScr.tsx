@@ -93,8 +93,10 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
               {teamsData &&
                 Object.keys(teamsData).map((teamName) => (
                   <View key={teamName} style={styles.teamContainer}>
-                    <Text style={styles.teamName}> Team {teamsData[teamName].name}</Text>
-                    <Text style={styles.teamScore}>Score: {teamsData[teamName].score}</Text>
+                    <View style={styles.contentlsits}>
+                      <Text style={styles.teamNames}> Team {teamsData[teamName].name}</Text>
+                      <Text style={styles.teamScore}>Score: {teamsData[teamName].score}</Text>
+                    </View>
                   </View>
                 ))}
             </View>
@@ -125,8 +127,8 @@ const ScoreScr: React.FC<ScoreScreenProps> = ({ navigation }) => {
           }}>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
-              <Text style={styles.modalText}>Are you sure you want to finish the game?</Text>
-              <Pressable style={styles.modalButton} onPress={handleConfirmFinish}>
+            <Text style={styles.modalText}>Are you sure you want to finish the game?</Text>
+              <Pressable style={styles.PressNo} onPress={handleConfirmFinish}>
                 <Text style={styles.text}>Yes</Text>
               </Pressable>
               <Pressable style={styles.modalButton} onPress={handleCancelFinish}>
