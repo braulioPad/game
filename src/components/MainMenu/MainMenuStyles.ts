@@ -24,10 +24,25 @@ export const MainMenuStyles = StyleSheet.create({
   buttonContainer: {
     marginBottom: 0, // Adjust the spacing between buttons
     flexDirection: 'column',
+    justifyContent: 'center', // Center content vertically
+    alignItems: 'center', // Center content horizontally
+    marginLeft: 10,
   },
   buttonText: {
-    fontSize: 18, // Add your font size
+    fontSize: 10, // Add your font size
     marginBottom: 4, // Adjust the spacing between text and button
+    color:'#ffffff',
+    fontFamily: 'Eight-Bit-Dragon',
+    textTransform: 'uppercase',
+    marginRight: 22,
+  },
+  Playbutton:{
+    fontSize: 14, // Add your font size
+    marginBottom: 4, // Adjust the spacing between text and button
+    color:'#ffffff',
+    fontFamily: 'Eight-Bit-Dragon',
+    textTransform: 'uppercase',
+    marginLeft: 10,
   },
   MainImageBtn: {
     width: 180,
