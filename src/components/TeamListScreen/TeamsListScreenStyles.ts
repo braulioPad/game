@@ -31,12 +31,11 @@ export const TeamsListScreenStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
-        width:200,
+        width:'100%',
       },
     
       // Style for the editable area displaying team name
       teamNameInput: {
-        
         flex: 1,
         height: 32,
         borderColor: 'rgb(44,42,65)',
@@ -95,12 +94,10 @@ export const TeamsListScreenStyles = StyleSheet.create({
         // Add additional styling for the custom image if needed
       },
       scrollView: {
-        flex: 1,
-        right:'20%',
-        top:'10%',
-        width:'50%',
+        right:'8%',
+        width:'100%',
         margin:'auto',
-        
+        height:'60%',
       },
       innerContainer: {
         padding: 20, // Adjust the padding as needed
@@ -118,12 +115,21 @@ export const TeamsListScreenStyles = StyleSheet.create({
         alignItems: 'center',
       },
       containerTeams:{
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        alignContent: 'flex-end',
+        top:'15.8%', 
+        width:'55%',
+      },
+
+      Newteamsgroup:{
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'stretch',
-        alignContent: 'space-between',
-        bottom:'5%', 
+      },
+      containerList:{
+        flexDirection: 'row',
+        alignItems: 'center',
         width:'100%',
-      }
-      
+        left:'10%',
+      },
 });

@@ -14,6 +14,7 @@ export const ScoreScrStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+    fontFamily: 'Eight-Bit-Dragon',
   },
   teamContainer: {
     marginBottom:4,
@@ -33,13 +34,16 @@ export const ScoreScrStyles = StyleSheet.create({
     height: 70,
     resizeMode: 'contain',
   },
-  text: {
+  text:{
+    color: 'white',
+    fontFamily: 'Eight-Bit-Dragon',
     fontSize: 16,
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   modalContent: {
     backgroundColor: 'white',
@@ -54,7 +58,7 @@ export const ScoreScrStyles = StyleSheet.create({
   modalButton: {
     padding: 10,
     borderRadius: 5,
-    backgroundColor: 'blue',
+    backgroundColor: '#2196F3',
     alignItems: 'center',
     marginVertical: 5,
   },
@@ -79,4 +83,31 @@ export const ScoreScrStyles = StyleSheet.create({
     alignContent: 'space-around',
     width:'55%',
   },
+  teamContainer:{
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  contentlsits:{
+    borderBottomWidth: 1,
+    borderColor: 'black',
+    width:'60%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    height: 30, 
+    alignItems: 'center',
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 20,
+    fontFamily: 'Eight-Bit-Dragon',
+  },
+  PressNo:{
+    fontFamily: 'Eight-Bit-Dragon',
+    backgroundColor: '#d41a3d',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  
 });

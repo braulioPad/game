@@ -7,17 +7,19 @@ export const ConfigStyle = StyleSheet.create({
         alignItems: 'center',
       },
       slider: {
-        width: 200,
+        width: 300,
         marginVertical: 10,
+        height: 40,
       },
       label: {
         fontFamily: 'Eight-Bit-Dragon',
         fontSize: 16,
-        marginBottom: 5,
+        marginBottom: 35,
+ 
       },
       durationText: {
         fontFamily: 'Eight-Bit-Dragon',
-        fontSize: 20,
+        fontSize: 14,
       },
       centeredDropdownContainer: {
         alignItems: 'center', // Align the dropdown to the center
@@ -31,4 +33,39 @@ export const ConfigStyle = StyleSheet.create({
         width: '100%',
         height: '100%',
       },
+      saveBtn: {
+        padding: 6,
+        alignItems: 'center', 
+      },
+      buttonText: {
+        color: 'white',
+        fontSize: 14,
+        textAlign: 'center',
+        fontFamily: 'Eight-Bit-Dragon',
+        letterSpacing: 1, 
+      },
+      centeredDropdownContainer:{
+        fontFamily: 'Eight-Bit-Dragon',
+      },
+      containerSelect:{
+        width: '100%',
+        justifyContent: 'space-around',
+        alignContent:'space-around',
+        alignItems: 'center',
+        flexDirection: 'row',
+      },
+      containerSelectLeft:{
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignContent:'space-around',
+        alignItems: 'left',
+        lineHeight: 30, 
+        width: '55%',
+      },
+      containerSelectRight:{
+        width: '30%',
+        flexDirection: 'column',
+        top:'15%',
+
+      }
 });

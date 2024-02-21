@@ -107,9 +107,10 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
             {/* Config Button */}
             <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Config</Text>
+                <Text style={styles.buttonText}>About Us</Text>
                 <CustomButton
-                  onPress={goToConfig}
+                  
+                  onPress={goToAboutUs}
                   imageSource={require('../../../assets/btns/menubtn.png')}
                   pressedImageSource={require('../../../assets/btns/menubtn2.png')}
                   imageStyle={styles.customImage}
@@ -117,9 +118,9 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
             {/* About Us Button */}
             <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>About Us</Text>
+                <Text style={styles.buttonText}>Config</Text>
                 <CustomButton
-                  onPress={goToAboutUs}
+                  onPress={goToConfig}
                   imageSource={require('../../../assets/btns/menubtn3.png')}
                   pressedImageSource={require('../../../assets/btns/menubtn4.png')}
                   imageStyle={styles.customImage}
@@ -128,14 +129,14 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.elementor}>
-          <Image source={require('../../../assets/Backgrounds/Horn.png' )} style={{ width: 220,marginRight:20, resizeMode: 'contain',}} />
+          <Image source={require('../../../assets/Backgrounds/Horn.png' )} style={{ width: 240,marginRight:10, resizeMode: 'contain',}} />
           {/* Play Button */}
           <View style={styles.buttonContainerPlay}>
-              <Text style={styles.buttonText}>Start Play</Text>
+              <Text style={styles.Playbutton}>Start Play</Text>
               <CustomButton
                 onPress={goToPlay}
-                imageSource={require('../../../assets/btns/btns_5.png')}
-                pressedImageSource={require('../../../assets/btns/btns_6.png')}
+                imageSource={require('../../../assets/btns/startbtn.png')}
+                pressedImageSource={require('../../../assets/btns/startbtnbg.png')}
                 imageStyle={styles.MainImageBtn}
               />
             </View>
