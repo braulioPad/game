@@ -10,13 +10,11 @@ export const ConfigStyle = StyleSheet.create({
         width: 300,
         marginVertical: 10,
         height: 40,
-        borderWidth: 2,
-        borderColor: 'black', 
       },
       label: {
         fontFamily: 'Eight-Bit-Dragon',
         fontSize: 16,
-        marginBottom: 5,
+        marginBottom: 35,
  
       },
       durationText: {
@@ -67,6 +65,7 @@ export const ConfigStyle = StyleSheet.create({
       containerSelectRight:{
         width: '30%',
         flexDirection: 'column',
+        top:'15%',
 
       }
 });

@@ -64,12 +64,13 @@ const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../../../assets/Backgrounds/MnScr.png')}
+        source={require('../../../assets/Backgrounds/team.png')}
         style={styles.backgroundImage}
         resizeMode="cover"
-      ><Text style={styles.label}>Configurations</Text>
+      >
         <View style={styles.containerSelect}>
           <View style={styles.containerSelectLeft}>
+          <Text style={styles.label}>Configurations</Text>
             <Text style={styles.durationText}>Game Time: {Math.floor(seconds / 60)}m {seconds % 60}s</Text>
             <Slider
               style={styles.slider}
@@ -89,20 +90,18 @@ const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
 
           </View>
           <View style={styles.containerSelectRight}>
-            <Image source={require('../../../assets/Backgrounds/Horn.png')}
-              style={{ width: 220, marginRight: 20, resizeMode: 'contain', }} />
- <Text style={styles.buttonText}>Save</Text>
+            <Text style={styles.buttonText}>Save</Text>
             <TouchableOpacity
               style={styles.saveBtn}
               onPress={handleSaveConfig}
-              underlayColor="transparent" 
+              underlayColor="transparent"
             >
               <View style={styles.buttonContent}>
                 <Image
                   source={require('../../../assets/btns/btns_3.png')}
                   style={styles.buttonImage}
                 />
-               
+
               </View>
             </TouchableOpacity>
           </View>

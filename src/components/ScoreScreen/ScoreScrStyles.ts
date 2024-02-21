@@ -43,7 +43,7 @@ export const ScoreScrStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    fontFamily: 'Eight-Bit-Dragon',
+    
   },
   modalContent: {
     backgroundColor: 'white',

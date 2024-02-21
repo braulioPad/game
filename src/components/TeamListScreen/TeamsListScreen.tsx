@@ -126,44 +126,46 @@ const TeamsListScreen = ({ navigation }) => {
         source={require('../../../assets/Backgrounds/team.png')}
         style={styles.backgroundImage}
         resizeMode="cover">
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.innerContainer}>
-            <Text style={styles.text}>Teams Data:</Text>
-            {teamsData ? (
-              <View>
-                {Object.keys(teamsData).map((teamName) => (
-                  <View key={teamName} style={styles.teamContainer}>
-                    {/* Replace Text with TextInput */}
-                    <TextInput
-                      style={styles.teamNameInput}
-                      value={teamsData[teamName].name}
-                      onChangeText={(text) => handleEditTeamName(teamName, text)}
-                    />
-                    <Text style={styles.text}>Delete</Text>
-                    <CustomButton onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.deletebtn} />
+        <View style={styles.containerList}>
+        <View style={styles.containerListLeft}>
+        <Text style={styles.text}>Teams List</Text>
+            <ScrollView style={styles.scrollView}>
+              <View style={styles.innerContainer}>
+                {teamsData ? (
+                  <View>
+                    {Object.keys(teamsData).map((teamName) => (
+                      <View key={teamName} style={styles.teamContainer}>
+                        {/* Replace Text with TextInput */}
+                        <TextInput
+                          style={styles.teamNameInput}
+                          value={teamsData[teamName].name}
+                          onChangeText={(text) => handleEditTeamName(teamName, text)}
+                        />
+                        <CustomButton onPress={() => handleDeleteTeam(teamName)} imageSource={require('../../../assets/btns/delbtn.png')} imageStyle={styles.deletebtn} />
+                      </View>
+                    ))}
                   </View>
-                ))}
-              </View>
-            ) : (
-              <Text style={styles.text}>No Teams Data</Text>
-            )}
-            <TextInput
-              style={styles.input}
-              placeholder="Enter new team name"
-              value={newTeamName}
-              onChangeText={(text) => setNewTeamName(text)}
-            />
-          </View>
-        </ScrollView>
+                ) : (
+                  <Text style={styles.text}>No Teams Data</Text>
+                )}
 
-        <View style={styles.containerTeams}>
-        <View style={styles.buttonsContainer}>
-            <Text style={styles.text}>Add Team</Text>
-            <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/btns_7.png')} pressedImageSource={require('../../../assets/btns/btns_8.png')} imageStyle={styles.customImage} />
+              </View>
+            </ScrollView>
+            <View style={styles.Newteamsgroup}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter new team name"
+                    value={newTeamName}
+                    onChangeText={(text) => setNewTeamName(text)}
+                  />
+                  <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/add.png')} pressedImageSource={require('../../../assets/btns/add.png')} style={{ width: 36, marginLeft: 10, resizeMode: 'contain', }} />
+                </View>
           </View>
-          <View style={styles.buttonsContainer}>
-            <Text style={styles.text}>Start Game</Text>
-            <CustomButton onPress={() => handleGoGame()} imageSource={require('../../../assets/btns/btns_5.png')} pressedImageSource={require('../../../assets/btns/btns_6.png')} imageStyle={styles.customImage} />
+          <View style={styles.containerTeams}>
+            <View style={styles.buttonsContainer}>
+              <Text style={styles.text}>Next</Text>
+              <CustomButton onPress={() => handleGoGame()} imageSource={require('../../../assets/btns/btns_5.png')} pressedImageSource={require('../../../assets/btns/btns_6.png')} imageStyle={styles.customImage} />
+            </View>
           </View>
         </View>
       </ImageBackground>
