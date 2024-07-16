@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, ImageBackground, Text, Image } from 'react-native';
+import { View, ImageBackground, Text, Image,StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -71,6 +71,7 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <View style={styles.container} onLayout={handleOnLayout}>
+      <StatusBar hidden />
       <ImageBackground
         source={require('../../../assets/Backgrounds/MnScr.png')}
         style={styles.backgroundImage}
@@ -82,7 +83,6 @@ const MainMenu: React.FC<{ navigation: any }> = ({ navigation }) => {
             <Image  source={require('../../../assets/Backgrounds/gamename.png')} style={styles.gameName}  />
             <Image  source={require('../../../assets/Backgrounds/maintype.png')} style={styles.mainType} />
             </View>
-
             {/* nav Button */}
             <View  style={styles.mainmenu}>
             {/* Play Button */}
