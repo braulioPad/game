@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { CardSelectionStyle as styles } from './CardSelectionStyle';
+import MoodSelectDropdown from '../SelectLngComp/MoodSelectDropdown';
 
 interface CardsListScreenProps {
   navigation: any;
@@ -30,6 +31,16 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
     } catch (error) {
       console.error('Error saving data', error);
     }
+  };
+  const emojisWithIcons = [
+    { title: 'Spanish', value: 'Spa' },
+    { title: 'English', value: 'Eng' },
+    { title: 'Japanese', value: 'Nih' },
+    // Add more items as needed
+  ];
+  const handleSelect = (selectedItem, index) => {
+    console.log('Selected item:', selectedItem);
+    console.log('Selected index:', index);
   };
 
   useEffect(() => {
@@ -68,33 +79,37 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
         source={require('../../../assets/Backgrounds/selectType.png')}
         style={styles.backgroundImage}
         resizeMode="cover">
-        <View style={styles.containerlist}>
-          <View style={styles.containerlists}>
-            <Text style={styles.text}>Easy </Text>
-            <Image source={require('../../../assets/btns/star1.png')} style={{ width: 60, resizeMode: 'contain', }} />
-            <CustomButton onPress={() => handleButtonPress('easy')}
-              imageSource={require('../../../assets/btns/easy.png')}
-              pressedImageSource={require('../../../assets/btns/easy.png')}
-              imageStyle={styles.customImage} />
+        <View /*style={styles.containerlists}*/>
+          <View style={styles.column}>
+            <MoodSelectDropdown data={emojisWithIcons} onSelect={handleSelect} />
           </View>
-          <View style={styles.containerlists}>
-            <Text style={styles.text}>Mid     </Text>
-            <Image source={require('../../../assets/btns/star2.png')} style={{ width: 60, resizeMode: 'contain', }} />
-            <CustomButton onPress={() => handleButtonPress('medium')}
-              imageSource={require('../../../assets/btns/mid.png')}
-              pressedImageSource={require('../../../assets/btns/mid.png')}
-              imageStyle={styles.customImage} />
-          </View>
-          <View style={styles.containerlists}>
-            <Text style={styles.text}>Hard </Text>
-            <Image source={require('../../../assets/btns/star3.png')} style={{ width: 60, resizeMode: 'contain', }} />
-            <CustomButton onPress={() => handleButtonPress('easy')}
-              imageSource={require('../../../assets/btns/hard.png')}
-              pressedImageSource={require('../../../assets/btns/hard.png')}
-              imageStyle={styles.customImage} />
+          <View style={styles.column}>
+            <View /* style={styles.containerlists} */>
+              <Text style={styles.text}>Easy </Text>
+              <Image source={require('../../../assets/btns/star1.png')} style={{ width: 60, resizeMode: 'contain', }} />
+              <CustomButton onPress={() => handleButtonPress('easy')}
+                imageSource={require('../../../assets/btns/easy.png')}
+                pressedImageSource={require('../../../assets/btns/easy.png')}
+                imageStyle={styles.customImage} />
+            </View>
+            <View /* style={styles.containerlists} */>
+              <Text style={styles.text}>Mid     </Text>
+              <Image source={require('../../../assets/btns/star2.png')} style={{ width: 60, resizeMode: 'contain', }} />
+              <CustomButton onPress={() => handleButtonPress('medium')}
+                imageSource={require('../../../assets/btns/mid.png')}
+                pressedImageSource={require('../../../assets/btns/mid.png')}
+                imageStyle={styles.customImage} />
+            </View>
+            <View /* style={styles.containerlists} */>
+              <Text style={styles.text}>Hard </Text>
+              <Image source={require('../../../assets/btns/star3.png')} style={{ width: 60, resizeMode: 'contain', }} />
+              <CustomButton onPress={() => handleButtonPress('easy')}
+                imageSource={require('../../../assets/btns/hard.png')}
+                pressedImageSource={require('../../../assets/btns/hard.png')}
+                imageStyle={styles.customImage} />
+            </View>
           </View>
         </View>
-
       </ImageBackground>
     </View>
   );

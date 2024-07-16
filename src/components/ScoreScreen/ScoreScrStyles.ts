@@ -16,11 +16,11 @@ export const ScoreScrStyles = StyleSheet.create({
     marginBottom: 10,
     fontFamily: 'Eight-Bit-Dragon',
   },
-  teamContainer: {
+ /*  teamContainer: {
     marginBottom:4,
     flexDirection: 'row',
     alignItems: 'center',
-  },
+  }, */
   teamName: {
     fontSize: 16,
     left:'1%',
@@ -95,11 +95,6 @@ export const ScoreScrStyles = StyleSheet.create({
     justifyContent: 'space-evenly',
     height: 30, 
     alignItems: 'center',
-  },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 20,
-    fontFamily: 'Eight-Bit-Dragon',
   },
   PressNo:{
     fontFamily: 'Eight-Bit-Dragon',

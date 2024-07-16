@@ -94,12 +94,12 @@ const ConfigScreen: React.FC<ConfigScrProps> = ({ navigation }) => {
             <TouchableOpacity
               style={styles.saveBtn}
               onPress={handleSaveConfig}
-              underlayColor="transparent"
+              /* underlayColor="transparent" */
             >
-              <View style={styles.buttonContent}>
+              <View /* style={styles.buttonContent} */>
                 <Image
                   source={require('../../../assets/btns/btns_3.png')}
-                  style={styles.buttonImage}
+                  /* style={styles.buttonImage} */
                 />
 
               </View>

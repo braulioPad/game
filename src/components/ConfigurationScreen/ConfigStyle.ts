@@ -44,9 +44,9 @@ export const ConfigStyle = StyleSheet.create({
         fontFamily: 'Eight-Bit-Dragon',
         letterSpacing: 1, 
       },
-      centeredDropdownContainer:{
+      /* centeredDropdownContainer:{
         fontFamily: 'Eight-Bit-Dragon',
-      },
+      }, */
       containerSelect:{
         width: '100%',
         justifyContent: 'space-around',
@@ -58,7 +58,7 @@ export const ConfigStyle = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignContent:'space-around',
-        alignItems: 'left',
+        //alignItems: 'left',
         lineHeight: 30, 
         width: '55%',
       },

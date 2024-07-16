@@ -44,4 +44,18 @@ export const CardSelectionStyle = StyleSheet.create({
     margin:'auto',
     left: '30%',
   },
+  containerlist:{
+    flexDirection: 'row',
+    width:'100%',
+    height:100,
+    justifyContent: 'center', // Center content vertically
+    alignItems: 'center', // Center content horizontally
+    margin:'auto',
+    left: '30%',
+  },
+  column: {
+    flex: 1,
+    flexDirection: 'column',
+    margin: 5,
+  },
 });
