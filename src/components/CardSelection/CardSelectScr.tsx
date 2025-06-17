@@ -78,41 +78,64 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
       <ImageBackground
         source={require('../../../assets/Backgrounds/selectType.png')}
         style={styles.backgroundImage}
-        resizeMode="cover">
-        <View /*style={styles.containerlists}*/>
-          <View style={styles.column}>
+        resizeMode="cover"
+      >
+       {/*  <View style={styles.containerlists}> */}
+          {/* Dropdown column */}
+        {/*   <View style={styles.column}>
             <MoodSelectDropdown data={emojisWithIcons} onSelect={handleSelect} />
-          </View>
+          </View> */}
+
+          {/* Buttons column */}
           <View style={styles.column}>
-            <View /* style={styles.containerlists} */>
-              <Text style={styles.text}>Easy </Text>
-              <Image source={require('../../../assets/btns/star1.png')} style={{ width: 60, resizeMode: 'contain', }} />
-              <CustomButton onPress={() => handleButtonPress('easy')}
+            {/* Easy */}
+            <View>
+              <Text style={styles.text}>Easy</Text>
+              <Image
+                source={require('../../../assets/btns/star1.png')}
+                style={{ width: 60, resizeMode: 'contain' }}
+              />
+              <CustomButton
+                onPress={() => handleButtonPress('easy')}
                 imageSource={require('../../../assets/btns/easy.png')}
                 pressedImageSource={require('../../../assets/btns/easy.png')}
-                imageStyle={styles.customImage} />
+                imageStyle={styles.customImage}
+              />
             </View>
-            <View /* style={styles.containerlists} */>
-              <Text style={styles.text}>Mid     </Text>
-              <Image source={require('../../../assets/btns/star2.png')} style={{ width: 60, resizeMode: 'contain', }} />
-              <CustomButton onPress={() => handleButtonPress('medium')}
+
+            {/* Mid */}
+            <View>
+              <Text style={styles.text}>Mid</Text>
+              <Image
+                source={require('../../../assets/btns/star2.png')}
+                style={{ width: 60, resizeMode: 'contain' }}
+              />
+              <CustomButton
+                onPress={() => handleButtonPress('medium')}
                 imageSource={require('../../../assets/btns/mid.png')}
                 pressedImageSource={require('../../../assets/btns/mid.png')}
-                imageStyle={styles.customImage} />
+                imageStyle={styles.customImage}
+              />
             </View>
-            <View /* style={styles.containerlists} */>
-              <Text style={styles.text}>Hard </Text>
-              <Image source={require('../../../assets/btns/star3.png')} style={{ width: 60, resizeMode: 'contain', }} />
-              <CustomButton onPress={() => handleButtonPress('easy')}
+
+            {/* Hard */}
+            <View>
+              <Text style={styles.text}>Hard</Text>
+              <Image
+                source={require('../../../assets/btns/star3.png')}
+                style={{ width: 60, resizeMode: 'contain' }}
+              />
+              <CustomButton
+                onPress={() => handleButtonPress('hard')}
                 imageSource={require('../../../assets/btns/hard.png')}
                 pressedImageSource={require('../../../assets/btns/hard.png')}
-                imageStyle={styles.customImage} />
+                imageStyle={styles.customImage}
+              />
             </View>
           </View>
-        </View>
+       {/*  </View> */}
       </ImageBackground>
     </View>
   );
-};
-
+}
 export default CardSelectScr;
