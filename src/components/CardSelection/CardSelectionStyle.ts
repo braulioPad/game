@@ -37,12 +37,12 @@ export const CardSelectionStyle = StyleSheet.create({
   },
   containerlists:{
     flexDirection: 'row',
-    width:'100%',
+    //width:'100%',
     height:100,
     justifyContent: 'center', // Center content vertically
     alignItems: 'center', // Center content horizontally
     margin:'auto',
-    left: '30%',
+    right: '6%',
   },
   containerlist:{
     flexDirection: 'row',
@@ -56,6 +56,18 @@ export const CardSelectionStyle = StyleSheet.create({
   column: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent:'center',
+    marginLeft:50,
+  },
+  row:{
+    flex: 1,
+    flexDirection: 'row',
+  },
+  item: {
+    padding: 10,
     margin: 5,
+    width:'50%',
+    justifyContent:'flex-end',
+    paddingLeft:60,
   },
 });
