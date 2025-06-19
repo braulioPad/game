@@ -81,21 +81,24 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
         style={styles.backgroundImage}
         resizeMode="cover"
       >
-       {/*  <View style={styles.containerlists}> */}
-          {/* Dropdown column */}
+        {/*  <View style={styles.containerlists}> */}
+        {/* Dropdown column */}
         {/*   <View style={styles.column}>
             <MoodSelectDropdown data={emojisWithIcons} onSelect={handleSelect} />
           </View> */}
 
-          {/* Buttons column */}
-          <View style={styles.column}>
-            {/* Easy */}
+        {/* Buttons column */}
+        <View style={styles.column}>
+          {/* Easy */}
+          <View style={styles.flexDirectionrow}>
             <View>
               <Text style={styles.text}>Easy</Text>
               <Image
                 source={require('../../../assets/btns/star1.png')}
-                style={{ width: 60, resizeMode: 'contain' }}
+                style={{ width: 60, height: 20, resizeMode: 'contain' }}
               />
+            </View>
+            <View>
               <CustomButton
                 onPress={() => handleButtonPress('easy')}
                 imageSource={require('../../../assets/btns/easy.png')}
@@ -103,29 +106,35 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
                 imageStyle={styles.customImage}
               />
             </View>
+          </View>
 
-            {/* Mid */}
+          {/* Mid */}
+          <View style={styles.flexDirectionrow}>
             <View>
               <Text style={styles.text}>Mid</Text>
               <Image
                 source={require('../../../assets/btns/star2.png')}
-                style={{ width: 60, resizeMode: 'contain' }}
-              />
+                style={{ width: 60, height: 20, resizeMode: 'contain' }}
+              /></View>
+            <View>
               <CustomButton
                 onPress={() => handleButtonPress('medium')}
                 imageSource={require('../../../assets/btns/mid.png')}
                 pressedImageSource={require('../../../assets/btns/mid.png')}
                 imageStyle={styles.customImage}
-              />
-            </View>
+              /></View>
+          </View>
 
-            {/* Hard */}
+
+          {/* Hard */}
+          <View style={styles.flexDirectionrow}>
             <View>
               <Text style={styles.text}>Hard</Text>
               <Image
                 source={require('../../../assets/btns/star3.png')}
-                style={{ width: 60, resizeMode: 'contain' }}
-              />
+                style={{ width: 60, height: 20, resizeMode: 'contain' }}
+              /></View>
+            <View>
               <CustomButton
                 onPress={() => handleButtonPress('hard')}
                 imageSource={require('../../../assets/btns/hard.png')}
@@ -134,7 +143,8 @@ const CardSelectScr: React.FC<CardsListScreenProps> = ({ navigation }) => {
               />
             </View>
           </View>
-       {/*  </View> */}
+        </View>
+        {/*  </View> */}
       </ImageBackground>
     </View>
   );

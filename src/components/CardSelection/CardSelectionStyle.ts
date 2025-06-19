@@ -6,7 +6,7 @@ export const CardSelectionStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-    buttonContainer: {
+  buttonContainer: {
     flexDirection: 'column',
     position: 'absolute',
     right: '10%',
@@ -24,7 +24,7 @@ export const CardSelectionStyle = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center', // Center content vertically
-    alignItems: 'center', // Center content horizontally
+    alignItems: 'flex-end', // content horizontally
     backgroundColor: '#0B0F26',
     width: '100%',
     height: '100%',
@@ -33,41 +33,46 @@ export const CardSelectionStyle = StyleSheet.create({
     marginLeft: 20, // Add margin between columns
     alignItems: 'center', // Align items horizontally in the center
     flexDirection: 'row',
-    textAlign:'center',
+    textAlign: 'center',
   },
-  containerlists:{
+  containerlists: {
     flexDirection: 'row',
     //width:'100%',
-    height:100,
+    height: 100,
     justifyContent: 'center', // Center content vertically
     alignItems: 'center', // Center content horizontally
-    margin:'auto',
+    margin: 'auto',
     right: '6%',
   },
-  containerlist:{
+  containerlist: {
     flexDirection: 'row',
-    width:'100%',
-    height:100,
+    width: '100%',
+    height: 100,
     justifyContent: 'center', // Center content vertically
     alignItems: 'center', // Center content horizontally
-    margin:'auto',
+    margin: 'auto',
     left: '30%',
+  },
+  flexDirectionrow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   column: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent:'center',
-    marginLeft:50,
+    justifyContent: 'space-evenly',
+    width: '30%',
+    height: '100%',
   },
-  row:{
+  row: {
     flex: 1,
     flexDirection: 'row',
   },
   item: {
     padding: 10,
     margin: 5,
-    width:'50%',
-    justifyContent:'flex-end',
-    paddingLeft:60,
+    width: '50%',
+    justifyContent: 'flex-end',
+    paddingLeft: 60,
   },
 });
