@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { CardSelectionStyle as styles } from './CardSelectionStyle';
-import MoodSelectDropdown from '../SelectLngComp/MoodSelectDropdown';
-import CardSelectScrLag from '../CardSelection/selectLag'
+// import MoodSelectDropdown from '../SelectLngComp/MoodSelectDropdown';
+// import CardSelectScrLag from '../CardSelection/selectLag'
 
 interface CardsListScreenProps {
   navigation: any;
