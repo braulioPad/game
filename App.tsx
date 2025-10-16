@@ -10,17 +10,27 @@ import GameScr from './src/components/GameScreen/GameScr';
 import ScoreScr from './src/components/ScoreScreen/ScoreScr';
 import CardSelectScr from './src/components/CardSelection/CardSelectScr';
 import TutorialScreen from './src/components/TutorialScreen/TutorialScr';
+import { BackHandler } from 'react-native';
 const Stack = createStackNavigator();
 
 const App: React.FC = () => {
+
+  //add block back hardware
+    useEffect(() => {
+      const blockBackButton = () => true; 
+      BackHandler.addEventListener('hardwareBackPress', blockBackButton);
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', blockBackButton);
+    }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={MainMenu} options={{ headerShown: false }} />
-        <Stack.Screen name="configuration" component={ConfigScreen}  options={{ headerShown: false }}/>
-        <Stack.Screen name="aboutUs" component={About} options={{ headerShown: false }}/>
+        <Stack.Screen name="configuration" component={ConfigScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="aboutUs" component={About} options={{ headerShown: false }} />
         <Stack.Screen name="ScoreScr" component={ScoreScr} options={{ headerShown: false }} />
-        <Stack.Screen  name="TeamsListScreen"
+        <Stack.Screen name="TeamsListScreen"
           component={TeamsListScreen as React.FC} options={{ headerShown: false }} />
         <Stack.Screen name="TutorialScreen" component={TutorialScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TimerScreen" component={GameScr} options={{ headerShown: false }} />

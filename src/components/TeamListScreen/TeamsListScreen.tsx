@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, Button, TextInput, StyleSheet, ImageBackground } from 'react-native';
+import { ScrollView, View, Text, Button, TextInput, StyleSheet, ImageBackground, BackHandler } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from '../CustomBtn/CustomButton';
 import { TeamsListScreenStyles as styles } from './TeamsListScreenStyles';
@@ -111,15 +111,23 @@ const TeamsListScreen = ({ navigation }) => {
     }
   };
 
+    //block go back hardware btn
+    useEffect(() => {
+      BackHandler.addEventListener('hardwareBackPress', function () {
+        return false;
+      });
+    }, []);
+  
 
-  const handleClearData = async () => {
+  /* const handleClearData = async () => {
     try {
       await AsyncStorage.clear();
     } catch (error) {
       console.error('Error in handleClearData:', error);
       // Handle the error as needed (e.g., show an alert)
     }
-  };
+  }; */
+  
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -127,7 +135,7 @@ const TeamsListScreen = ({ navigation }) => {
         style={styles.backgroundImage}
         resizeMode="cover">
         <View style={styles.containerList}>
-        <View style={styles.containerListLeft}>
+        <View /*style={styles.containerListLeft}*/>
         <Text style={styles.text}>Teams List</Text>
             <ScrollView style={styles.scrollView}>
               <View style={styles.innerContainer}>
@@ -158,7 +166,7 @@ const TeamsListScreen = ({ navigation }) => {
                     value={newTeamName}
                     onChangeText={(text) => setNewTeamName(text)}
                   />
-                  <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/add.png')} pressedImageSource={require('../../../assets/btns/add.png')} style={{ width: 36, marginLeft: 10, resizeMode: 'contain', }} />
+                  <CustomButton onPress={handleAddTeam} imageSource={require('../../../assets/btns/add.png')} pressedImageSource={require('../../../assets/btns/add.png')} style={{ width: 36, marginLeft: 10}} />
                 </View>
           </View>
           <View style={styles.containerTeams}>
